@@ -574,7 +574,7 @@ const updateval = (event) => {
 
       </Grid>
 
-      <div className="sticky" style={{background:"grey",position:"sticky",bottom:"50%",height:"200px",padding:"20px",display: displayremark ? "block" : 'none'}}>
+      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"sticky",bottom:"50%",height:"200px",padding:"20px",display: displayremark ? "block" : 'none'}}>
      
         <CloseIcon style={{position:"absolute",top:"10px",right:"10px", zIndex:3,}} onClick={()=>{setDisplayremark(false)}}/>
        <h3> Remark: {remark && remark}</h3>
