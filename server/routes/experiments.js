@@ -13,7 +13,8 @@ const {
   getExpAllUsermail,
   postBulkuser,
   getExpBymail,
-  postspecificexp
+  postspecificexp,
+  patchGradeandremark
   
 } = require("../controllers/experimentController");
 
@@ -49,7 +50,7 @@ router.patch("/:_id", patchUser);
 router.patch("/remove/:_id",removesharedUser);
 
 router.patch("/", patchUser1);
-
+router.patch("/grade/remark", patchGradeandremark);
 // @route Delete /users/delete
 // @desc a PATCH req for users registeration
 // @access public

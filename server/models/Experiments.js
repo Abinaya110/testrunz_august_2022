@@ -72,7 +72,14 @@ department:{
   type:String,
   required: true,
 },
+grade: {
+  type: String,
 
+},
+remark:{
+  type: String,
+  
+},
 });
 
 module.exports = User = mongoose.model("experiments", userSchema);

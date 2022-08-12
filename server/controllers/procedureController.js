@@ -1,6 +1,7 @@
 const html2json = require("html2json").html2json;
 const json2html = require("html2json").json2html;
 const Content = require("../models/Content");
+const MetaInfo = require("../models/MetaInfo");
 
 const getProcedures = async function (req, res, next) {
   try {
@@ -92,8 +93,13 @@ const patchProcedure = async (req, res) => {
 
  const deleteProcedure = async (req, res) => {
   try {
-    const removedContent = await Content.remove({ _id: req.params._id });
-    res.json(removedContent);
+    console.log(req.params._id )
+    const proceduredetail = await MetaInfo.findById(req.params._id)
+    console.log(proceduredetail)
+// proceduredetail
+    const removedContent = await Content.remove({ _id: proceduredetail.id });
+    const removedmetainfo = await MetaInfo.remove({ _id: req.params._id });
+    res.json({"msg":"content and metainfo has been deleted"});
   } catch (err) {
     console.error(err);
   }

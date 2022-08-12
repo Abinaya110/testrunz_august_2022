@@ -134,8 +134,11 @@ const Runz = () => {
     // { title: "Procedure ID    ", field: "ProcedureId" ,width:"18%",sorting:false },
     { title: "Description", field: "description",width:"18%" },
     { title: "Assigned By", field: "assignedBy",emptyValue:()=><em>{user.email}</em> },
+    { title: "Grade", field: "grade",emptyValue:()=><em>-</em>,render:(rowData)=><div style={{color:rowData.grade <"5"?"red":"green"}}>{rowData.grade}</div>,
+  },
     { title: "Created Time", field: "time" },
     { title: "Status", field: "status" },
+
   ];
 
   const [page, setPage] = React.useState(0);
@@ -296,7 +299,8 @@ individuals.map((userr, ident) => {
         description:userr.procedureDescription,
         time:new Date(userr.time).toDateString(),
         status:userr.status,
-        assignedBy:userr.assignedBy
+        assignedBy:userr.assignedBy,
+        grade:userr.grade
 
       });
 

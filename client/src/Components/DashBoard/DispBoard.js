@@ -16,7 +16,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-
+import { useStateValue } from '../../data/StateProvider';
 /* import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio"; */
@@ -82,6 +82,7 @@ export default function VerticalTabs({ data }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [selectedValue, setSelectedValue] = React.useState("");
+  const [{user}, dispatch] = useStateValue();
 
   React.useEffect(() => {
     async function fetchData() {
@@ -147,7 +148,7 @@ export default function VerticalTabs({ data }) {
           </Typography>
         </CardContent>
       </Card>
-      <Divider />
+    
       <div className={classes.root}>
       {/* <Record data={data} /> */}
       <AppBar position="static" style={{width:"100%"}}>
@@ -159,7 +160,7 @@ export default function VerticalTabs({ data }) {
       },
     }}  >
           <Tab label="Observation" {...a11yProps(0)} />
-          <Tab label="Record" {...a11yProps(1)} />
+         {user.role!="student" &&<Tab label="Record" {...a11yProps(1)} />}
           <Tab label="Notes" {...a11yProps(3)} />
           </Tabs>
       </AppBar>

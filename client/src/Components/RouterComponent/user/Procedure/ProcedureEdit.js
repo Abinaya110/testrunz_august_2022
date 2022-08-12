@@ -244,7 +244,7 @@ const App = (props) => {
         <Button variant="contained" style={{ backgroundColor:"#F1C232",color:"black"  }}
           className="buttons"
           onClick={duplicate}
-        >Duplicate</Button>
+        >Duplicatpe</Button>
          </Grid>
 
       

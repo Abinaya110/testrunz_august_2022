@@ -24,6 +24,6 @@ router.post("/", postProcedure);
 
 router.patch("/edit", patchProcedure);
 
-router.delete("/:_id", deleteProcedure);
+router.delete("/delete/:_id", deleteProcedure);
 
 module.exports = router;

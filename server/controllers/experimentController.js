@@ -105,6 +105,35 @@ const postUser =async (req, res, next) => {
 
 
 
+// grade and remark
+const patchGradeandremark =async (req, res, next) => {
+  let key=Object.keys(req.body)[0]
+  let value=Object.values(req.body)[0]
+  id=req.body.id
+console.log(key,value,id)
+ 
+
+  try {
+    const updatedContent = await User.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: { 
+          // labtype:lab,
+          [key]: value,
+          
+        }
+      }
+    );
+    res.json(updatedContent);
+  } catch (err) {
+    console.error(err);
+    res.json("error");
+  }
+
+}
+
+
+
 
 
 
@@ -353,6 +382,7 @@ module.exports = {
   getExpAllUsermail,
   postBulkuser,
   getExpBymail,
-  postspecificexp
+  postspecificexp,
+  patchGradeandremark
 
 };

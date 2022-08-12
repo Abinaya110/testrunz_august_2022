@@ -55,7 +55,32 @@ const Editprocedure = (props) => {
     const [moreinfoid,setMoreinfoid]=useState()
     let content = props.location.pathname.replace("/editProce/", "") || window.localStorage.getItem("proceId");
 
-    const fetch = useCallback(() => {
+    // const fetch = useCallback(() => {
+    //     axios.get(`${ApiUrl}/procedures/test/${content}`).then((res) => {
+    //       setInitialcontent( res.data.html );
+    //       setProcedureid(res.data._id)
+    //     });
+    
+    //     axios.get(`${ApiUrl}/moreInfo/${content}`).then((res) => {
+    //   console.log("check",res.data)
+    //   setExperiment(res.data.ProcedureName)
+    //   setLabtype(res.data.labtype)
+    //   setDepartment(res.data.department)
+    //   setYear(res.data.year)
+    //   setSemester(res.data.semester)
+    //   setInstitute(res.data.institute)
+    //   setUniversity(res.data.university)
+    //   setMoreinfoid(res.data._id)
+    //     });
+    //   }, [content]);
+    
+      useEffect(() => {
+        // fetch();
+    
+        // return () => {};
+      }, []);
+
+      useEffect(()=>{
         axios.get(`${ApiUrl}/procedures/test/${content}`).then((res) => {
           setInitialcontent( res.data.html );
           setProcedureid(res.data._id)
@@ -72,13 +97,7 @@ const Editprocedure = (props) => {
       setUniversity(res.data.university)
       setMoreinfoid(res.data._id)
         });
-      }, [content]);
-    
-      useEffect(() => {
-        fetch();
-    
-        return () => {};
-      }, []);
+      },[])
 
 
 
@@ -163,6 +182,44 @@ const goBack = () => {
     props.history.push("/procedure");
   };
 
+  const deleteexperiment=()=>{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      console.log("button result",result)
+      if (result.isConfirmed) {
+
+
+
+        fetch(`${ApiUrl}/procedures/delete/${moreinfoid}`, {
+  method: 'DELETE'
+})
+  .then(res => res.json())
+  .then(data => {
+    // Do some stuff...
+    console.log(moreinfoid)
+    console.log(data)
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    props.history.push("/procedure");
+  })
+  .catch(err => console.log("hai",err));
+      
+      }
+      else if(result.isDismissed){
+        Swal.fire('Nothing is deleted', '', 'info')
+      }
+    })
+  }
 
   const duplicate = (e) => {
     e.preventDefault();
@@ -400,6 +457,19 @@ BACK
  
       </Grid>
     </Grid>
+
+
+
+
+    <Button variant='contained'
+style={{ color: '#000000', backgroundColor: 'red',marginLeft:"50%",marginRight:"50%" }}
+onClick={()=>{deleteexperiment()}}>
+Delete
+ </Button>
+
+
+
+
    </div>
     </Modal>
    
