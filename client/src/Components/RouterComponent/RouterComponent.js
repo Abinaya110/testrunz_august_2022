@@ -4,7 +4,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "../../Home";
 import ListUserComponent from "./user/ListUserComponent";
 import AddUserComponent from "./user/AddUserComponent";
-
+import "../../index.css"
 import UserDashComponent from "../DashBoard/DashBoard";
 import ShatedDashComponent from "../DashBoard/Dashboardshared";
 import ListProcedure from "./user/Procedure/ProcedureList";
@@ -43,7 +43,8 @@ import { actionTypes } from "../../data/reducer";
 import Inventory from "./user/Inventory/Inventory";
 import Lablist from "./user/Lablist";
 import Assignedlist from "./user/Assignedlist";
-import Landingpage from "./user/Landingpage/Landingpage";
+// import Landingpage from "./user/Landingpage/Landingpage";
+import Landingpage from "../../LandingPage/Landingpage"
 import NewProcedure from "./user/Procedure/NewProcedure";
 
 const RouterComponent = (props) => {
@@ -70,8 +71,9 @@ const RouterComponent = (props) => {
           
         <Sidelayout>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/landingpage" exact component={Landingpage} />
+            <Route path="/" exact component={Landingpage} />
+
+           
             <Route path="/signup" exact component={Signup} />
             {/* <Route path="/signin" exact component={Signin} /> */}
             <Route path="/signin" exact component={Signin} />
@@ -128,6 +130,7 @@ const RouterComponent = (props) => {
               exact
               component={Manageindividual2}
             /> */}
+      
           </Switch>
           </Sidelayout>
         </Router>

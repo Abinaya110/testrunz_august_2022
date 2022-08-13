@@ -26,7 +26,6 @@ import { ImCloudUpload } from 'react-icons/im';
 import { BsFillCalculatorFill } from 'react-icons/bs';
 import "../layout.css"
 import Alert from '@mui/material/Alert';
-import CloseIcon from '@mui/icons-material/Close';
 import { useParams} from "react-router-dom";
 import { useStateValue } from "../../../data/StateProvider"
 import Newsinglegraph from "../../Graph/Newsinglegraph";
@@ -64,7 +63,7 @@ const Observation = ({ data ,datavalues }) => {
   const [maxval,setMaxval]=React.useState();
   const [remark,setRemark]=React.useState();
   const [mark,setMark]=React.useState();
-  const [displayremark,setDisplayremark]=React.useState(true);
+
 
 
   
@@ -574,12 +573,11 @@ const updateval = (event) => {
 
       </Grid>
 
-      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"sticky",bottom:"50%",height:"200px",padding:"20px",display: displayremark ? "block" : 'none'}}>
+      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"absolute",top:'200px',right:"0%", width: "calc(100vw - 100rem)",height:"200px",padding:"20px  20px 20px",marginRight:"-50px"}}>
      
-        <CloseIcon style={{position:"absolute",top:"10px",right:"10px", zIndex:3,}} onClick={()=>{setDisplayremark(false)}}/>
-       <h3> Remark: {remark && remark}</h3>
+       <h5> Remark: {remark && remark}</h5>
         <br/>
-       <h3>Mark: {mark && mark} </h3> 
+       <h5>Mark: {mark && mark} </h5> 
       </div>
     </>
   );

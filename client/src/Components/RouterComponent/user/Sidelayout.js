@@ -284,7 +284,8 @@ const Sidelayout = ({children}) => {
 
     
       </Drawer> :null:null }
-      <div className={classes.page}>
+      
+      <div className={location.pathname== "/" ?  null: classes.page }>
           <div className={classes.toolbar}></div>
       {children}
       </div>

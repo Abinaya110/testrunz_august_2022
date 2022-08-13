@@ -6,6 +6,7 @@ import {actionTypes} from "./data/reducer"
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import Landingpage from "./LandingPage/Landingpage";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -47,6 +48,7 @@ function App() {
   return (
     <div>
       {/* <NavBar /> */}
+      {/* <Landingpage/> */}
       <AppRouter user={ user }/>
     </div>
   );
