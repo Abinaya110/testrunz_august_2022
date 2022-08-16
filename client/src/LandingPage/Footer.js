@@ -92,7 +92,7 @@ const Footer = () => {
 				<div className='form'>
 					<input placeholder='Name' value={name} onChange={(e)=>{setName(e.target.value)}} /><br/>
 					<input placeholder='Email' value={email} onChange={(e)=>{setEmail(e.target.value)}} /><br/>
-					<TextareaAutosize placeholder='Type yuor message' style={{height:'50px'}} value={message} onChange={(e)=>{setMessage(e.target.value)}} /><br/><br/>
+					<TextareaAutosize placeholder='Type your message' style={{height:'50px'}} value={message} onChange={(e)=>{setMessage(e.target.value)}} /><br/><br/>
 					
 					<Button  variant='contained' size='small' style={{background:"#F1C232",color:"black"}} onClick={sendmessage}>send</Button>
 

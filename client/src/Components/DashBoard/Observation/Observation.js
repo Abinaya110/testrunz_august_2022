@@ -85,21 +85,22 @@ const Observation = ({ data ,datavalues }) => {
         fetch(`${ApiUrl}/experiments/${token}`)
         .then((res)=>res.json())
         .then(data =>{
-        
-          const datavalues =JSON.parse(data.datas)
+       
           const expresultval=data.expresult
           if(expresultval){
             setExpresult(expresultval)
           }
           setMark(data.grade)
           setRemark(data.remark)
-          console.log("check remark here",data.remark)
-          console.log("datas are",datavalues)
-          const filtered = Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '');
-          const obj = Object.fromEntries(filtered)
+          console.log("check remark here",data)
+          const filtered =data.datas && Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '') ;
+          const obj = filtered && Object.fromEntries(filtered)
+if(obj){
           for (const [key, values] of Object.entries(obj)) {
             document.getElementById(key).value=values
              }
+         }         
+
              setOpens(true);
             setStatusmessages('Data has been Retrived') 
         } )
