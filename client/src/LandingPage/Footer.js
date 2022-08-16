@@ -4,21 +4,45 @@ import "./Footer.css"
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import ApiUrl from '../ServerApi';
 
 const Footer = () => {
 	const [name,setName]=useState()
 	const [email,setEmail]=useState()
 	const [message,setMessage]=useState()
 
+
 	const sendmessage=()=>{
 		if (name,email,message) {
 			// send mail
-			alert("hai")
+			
+			fetch(`${ApiUrl}/feedback/query`, {
+				method: "POST",
+			// signal:abortcont.signal,
+			  body: JSON.stringify({
+			  name: name,
+			  email:email,
+			  message:message
+			}),
+			headers: {
+				"Content-type": "application/json; charset=UTF-8"
+			}
+		})
+		.then(response => response.json())
+		.then(json => 
+		  {
+		console.log(json)
+		alert("message sent")
+		setName("")
+		setEmail("")
+		setMessage("")
+		  }
+		  );	
 				
 			}
 			else{
 
-			// send error				
+				alert("Enter all field")	
 			}
 	}
 
@@ -71,7 +95,7 @@ const Footer = () => {
 					<TextareaAutosize placeholder='Type yuor message' style={{height:'50px'}} value={message} onChange={(e)=>{setMessage(e.target.value)}} /><br/><br/>
 					
 					<Button  variant='contained' size='small' style={{background:"#F1C232",color:"black"}} onClick={sendmessage}>send</Button>
-					{/* <p>+1.555.555.5555</p> */}
+
 				</div>
 
 

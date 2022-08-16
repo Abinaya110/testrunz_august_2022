@@ -4,6 +4,7 @@ const router = express.Router();
 const {
   getAll,
   postFeedback,
+  postQuery
   
 } = require("../controllers/feedbackController");
 
@@ -13,6 +14,8 @@ const {
 // router.get("/:runID", getById);
 
 router.post("/", postFeedback);
+
+router.post("/query", postQuery);
 
 // router.patch("/:runID", patchNotes);
 

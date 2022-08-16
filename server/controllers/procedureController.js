@@ -53,7 +53,7 @@ const testId = async function (req, res, next) {
 
 const postProcedure = async(req, res, next)=> {
 let check = await Content.findOne({title:req.body.title})
-console.log('\u001b[' + 32 + 'm' + 'hello stack' + '\u001b[0m')
+
 if(check){
   console.log("already exist")
   res.json({"result":"already exist"})

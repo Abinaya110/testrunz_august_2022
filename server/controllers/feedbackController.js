@@ -78,37 +78,6 @@ const postFeedback = function (req, res, next) {
 
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     })
     .catch((err) => console.error(err));
 };
@@ -116,5 +85,49 @@ const postFeedback = function (req, res, next) {
 
 
 
+const postQuery = function (req, res, next) {
+ 
 
-module.exports = {postFeedback, getAll };
+
+
+
+  let email =req.body.email
+  let name =req.body.name
+  let message =`A Query has been recived from ${name} though the email ${email} : " ${req.body.message}"`
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.EMAILPASS
+        }
+      });
+      
+      
+      var mailOptions = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL,
+        subject: 'Query Recived',
+        text: message,
+      };
+      
+      
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log("here comes the error",error);
+          res.json("error")
+        } else {
+          res.json("sent!!!")
+          console.log('Email sent!!!');
+        }
+
+      });
+
+
+};
+
+
+
+
+module.exports = {postFeedback, getAll,postQuery };

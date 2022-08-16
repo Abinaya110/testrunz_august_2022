@@ -40,12 +40,33 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const customStyles = {
   content: {
-    top: "40%",
+    top: "50%",
     left: "50%",
     width: "30%",
-    height: "30%",
+    height: "60%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
@@ -335,6 +356,33 @@ const SharedRecord = ({ data, datavalues }) => {
         disableBackdropClick="true"
         sx={{ overflow: "hidden" }}
       >
+                          <FormControl >
+
+<Select
+  labelId="demo-simple-select-label"
+  id="demo-simple-select"
+  size="small"
+  style={{width:"100px"}}
+  value={mark}
+  onChange={(e) => setMark(e.target.value)}  
+
+>
+  <MenuItem value={1}>1</MenuItem>
+  <MenuItem value={2}>2</MenuItem>
+  <MenuItem value={3}>3</MenuItem>
+  <MenuItem value={4}>4</MenuItem>
+  <MenuItem value={5}>5</MenuItem>
+  <MenuItem value={6}>6</MenuItem>
+  <MenuItem value={7}>7</MenuItem>
+  <MenuItem value={8}>8</MenuItem>
+  <MenuItem value={9}>9</MenuItem>
+  <MenuItem value={10}>10</MenuItem>
+
+</Select>
+</FormControl>
+
+                <Button  variant="contained"  style={{ backgroundColor: "#F1C232", color: "black",margin: "0 0 20px 20px" }} onClick={()=>updatescoreandremark("grade",mark,token)}>update score</Button>
+
         <TextareaAutosize onChange={(e)=>{setRemark(e.target.value)}} value={remark} style={{ width: "100%", height: "70%" }} />
         <Stack
           direction="row"
@@ -343,7 +391,7 @@ const SharedRecord = ({ data, datavalues }) => {
           spacing={4}
           style={{marginTop:"5%"}}
         >
-          <Button variant="contained"  style={{ backgroundColor: "#F1C232", color: "black" }}  onClick={()=>updatescoreandremark("remark",remark,token)}> Submit remark</Button>
+          <Button variant="contained"  style={{ backgroundColor: "#F1C232", color: "black" }}  onClick={()=>updatescoreandremark("remark",remark,token)}> update remark</Button>
           <Button variant="contained" color="error" onClick={closeModal}> close</Button>
         </Stack>
       </Modal>
@@ -473,10 +521,9 @@ const SharedRecord = ({ data, datavalues }) => {
                     Graph &nbsp;&nbsp;&nbsp;
                     <VscGraphLine />
                   </Button>
-                  <input onChange={(e) => setMark(e.target.value)}  value={mark}/>
-                 
+                  {/* <input onChange={(e) => setMark(e.target.value)}  value={mark}/> */}
 
-                  <Button  variant="contained"  style={{ backgroundColor: "#F1C232", color: "black" }} onClick={()=>updatescoreandremark("grade",mark,token)}>update score</Button>
+
 
                   <Button  variant="contained"  style={{ backgroundColor: "#F1C232", color: "black" }} onClick={openModal}>remark</Button>
                 </Stack>

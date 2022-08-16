@@ -436,8 +436,8 @@ const updateval = (event) => {
   const uses = htmlContext?.html.child.map((ele) => ele);
   return (
     <>
-      <Grid container className={classes.root} spacing={2}>
-        <Grid item >
+      {/* <Grid container className={classes.root} spacing={2}>
+        <Grid item > */}
           <div className={classes.paper}>
           
              {/* <Contextshared value={htmlContext} dataV={data} datavalues={datavalues}/>  */}
@@ -569,11 +569,11 @@ const updateval = (event) => {
         }
          {/* :<Lodaing style={{width:"100%",height:"100%"}}/>} */}
           </div>
-        </Grid>
+        {/* </Grid>
 
-      </Grid>
+      </Grid> */}
 
-      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"absolute",top:'200px',right:"0%", width: "calc(100vw - 100rem)",height:"200px",padding:"20px  20px 20px",marginRight:"-50px"}}>
+      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"absolute",top:'200px',right:"0%", width: "calc(100vw - 100rem)",height:"200px",padding:"20px  20px 20px"}}>
      
        <h5> Remark: {remark && remark}</h5>
         <br/>

@@ -73,7 +73,7 @@ department:{
   required: true,
 },
 grade: {
-  type: String,
+  type: Number,
 
 },
 remark:{
