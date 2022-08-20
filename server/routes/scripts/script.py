@@ -30,6 +30,7 @@ from FirstYearGeotechnical import FirstYGtech
 from Electronic2 import E2
 from Electronic1 import EL1
 from ElectricElectronic import EE
+from HMT_Milam import HMT_Milam
 def main(argv,title):
     argument = ''
     usage = 'usage: script.py -f <sometext>'
@@ -591,6 +592,31 @@ def main(argv,title):
                     EE(argument).wattmeter()
                 elif((argument[len(argument) -3] == "EMF")and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] =="MMF" )):
                     EE(argument).emf()
+                elif( (argument[len(argument) -2] == "Morse") and (argument[len(argument) -1] =="test_Mailam" )):
+                    HMT_Milam(argument).morse()
+                elif((argument[len(argument) -3] == "I.C") and (argument[len(argument) -2] == "heat") and (argument[len(argument) -1] =="balance_Mailam" )):
+                    HMT_Milam(argument).heat_balance()
+                elif( (argument[len(argument) -2] == "Hot") and (argument[len(argument) -1] =="plate_Mailam" )):
+                    HMT_Milam(argument).hot_plate_Mailam()
+                elif( (argument[len(argument) -2] == "Lagged") and (argument[len(argument) -1] =="Pipe_Mailam" )):
+                    HMT_Milam(argument).Lagged_Pipe_Mailam()
+                elif( (argument[len(argument) -2] == "Free") and (argument[len(argument) -1] =="Convection_Mailam" )):
+                    HMT_Milam(argument).Free_Convection_Mailam()
+                elif( (argument[len(argument) -2] == "Forced") and (argument[len(argument) -1] =="convection_Mailam" )):
+                    HMT_Milam(argument).Forced_convection_Mailam()
+                elif( (argument[len(argument) -2] == "Stefan") and (argument[len(argument) -1] =="Boltzman_Mailam" )):
+                    HMT_Milam(argument).Stefan_Boltzman_Mailam()
+                elif( (argument[len(argument) -1] =="Emissivity_Mailam" )):
+                    HMT_Milam(argument).Emissivity_Mailam()
+                elif( (argument[len(argument) -2] == "Counter") and (argument[len(argument) -1] =="Flow_Mailam" )):
+                    HMT_Milam(argument).Counter_Flow_Mailam()
+                elif( (argument[len(argument) -2] == "Insulating") and (argument[len(argument) -1] =="Powder_Mailam" )):
+                    HMT_Milam(argument).Insulating_Powder_Mailam()
+
+
+                     
+ 
+                 
                 else:
                     Dummy(title).dummy()
             except ValueError:

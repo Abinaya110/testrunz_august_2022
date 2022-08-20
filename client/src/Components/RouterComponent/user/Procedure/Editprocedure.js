@@ -22,6 +22,10 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { userInfo } from "os";
 import { useStateValue } from '../../../../data/StateProvider';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
 const customStyles = {
     content: {
       top: '50%',
@@ -325,11 +329,6 @@ const goBack = () => {
       />
 
         
-         <Button variant="contained" style={{ backgroundColor:"#F1C232",color:"black",float:"right"}} onClick={showmodal}>
-  SHOW
-      </Button>
-      <br/>   <br/>
-     
       <Modal
       isOpen={modalopen}        
       style={customStyles}
@@ -472,62 +471,13 @@ Delete
 
    </div>
     </Modal>
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{initialcontent ?
+    <div>
+         <Button variant="contained" style={{ backgroundColor:"#F1C232",color:"black",float:"right"}} onClick={showmodal}>
+          SHOW
+         </Button>
+         <br/><br/>
+     
         <Editor
           id="myTiny_Mce"
           initialValue={initialcontent}
@@ -625,17 +575,19 @@ Delete
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
           onInit={(evt,editor)=>editorRef.current=editor}
-
         />
 
-
-
-
-
-
-
+</div>
+:
+<Backdrop
+sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+open={true}
+// onClick={handleClose}
+>
+<CircularProgress color="inherit" />
+</Backdrop>
    
-    
+        }
     </div>
   )
 }
