@@ -31,6 +31,9 @@ from Electronic2 import E2
 from Electronic1 import EL1
 from ElectricElectronic import EE
 from HMT_Milam import HMT_Milam
+from FluidMechanics_svcet import FML_svcet
+
+
 def main(argv,title):
     argument = ''
     usage = 'usage: script.py -f <sometext>'
@@ -612,6 +615,8 @@ def main(argv,title):
                     HMT_Milam(argument).Counter_Flow_Mailam()
                 elif( (argument[len(argument) -2] == "Insulating") and (argument[len(argument) -1] =="Powder_Mailam" )):
                     HMT_Milam(argument).Insulating_Powder_Mailam()
+                elif( (argument[len(argument) -3] == "Flow")  and (argument[len(argument) -2] == "Through") and (argument[len(argument) -1] =="Orifice_SVCET" )):
+                    FML_svcet(argument).Flow_Through_Orifice_SVCET()
 
 
                      
