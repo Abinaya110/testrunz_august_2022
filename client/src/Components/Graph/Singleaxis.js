@@ -15,12 +15,21 @@ function Singleaxis() {
   ]);
 const[maxval,setMaxval]=useState()
 const[temp,setTemp]=useState()
+const array = [
+  {id: 'c21c4557-c664-49bf-b826-e2536254af60', x1: '1', y1: '2'},
+  {id: '19b062ef-9973-443a-879a-e1cbd9364bdf', x1: '2', y1: '6'},
+  {id: 'b408f086-57c4-4295-a06f-0ba4e4e92600', x1: '3', y1: '8'},
+  {id: '3d0f52a7-df60-47d1-bbbb-80c3c7ea60db', x1: '4', y1: '10'}]
 
-
+const addd=()=>{
+  console.log("value saved",inputFields)
+  localStorage.setItem("inputFields", JSON.stringify(inputFields))
+}
 
   const generate = () => {
     setTemp()
     let yval = inputFields.map((obj) => obj.y1);
+ 
    let newyval= yval.map(Number);
    setMaxval(Math.max(...newyval) )
     setTemp(inputFields)
@@ -28,7 +37,11 @@ const[temp,setTemp]=useState()
     console.log("InputFields", inputFields);
     
   };
-
+const copppy=()=>{
+  let value = localStorage.getItem("inputFields")
+  console.log(value)
+  setInputFields(JSON.parse(value))
+}
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map(i => {
       if(id === i.id) {
@@ -74,7 +87,7 @@ const[temp,setTemp]=useState()
             <input
               name="x1"
               style={{width:"100px"}}
-              value={inputField.x}
+              value={inputField.x1}
               onChange={event => handleChangeInput(inputField.id, event)}
             />
             </td>
@@ -92,6 +105,7 @@ const[temp,setTemp]=useState()
             <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
               remove
             </button>
+            
             </td>
            
             </tr>
@@ -107,7 +121,15 @@ const[temp,setTemp]=useState()
         variant='contained'
           onClick={()=>generate()}
         >Generate</Button>
-     
+
+<Button
+        variant='contained'
+          onClick={()=>copppy()}
+        >copy</Button>
+     <button  onClick={() => addd()}>
+              addd
+              
+            </button>
       <br/>
 
    <div>

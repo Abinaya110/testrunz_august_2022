@@ -45,6 +45,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Graph from "../../Graph/Graph";
 
 
 
@@ -140,6 +141,10 @@ const SharedRecord = ({ data, datavalues }) => {
             }
             setOpens(true);
             setStatusmessages("Data has been Retrived");
+            for (const [key, values] of Object.entries(obj)) {
+              document.getElementById(key).setAttribute("readonly", "readonly");
+            }
+
 
             console.log(datavalues);
             fetch(`${ApiUrl}/runPython/`, {
@@ -233,102 +238,12 @@ const SharedRecord = ({ data, datavalues }) => {
 };
 
   // graph
-  const graph = () => {
-    setGraph1data();
-    setGraph2data();
-    setGraphview(true);
-    var graph1x1 = [];
-    var graph1x2 = [];
-    var graph1x3 = [];
-    var graph1x4 = [];
-
-    var graph1y1 = [];
-    var graph1y2 = [];
-    var graph1y3 = [];
-    var graph1y4 = [];
-
-    var graph2x1 = [];
-    var graph2x2 = [];
-    var graph2x3 = [];
-    var graph2x4 = [];
-
-    var graph2y1 = [];
-    var graph2y2 = [];
-    var graph2y3 = [];
-    var graph2y4 = [];
-
-    var lineargraph = [];
-    // first graph
-    for (var y = 1; y < 5; y++) {
-      for (var x = 1; x < 20; x++) {
-        var ele = document.getElementById(`graph1x${y}${x}`);
-        if (ele) {
-          eval(`graph1x${y}`).push(parseFloat(ele.value));
-        }
-      }
-      for (var x = 1; x < 20; x++) {
-        var ele = document.getElementById(`graph1y${y}${x}`);
-        if (ele) {
-          eval(`graph1y${y}`).push(parseFloat(ele.value));
-        }
-      }
-    }
-    // second graph
-    for (var y = 1; y < 5; y++) {
-      for (var x = 1; x < 20; x++) {
-        var ele = document.getElementById(`graph2x${y}${x}`);
-        if (ele) {
-          eval(`graph2x${y}`).push(parseFloat(ele.value));
-        }
-      }
-      for (var x = 1; x < 20; x++) {
-        var ele = document.getElementById(`graph2y${y}${x}`);
-        if (ele) {
-          eval(`graph2y${y}`).push(parseFloat(ele.value));
-        }
-      }
-    }
-    console.log(graph1x1);
-    console.log(graph2x1);
-    if (graph1x1.length > 1 && graph1y1.length > 1) {
-      setGraph1data({
-        X1: graph1x1,
-        Y1: graph1y1,
-        X2: graph1x2,
-        Y2: graph1y2,
-        X3: graph1x3,
-        Y3: graph1y3,
-        X4: graph1x4,
-        Y4: graph1y4,
-      });
-    }
-    if (graph2x1.length > 1 && graph2y1.length > 1) {
-      setGraph2data({
-        X1: graph2x1,
-        Y1: graph2y1,
-        X2: graph2x2,
-        Y2: graph2y2,
-        X3: graph2x3,
-        Y3: graph2y3,
-        X4: graph2x4,
-        Y4: graph2y4,
-      });
-    }
-    console.log(graph1data, graph2data);
-    // for (var n = 0; n < y_axis.length; n++) {
-
-    //   let object = {
-    //     'x_axis': x_axis[n],
-    //     'y_axis':y_axis[n]
-    //   };
-    //   lineargraph.push(object)
-
-    // }
-    // setLineargraphval(lineargraph)
-    // setMaxval(Math.max(...y_axis) )
-    // setMinval(Math.min(...y_axis) )
-    // console.log(lineargraph)
-  };
+ const graph=()=>{
+  setGraphview(true)
+  // var aElement = document.querySelector("input"); 
+  // aElement.setAttribute("readonly", "readonly"); 
+ }
+  
 
   const handleClosee = (event, reason) => {
     if (reason === "clickaway") {
@@ -413,22 +328,12 @@ const SharedRecord = ({ data, datavalues }) => {
                     </form>
                   </div>
                   <div>
-                    {graphview && (
-                      // <Newsinglegraph lineargraphval={lineargraphval} minval={minval} maxval={maxval} />
-                      <>
-                        <h5>Graph:</h5>
-                        {graph1data ? (
-                          <Graphcomponent data={graph1data} />
-                        ) : (
-                          <div>
-                            <p style={{ color: "red" }}>
-                              *No Graph for this experiment*
-                            </p>
-                          </div>
-                        )}
-                        {graph2data && <Graphcomponent data={graph2data} />}
-                      </>
-                    )}
+                    {graphview && 
+                    <div className="graphinput">
+
+                      <Graph/>
+                    </div>
+                     }
                   </div>
                   <br />
                   <br />

@@ -32,7 +32,7 @@ function Landingpage() {
       <Slider
         imageSrc={solution}
         title={"Solution"}
-        subtitle={"A web based application that streamlines the experimentation workflow by digitising test steps, post processing of the test data and automatic report generation. The application also provides capability for the students and teachers to collaborate in real time."}
+        subtitle={"A web based application that streamlines the experimentation workflow by digitising test steps, post processing of the test data and automatic report generation. The Testrunz also provides capability for the students and teachers to collaborate in real time."}
         flipped={true}
       /> 
 

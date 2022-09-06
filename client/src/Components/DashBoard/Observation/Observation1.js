@@ -26,7 +26,6 @@ import { ImCloudUpload } from 'react-icons/im';
 import { BsFillCalculatorFill } from 'react-icons/bs';
 import "../layout.css"
 import Alert from '@mui/material/Alert';
-import { GridLoadingOverlay } from "@material-ui/data-grid";
 import { useParams} from "react-router-dom";
 import { useStateValue } from "../../../data/StateProvider"
 import Newsinglegraph from "../../Graph/Newsinglegraph";
@@ -62,6 +61,11 @@ const Observation = ({ data ,datavalues }) => {
   const [lineargraphval,setLineargraphval]=React.useState();
   const [minval,setMinval]=React.useState();
   const [maxval,setMaxval]=React.useState();
+  const [remark,setRemark]=React.useState();
+  const [mark,setMark]=React.useState();
+
+
+
   
   const vertical ="button"
   const horizontal = "center"
@@ -81,47 +85,24 @@ const Observation = ({ data ,datavalues }) => {
         fetch(`${ApiUrl}/experiments/${token}`)
         .then((res)=>res.json())
         .then(data =>{
-        
-          const datavalues =JSON.parse(data.datas)
+       
           const expresultval=data.expresult
           if(expresultval){
             setExpresult(expresultval)
           }
-          console.log("datas are",datavalues)
-          const filtered = Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '');
-          const obj = Object.fromEntries(filtered)
+          setMark(data.grade)
+          setRemark(data.remark)
+          console.log("check remark here",data)
+          const filtered =data.datas && Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '') ;
+          const obj = filtered && Object.fromEntries(filtered)
+if(obj){
           for (const [key, values] of Object.entries(obj)) {
             document.getElementById(key).value=values
              }
+         }         
+
              setOpens(true);
-            setStatusmessages('Data has been Retrived')
-            console.log(datavalues)
-            fetch(`${ApiUrl}/runPython/`, {
-              method: "POST",
-              body: JSON.stringify({
-                ...datavalues,
-                title: `${data && data?.experimentName}`,
-              }),
-              headers: { "Content-Type": "application/json" },
-            }).then((responce)=>responce.json())
-            .then((data)=>{
-              console.log("result",data);
-             setResult( data)
-             setOpens(true);
-              setStatusmessages('Calculation Completed')
-              setAccord(true)
-            })
-            .catch((error) => {
-              ////////////////////
-              function call(){
-                setOpene(true)
-                setErrorvalue("Check the values you have Entered")
-                setStatusmessagee("Check the values you have Entered")
-              }
-              setTimeout(
-                call()
-              , 1000);
-            });
+            setStatusmessages('Data has been Retrived') 
         } )
         .catch((error) => {
           setOpene(true);
@@ -325,57 +306,6 @@ useEffect(() => {
 
 
 
-// calculate
-const Calculate = (event) => {
-  
-  event.preventDefault();
-  init()
-  
-  console.log("data to calc",data1);
-  let vals = Object.values(data1)
- 
-  const empty = vals.filter(item => item  === "");
-  const tosent  = delete data1[""]
-
-
-  if (empty.length > 0){
-    setErrorvalue("Must fill all Required Readings")
-    setOpene(true);
-    setStatusmessagee('Must fill all Required Readings')
-  }
-  else if(empty.length === 0){
-    setErrorvalue()
-    setResult({})
-    let resultval ={}
-  
- 
-  fetch(`${ApiUrl}/runPython/`, {
-    method: "POST",
-    body: JSON.stringify({
-      ...data1,
-      title: `${data && data?.experimentName}`,
-    }),
-    headers: { "Content-Type": "application/json" },
-  }).then((responce)=>responce.json())
-  .then((data)=>{
-    console.log("result",data);
-   setResult( data)
-   setOpens(true);
-    setStatusmessages('Calculation Completed')
-    setAccord(true)
-  })
-  .catch((error) => {
-    setOpene(true);
-    setErrorvalue("Check the values you have Entered")
-    setStatusmessagee("Check the values you have Entered")
-  });
-
-//   setIsData((prev) => !prev);
-// if(resultval){
-//   setResult(resultval)
-// }
-}
-}
 
 
 
@@ -507,8 +437,8 @@ const updateval = (event) => {
   const uses = htmlContext?.html.child.map((ele) => ele);
   return (
     <>
-      <Grid container className={classes.root} spacing={2}>
-        <Grid item >
+      {/* <Grid container className={classes.root} spacing={2}>
+        <Grid item > */}
           <div className={classes.paper}>
           
              {/* <Contextshared value={htmlContext} dataV={data} datavalues={datavalues}/>  */}
@@ -607,14 +537,7 @@ const updateval = (event) => {
           </div>
           <br /><br />
           <Stack spacing={2} direction="row" style={{ position: "relative", left: "25%" }}>
-          <Button variant="contained"
-            disabled={user.role==="student"}
-                style={{ backgroundColor: user.role==="student" ? '#FFD37C' : '#F1C232' ,color: user.role==="student" ? 'grey' : 'black'}}
-                onClick={Calculate}
-              >
-                Calculate Result &nbsp;&nbsp;&nbsp;
-                <BsFillCalculatorFill/>
-                </Button>
+         
 
                 <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={graph}>Graph &nbsp;&nbsp;&nbsp;<VscGraphLine/></Button>
           
@@ -647,9 +570,16 @@ const updateval = (event) => {
         }
          {/* :<Lodaing style={{width:"100%",height:"100%"}}/>} */}
           </div>
-        </Grid>
+        {/* </Grid>
 
-      </Grid>
+      </Grid> */}
+
+      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"absolute",top:'200px',right:"0%", width: "calc(100vw - 100rem)",height:"200px",padding:"20px  20px 20px"}}>
+     
+       <h5> Remark: {remark && remark}</h5>
+        <br/>
+       <h5>Mark: {mark && mark} </h5> 
+      </div>
     </>
   );
 };

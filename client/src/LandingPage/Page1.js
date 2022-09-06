@@ -6,7 +6,7 @@ const Page1 = () => {
   return (
 <div className= "page1 ">
 <div className="page1__content">
-<h1 className="page1__title" style={{color:'white'}}>Rich Text Editor</h1>
+<h1 className="page1__title" style={{color:'white'}}>Digital experimentation</h1>
 <p>
 <ul style={{ listStyleType: 'circle',fontSize:"15px" ,fontWeight:'bold',color:'white'}}>
       <li>Students carry out experiments with predefined experiments.</li>
@@ -18,7 +18,7 @@ const Page1 = () => {
 </p>
 <p style={{color:'white'}}>A web based application that streamlines the experimentation workflow by digitising test steps, post processing of the test data and automatic report generation.</p>
 </div>
-<img src={ss} alt="Travel" className="page1__image" />
+<img src={ss} alt="applayout" className="page1__image" />
 
 </div>
   );

@@ -42,6 +42,9 @@ class ApiService {
   AllUser() {
     return axios.get(USER_API_BASE);
   }
+  patchplotdata(user) {
+    return axios.patch(USER_API_BASE_URL + "/save/plot/data", user);
+  }
 }
 
 export default new ApiService();

@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -13,7 +13,19 @@ import {
 
 import { v4 as uuidv4 } from "uuid";
 import "./Graph.css"
-function Multiaxis() {
+
+import { useParams} from "react-router-dom";
+import ApiService from '../../Sevices/ApiService';
+
+
+
+
+
+
+
+function Multiaxis({count,data,setData}) {
+  
+  let {token} = useParams();
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" },
   ]);
@@ -24,6 +36,55 @@ function Multiaxis() {
 
   const [temp, setTemp] = useState();
   const [column, setColumn] = useState();
+  useEffect(()=>{
+    console.log("hello1", data)
+    let value = data
+    // console.log("hello2", value[count].plotdata)
+    if (value){
+  console.log("hello1",typeof value[0])
+ 
+  
+  setInputFields(value[count].plotdata)
+  setColumn(value[count].axiscount)
+
+  console.log("if",inputFields)
+// if(value[count].axiscount){
+//   let key =Object.values(value[count].plotdata[0])
+//   let keys =key.filter(e => e != "");
+  
+  
+//   // let count = keys.length -2
+//   setColumn(keys.length - 2)
+//   console.log("count",column)
+//   console.log("keys",keys)
+//   // console.log("keys",keys)
+
+
+// }
+
+ 
+}
+// else{
+//   console.log("else",data)
+//   setInputFields(data[count].plotdata)
+   
+
+
+
+//   let key =Object.values(data[count].plotdata[0])
+//   let keys =key.filter(e => e != "");
+
+
+//   // let count = keys.length -2
+//   setColumn(keys.length - 2)
+//   console.log("count",column)
+//   console.log("keys",keys)
+//   // console.log("keys",keys)
+// }
+   
+
+
+  },[])
 
   const generate = () => {
     setTemp();
@@ -78,9 +139,35 @@ function Multiaxis() {
     setInputFields(values);
   };
 
+
+  const check=()=>{
+    console.log("value saved",column)
+    setData(current =>
+      current.map(obj => {
+        if (obj.id === count+1) {
+          return {...obj, plotdata:inputFields, axiscount: column};
+        }
+
+        return obj;
+      }),
+    );
+    console.log("data saved",data)
+    let patchdata={ 
+      data:JSON.stringify(data),
+      id:token
+    // JSON.stringify(data)
+  }
+  
+    ApiService.patchplotdata(patchdata).then((res) => {
+     console.log(res)
+      
+    });
+  
+
+  }
   return (
     <div>
-      <h1>MultiAxis Graph</h1>
+      <h1>MultiAxis Graph {count+1}</h1>
       <label >Column:</label>
 
       <select onChange={(e)=>{setColumn(e.target.value)}}>
@@ -93,10 +180,9 @@ function Multiaxis() {
 
 
 
+<div className="row">
 
-
-
-
+<div className="column">
 
       <table>
         <thead>
@@ -117,7 +203,7 @@ function Multiaxis() {
                 <input
                   name="x1"
                   style={{ width: "100px" }}
-                  value={inputField.x}
+                  value={inputField.x1}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
                 />
               </td>
@@ -173,26 +259,11 @@ function Multiaxis() {
           ))}
         </tbody>
       </table>
+  </div>
 
-      <br/>
 
+  <div className="column">
 
-<Button
-variant='contained'
-  onClick={()=>generate()}
->Generate</Button>
-
-<br/>
-
-      <br />
-
-      <div>
-        {/* <LineChart width={600} height={300} data={data}>
-    <Line  dataKey="y1" stroke="#8884d8" />
-    <CartesianGrid stroke="#ccc" />
-    <XAxis dataKey="x1" />
-    <YAxis />
-  </LineChart>    */}
         {temp && (
           <ResponsiveContainer width="50%" aspect={2}>
             <LineChart
@@ -220,7 +291,7 @@ variant='contained'
               yAxisId="right1"
                 type="monotone"
                 dataKey="y1"
-                stroke="#8884d8"
+                stroke="#FF0000"
                 activeDot={{ r: 8 }}
               />
   {column >=2 &&            <Line
@@ -235,7 +306,7 @@ variant='contained'
         yAxisId="right3"
                 type="monotone"
                 dataKey="y3"
-                stroke="#8884d8"
+                stroke="#0000ff"
                 activeDot={{ r: 8 }}
               />
         }
@@ -243,7 +314,7 @@ variant='contained'
          yAxisId="right4"
                 type="monotone"
                 dataKey="y4"
-                stroke="#8884d8"
+                stroke="#00FF00"
                 activeDot={{ r: 8 }}
               />
          }
@@ -252,7 +323,34 @@ variant='contained'
             </LineChart>
           </ResponsiveContainer>
         )}
-      </div>
+      
+  </div>
+
+  </div>
+
+      <br/>
+
+
+<Button
+variant='contained'
+  onClick={()=>generate()}
+>Generate</Button>
+
+
+     {/* <Button  onClick={() => addd()}>
+              Save
+              
+            </Button> */}
+            <Button  onClick={() => check()}>
+              Update
+              
+            </Button>
+
+<br/>
+
+      <br />
+
+     
     </div>
   );
 }

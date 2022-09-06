@@ -32,6 +32,9 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId
     
   },
+  plotdata:{
+    type: String,
+  },
 //   datas : {
 //     type: Map,
 //     of: String
