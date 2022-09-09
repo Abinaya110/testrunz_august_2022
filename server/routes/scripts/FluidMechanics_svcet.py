@@ -153,10 +153,10 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q,H):
-            return((W*Q*H)/1000)
+            return(W*Q*H)
         
         def IP(t):
-            return((3600*Nr*0.8)/c*t)
+            return((3600*Nr*0.8)/(c*t))
         
         def Eff(Out,In):
             return((Out/In)*100)
@@ -174,13 +174,13 @@ class FML_svcet:
         Qactround=np.round(Qact, decimals=5)
         
         Output=list(map(OP, Qactround,Head))
-        Outputround=np.round(Output, decimals=4)
+        Outputround=np.round(Output, decimals=3)
 
         Input=list(map(IP, time))
-        Inputround=np.round(Input, decimals=4)
+        Inputround=np.round(Input, decimals=3)
         
         Effi=list(map(Eff, Outputround,Inputround))
-        Efficiency=np.round(Effi, decimals=4)
+        Efficiency=np.round(Effi, decimals=3)
         
         print(json.dumps({"centrifugal":[{ "The Actual discharge Qact " : str(Qactround[0]) +", "+ str(Qactround[1]) +", "+ str(Qactround[2]),"The Output power " : str(Outputround[0]) +", "+ str(Outputround[1]) +", "+ str(Outputround[2]),"The Input power " : str(Inputround[0]) +", "+ str(Inputround[1]) +", "+ str(Inputround[2]), "The Efficiency % " : str(Efficiency[0]) +", "+ str(Efficiency[1]) +", "+ str(Efficiency[2])}]}))
 
@@ -194,10 +194,10 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q,H):
-            return((c*9.81*Q*H)/1000)
+            return(c*9.81*Q*H)
         
         def IP(t):
-            return((X*3600*0.8)/c*t)
+            return((X*3600*0.8)/(c*t))
         
         def Eff(Out,In):
             return((Out/In)*100)
@@ -234,10 +234,10 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q,H):
-            return((c*9.81*Q*H)/1000)
+            return(c*9.81*Q*H)
         
         def IP(t):
-            return((X*3600*0.8)/c*t)
+            return((X*3600*0.8)/(c*t))
         
         def Eff(Out,In):
             return((Out/In)*100)
@@ -255,13 +255,13 @@ class FML_svcet:
         Qactround=np.round(Qact, decimals=5)
         
         Output=list(map(OP, Qactround,Head))
-        Outputround=np.round(Output, decimals=4)
+        Outputround=np.round(Output, decimals=3)
 
         Input=list(map(IP, timeIN))
-        Inputround=np.round(Input, decimals=4)
+        Inputround=np.round(Input, decimals=3)
         
         Effi=list(map(Eff, Outputround,Inputround))
-        Efficiency=np.round(Effi, decimals=5)
+        Efficiency=np.round(Effi, decimals=2)
         
         print(json.dumps({"gear":[{ "The Actual discharge Qact " : str(Qactround[0]) +", "+ str(Qactround[1]) +", "+ str(Qactround[2])+", "+ str(Qactround[3])+", "+ str(Qactround[4]),"The Output power " : str(Outputround[0]) +", "+ str(Outputround[1]) +", "+ str(Outputround[2])+", "+ str(Outputround[3])+", "+ str(Outputround[4]),"The Input power " : str(Inputround[0]) +", "+ str(Inputround[1]) +", "+ str(Inputround[2])+", "+ str(Inputround[3])+", "+ str(Inputround[4]), "The Efficiency % " : str(Efficiency[0]) +", "+ str(Efficiency[1]) +", "+ str(Efficiency[2])+", "+ str(Efficiency[3])+", "+ str(Efficiency[4])}]}))
 
@@ -275,10 +275,10 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q):
-            return((c*9.81*Q*Head)/1000)
+            return(c*9.81*Q*Head)
         
         def IP(t):
-            return((X*3600*0.08)/c*t)
+            return((X*3600*0.08)/(c*t))
         
         def Eff(Out,In):
             return((Out/In)*100)
@@ -296,13 +296,13 @@ class FML_svcet:
         Qactround=np.round(Qact, decimals=5)
         
         Output=list(map(OP, Qactround))
-        Outputround=np.round(Output, decimals=4)
+        Outputround=np.round(Output, decimals=2)
 
         Input=list(map(IP, timeIN))
-        Inputround=np.round(Input, decimals=4)
+        Inputround=np.round(Input, decimals=3)
         
         Effi=list(map(Eff, Outputround,Inputround))
-        Efficiency=np.round(Effi, decimals=5)
+        Efficiency=np.round(Effi, decimals=2)
         
         print(json.dumps({"submersible":[{ "The Actual discharge Qact " : str(Qactround[0]) +", "+ str(Qactround[1]) +", "+ str(Qactround[2])+", "+ str(Qactround[3])+", "+ str(Qactround[4]),"The Output power " : str(Outputround[0]) +", "+ str(Outputround[1]) +", "+ str(Outputround[2])+", "+ str(Outputround[3])+", "+ str(Outputround[4]),"The Input power " : str(Inputround[0]) +", "+ str(Inputround[1]) +", "+ str(Inputround[2])+", "+ str(Inputround[3])+", "+ str(Inputround[4]), "The Efficiency % " : str(Efficiency[0]) +", "+ str(Efficiency[1]) +", "+ str(Efficiency[2])+", "+ str(Efficiency[3])+", "+ str(Efficiency[4])}]}))
 
