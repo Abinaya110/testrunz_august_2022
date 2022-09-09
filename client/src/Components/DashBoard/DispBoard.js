@@ -160,19 +160,25 @@ export default function VerticalTabs({ data }) {
       },
     }}  >
           <Tab label="Observation" {...a11yProps(0)} />
-         {user.role!="student" &&<Tab label="Record" {...a11yProps(1)} />}
-          <Tab label="Notes" {...a11yProps(3)} />
+          <Tab label="Notes" {...a11yProps(1)} />
+         {user.role!="student" &&<Tab label="Record" {...a11yProps(2)} />}
           </Tabs>
       </AppBar>
         <TabPanel value={value} index={0}>
           <Observation data={data} />
+          {/* <>hai0</> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <Record data={data} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
           <Notes data={data} />
+          {/* <>hai1</> */}
         </TabPanel>
+      
+        <TabPanel value={value} index={2}>
+          <Record data={data} />
+          {/* <>hai2</> */}
+        </TabPanel>
+
+       
       </div>
     </>
   );

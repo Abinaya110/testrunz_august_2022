@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import { v4 as uuidv4 } from "uuid";
 import "./Graph.css"
 
@@ -167,8 +167,8 @@ function Multiaxis({count,data,setData}) {
   }
   return (
     <div>
-      <h1>MultiAxis Graph {count+1}</h1>
-      <label >Column:</label>
+      <h5> Graph {count+1}:</h5>
+      <label style={{padding:'20px 20px 20px 0'}}>Column:</label>
 
       <select onChange={(e)=>{setColumn(e.target.value)}}>
       <option value={1}> 1</option>
@@ -187,12 +187,12 @@ function Multiaxis({count,data,setData}) {
       <table>
         <thead>
           <tr>
-            <th>XAxis</th>
-            <th>YAxis1</th>
-            {column >= 2 && <th>YAxis2</th>}
-            {column >= 3 && <th>YAxis3</th>}
-              {column >= 4 && <th>YAxis4</th>}
-            <th>Remove cell</th>
+            <th>Xaxis</th>
+            <th>Yaxis1</th>
+            {column >= 2 && <th>Yaxis2</th>}
+            {column >= 3 && <th>Yaxis3</th>}
+              {column >= 4 && <th>Yaxis4</th>}
+            <th>Remove row</th>
             {/* <th>Add Cell</th> */}
           </tr>
         </thead>
@@ -246,13 +246,16 @@ function Multiaxis({count,data,setData}) {
                 />
               </td>
 }
-              <td>
-                <button
+              <td >
+                <Button 
+                variant="contained"
+                color="error"
+                style={{width:"100%",padding:"3px 3px 3px 5px"}}
                   disabled={inputFields.length === 1}
                   onClick={() => handleRemoveFields(inputField.id)}
                 >
-                  remove
-                </button>
+                  remove &nbsp;&nbsp;&nbsp; <DeleteIcon/>
+                </Button>
               </td>
           
             </tr>
@@ -334,6 +337,7 @@ function Multiaxis({count,data,setData}) {
 <Button
 variant='contained'
   onClick={()=>generate()}
+  style={{background:"#F1C232",color:"black"}}
 >Generate</Button>
 
 
@@ -341,7 +345,10 @@ variant='contained'
               Save
               
             </Button> */}
-            <Button  onClick={() => check()}>
+            <Button 
+            variant='outlined'
+            style={{marginLeft:"50px",color:"black",borderColor:"#F1C232"}}
+             onClick={() => check()}>
               Update
               
             </Button>

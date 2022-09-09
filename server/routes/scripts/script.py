@@ -32,7 +32,8 @@ from Electronic1 import EL1
 from ElectricElectronic import EE
 from HMT_Milam import HMT_Milam
 from FluidMechanics_svcet import FML_svcet
-
+from BEE_acet import BEE
+from Electronic1_svcet import Elec1
 
 def main(argv,title):
     argument = ''
@@ -615,11 +616,50 @@ def main(argv,title):
                     HMT_Milam(argument).Counter_Flow_Mailam()
                 elif( (argument[len(argument) -2] == "Insulating") and (argument[len(argument) -1] =="Powder_Mailam" )):
                     HMT_Milam(argument).Insulating_Powder_Mailam()
+                elif((argument[len(argument) -3] == "Bed")and (argument[len(argument) -2]=="Room")and (argument[len(argument) -1])=="Wiring_acet"):
+                    BEE(argument).Bed_Room_Wiring()
+                elif((argument[len(argument) -3] == "Doctor’s")and (argument[len(argument) -2]=="Room")and (argument[len(argument) -1])=="Wiring_acet"):
+                    BEE(argument).Doctor_Room_Wiring()  
+                elif((argument[len(argument) -3] == "Stair")and (argument[len(argument) -2]=="Case")and (argument[len(argument) -1])=="Wiring_acet"):
+                    BEE(argument).Stair_Case_Wiring() 
+                elif((argument[len(argument) -2] == "Godown")and (argument[len(argument) -1]=="Wiring_acet")):
+                    BEE(argument).Godown_Wiring() 
+                elif((argument[len(argument) -2] == "Kirchoff’s")and (argument[len(argument) -1]=="Law_acet")):
+                    BEE(argument).Verification_of_Kirchoff_Law()
                 elif( (argument[len(argument) -3] == "Flow")  and (argument[len(argument) -2] == "Through") and (argument[len(argument) -1] =="Orifice_SVCET" )):
                     FML_svcet(argument).Flow_Through_Orifice_SVCET()
-
-
-                     
+                elif( (argument[len(argument) -3] == "Flow")  and (argument[len(argument) -2] == "Through") and (argument[len(argument) -1] =="Venturimeter_SVCET" )):
+                    FML_svcet(argument).Flow_Through_Venturimeter_SVCET()
+                elif( (argument[len(argument) -2] == "Centrifugal") and (argument[len(argument) -1] =="Pump_SVCET" )):
+                    FML_svcet(argument).Centrifugal_Pump_SVCET()
+                # elif( (argument[len(argument) -2] == "Performance") and (argument[len(argument) -1] =="RP_SVCET " )):
+                    # FML_svcet(argument).Performance_RP_SVCET()
+                elif( (argument[len(argument) -2] == "Jet") and (argument[len(argument) -1] =="pump_SVCET" )):
+                        FML_svcet(argument).Jet_Pump_SVCET()
+                elif( (argument[len(argument) -2] == "Gear") and (argument[len(argument) -1] =="oil_SVCET" )):
+                        FML_svcet(argument).Gear_oil_SVCET()
+                elif( (argument[len(argument) -2] == "Submersible") and (argument[len(argument) -1] =="Pump_SVCET" )):
+                        FML_svcet(argument).Submersible_Pump_SVCET()
+                elif( (argument[len(argument) -3] == "Pelton")  and (argument[len(argument) -2] == "Wheel") and (argument[len(argument) -1] =="Turbine_SVCET" )):
+                    FML_svcet(argument).Pelton_Wheel_Turbine_SVCET()    
+                elif((argument[len(argument) -1] == "CB_SVCET")):
+                    Elec1(argument).CB_SVCET()
+                elif((argument[len(argument) -1] == "CE_SVCET")):
+                    Elec1(argument).CE_SVCET()
+                elif((argument[len(argument) -1] == "FET_SVCET")):
+                    Elec1(argument).FET_SVCET()
+                elif((argument[len(argument) -1] == "UJT_SVCET")):
+                    Elec1(argument).UJT_SVCET()
+                elif((argument[len(argument) -1] == "SCR_SVCET")):
+                    Elec1(argument).SCR_SVCET()
+                elif((argument[len(argument) -1] == "Triac_SVCET")):
+                    Elec1(argument).Triac_SVCET()  
+                elif((argument[len(argument) -3] == "Clipper")and (argument[len(argument) -2] == "&") and (argument[len(argument) -1] =="Clamper_SVCET" )):
+                    Elec1(argument).Clamper_SVCET()  
+                elif((argument[len(argument) -2] == "Full")and (argument[len(argument) -1] == "wave_SVCET" )):
+                    Elec1(argument).Full_SVCET()
+                elif((argument[len(argument) -2] == "Biasing")and (argument[len(argument) -1] == "circuit_SVCET" )):
+                    Elec1(argument).Biasing_SVCET() 
  
                  
                 else:

@@ -33,6 +33,7 @@ import Loading from "./Lodaing"
 import { Button } from "@material-ui/core";
 import { useHistory,Redirect } from "react-router-dom";
 import Paper from '@mui/material/Paper';
+import Notificationmypage from "./Notificationmypage";
 
 
 function Alert(props) {
@@ -204,6 +205,9 @@ const Mypage = () => {
 
       <div >
         {loadingscreen ?<Loading/>:
+        <div>
+          {users.length != 0 && <Notificationmypage users={users} />}
+      
         <MaterialTable
           columns={columns1}
           data={rows}
@@ -227,6 +231,7 @@ const Mypage = () => {
 
           }}
         />
+        </div>
         }
       </div>
       {/* <Paper elevation={1} >hello</Paper> */}

@@ -106,7 +106,7 @@ const SharedRecord = ({ data, datavalues }) => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const editorRef = useRef(null);
-  const [graph1data, setGraph1data] = React.useState();
+  const [graphdata, setGraphdata] = useState();
   const [graph2data, setGraph2data] = React.useState();
 
   const options = ["1","2","3","4","5","6","7","8","9","10"];
@@ -118,17 +118,19 @@ const SharedRecord = ({ data, datavalues }) => {
     axios
       .get(`${ApiUrl}/procedures/search/${data.experimentName}`)
       .then((res) => {
-        setHtmlContext((prev) => {
-          if (prev === null) return res.data;
-        });
+        // setHtmlContext((prev) => {
+        //   if (prev === null) return res.data;
+        // });
+        setHtmlContext(res.data);
         fetch(`${ApiUrl}/experiments/${token}`)
           .then((res) => res.json())
           .then((data) => {
-            // console.log("check here",data)
-            const datavalues = JSON.parse(data.datas);
+            console.log("check here",token)
+            // const datavalues = JSON.parse(data.datas);
             setExpresultval(data.expresult);
             setMark(data.grade)
             setRemark(data.remark)
+            setGraphdata(data.plotdata)
             console.log("datas are", datavalues);
 
             const filtered = Object.entries(JSON.parse(data.datas)).filter(
@@ -144,7 +146,10 @@ const SharedRecord = ({ data, datavalues }) => {
             for (const [key, values] of Object.entries(obj)) {
               document.getElementById(key).setAttribute("readonly", "readonly");
             }
-
+            if(graphdata){
+              setGraphview(true)
+              console.log("hai")
+            }
 
             console.log(datavalues);
             fetch(`${ApiUrl}/runPython/`, {

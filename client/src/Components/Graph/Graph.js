@@ -66,15 +66,15 @@ fetch(`${ApiUrl}/experiments/${token}`)
   
   return (
     <div>
-
-<label >No of Graph: </label>
+<h4 >GRAPH: </h4>
+<br/>
+<label style={{paddingTop:"15px"}}>No of Graph: </label>
 
 {console.log(data)}
 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
 
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+      
           value={axisCount}
           size="small"
     

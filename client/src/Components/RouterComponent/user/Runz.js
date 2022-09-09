@@ -35,6 +35,7 @@ import { useHistory } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AddUserComponentadmin from "./AddUserComponentadmin";
 import AddUserComponentschool from "./AddUserComponentschool";
+import NotificationRunz from "./NotificationRunz";
 const USER_API_BASE_URL = `${ApiUrl}/experiments`;
 
 
@@ -389,6 +390,9 @@ individuals.map((userr, ident) => {
       </Modal>
       <div style={{ maxWidth: '100%' }}>
         {loadingscreen ?<Loading />:
+        <div>
+          {users.length != 0 && <NotificationRunz users={users} />}
+       
         <MaterialTable
           columns={columns1}
           data={rows}
@@ -432,6 +436,7 @@ individuals.map((userr, ident) => {
 
           }}
         />
+         </div>
         }
       </div>
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
