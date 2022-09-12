@@ -62,6 +62,7 @@ const DashBoard = (props) => {
     })
 
     playingUser();
+    changestatus()
   }, []);
 
   const handleClose = (event, reason) => {
@@ -81,6 +82,29 @@ const DashBoard = (props) => {
       `RunId ${token} experiment is encaged...`
     );
     setOpen(true);
+  };
+
+  const changestatus = () => {
+    fetch(`${ApiUrl}/experiments/editstatus/${token}`, {
+      method: "PATCH",
+      // signal:abortcont.signal,
+      body: JSON.stringify({
+        status:"viewed",
+
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(json => 
+    {
+    
+      console.log("edit status",json)
+      
+    }
+    );
+  
   };
 
   return (

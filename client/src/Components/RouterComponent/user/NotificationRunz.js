@@ -62,7 +62,7 @@ export default function NotificationRunz(props) {
   useEffect(() => {
     setArray(
       datas.filter(function (data) {
-        return data.status == "Created";
+        return data.status == "reviewed";
       })
     );
 

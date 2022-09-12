@@ -108,6 +108,7 @@ const patchGradeandremark = async (req, res, next) => {
   let key = Object.keys(req.body)[0];
   let value = Object.values(req.body)[0];
   id = req.body.id;
+  let status=req.body.status
   console.log("grade and mark", key, value, id);
 
   try {
@@ -117,6 +118,7 @@ const patchGradeandremark = async (req, res, next) => {
         $set: {
           // labtype:lab,
           [key]: value,
+          status:status
         },
       }
     );
@@ -126,6 +128,53 @@ const patchGradeandremark = async (req, res, next) => {
     res.json("error");
   }
 };
+
+
+// patch status  editstatus
+const editstatus = async (req, res, next) => {
+  // let key = Object.keys(req.body)[0];
+  // let value = Object.values(req.body)[0];
+  // id = req.body.id;
+  let id=req.params._id
+  let status=req.body.status
+  const user = await User.findById(id);
+  console.log("status", user);
+  
+    const updatedContent = await User.findByIdAndUpdate(
+          { _id: id },
+          {
+            $set: {
+           
+              status: status,
+            },
+          }
+        );
+        res.json(updatedContent);
+ 
+  
+  // try {
+  //   const updatedContent = await User.findByIdAndUpdate(
+  //     { _id: id },
+  //     {
+  //       $set: {
+  //         // labtype:lab,
+  //         [key]: value,
+  //       },
+  //     }
+  //   );
+  //   res.json(updatedContent);
+  // } catch (err) {
+  //   console.error(err);
+  //   res.json("error");
+  // }
+
+
+};
+
+
+
+
+
 
 //post bulk user
 const postBulkuser = async (req, res, next) => {
@@ -233,6 +282,7 @@ const patchUser = async (req, res) => {
           labType: req.body.labType,
           experimentName: req.body.experimentName,
           sharedDate: new Date().getTime(),
+          status:req.body.status
         },
       }
     );
@@ -395,4 +445,5 @@ module.exports = {
   postspecificexp,
   patchGradeandremark,
   datatoPlot,
+  editstatus
 };
