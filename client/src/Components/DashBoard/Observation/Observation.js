@@ -107,7 +107,6 @@ if(obj){
 
 
 
-//graph 
 
 
 
@@ -338,7 +337,7 @@ const updateval = (event) => {
       return;
     }
     setOpens(false);
-   
+    
   };
   const accordchange=()=>{
     setAccord(!accord)

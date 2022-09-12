@@ -16,6 +16,7 @@ const {
   postspecificexp,
   patchGradeandremark,
   datatoPlot,
+  editstatus
   
 } = require("../controllers/experimentController");
  
@@ -49,7 +50,7 @@ router.post("/mail", mailUser);
 // @access public
 router.patch("/:_id", patchUser);
 router.patch("/remove/:_id",removesharedUser);
-
+router.patch("/editstatus/:_id",editstatus)
 router.patch("/", patchUser1);
 router.patch("/grade/remark", patchGradeandremark);
 router.patch("/save/plot/data", datatoPlot);

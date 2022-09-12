@@ -229,6 +229,7 @@ const SharedRecord = ({ data, datavalues }) => {
     body: JSON.stringify({
       [tag]: value,
       id: id,
+      status:"reviewed"
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8",

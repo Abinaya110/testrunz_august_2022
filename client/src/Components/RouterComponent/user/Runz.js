@@ -138,7 +138,7 @@ const Runz = () => {
     { title: "Grade", field: "grade",emptyValue:()=><em>-</em>,render:(rowData)=><div style={{color:rowData.grade <"5"?"red":"green"}}>{rowData.grade}</div>,
   },
     { title: "Created Time", field: "time" },
-    { title: "Status", field: "status" },
+    // { title: "Status", field: "status" },
 
   ];
 
@@ -225,6 +225,7 @@ const Runz = () => {
           labType: datatoshare.labname,
           experimentName: datatoshare.ProcedureName,
           sharewith:sharewith,
+          status:"shared"
       }
       let usermail ={
         _id:datatoshare.ProcedureId,
@@ -391,7 +392,7 @@ individuals.map((userr, ident) => {
       <div style={{ maxWidth: '100%' }}>
         {loadingscreen ?<Loading />:
         <div>
-          {users.length != 0 && <NotificationRunz users={users} />}
+          {users.length != 0 && <div style={{position:"relative",left:"20px"}}><NotificationRunz users={users} /></div>}
        
         <MaterialTable
           columns={columns1}
