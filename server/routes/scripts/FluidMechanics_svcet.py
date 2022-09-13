@@ -153,10 +153,10 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q,H):
-            return(W*Q*H)
+            return((W*Q*H)/1000)
         
         def IP(t):
-            return((3600*Nr*0.8)/(c*t))
+            return((3100*Nr*0.5)/(c*t))
         
         def Eff(Out,In):
             return((Out/In)*100)
@@ -167,16 +167,17 @@ class FML_svcet:
         Nr = float(argument[4])
         c = float(argument[5])
         
-        time = [float(argument[9]),float(argument[18]),float(argument[27])]
+        time = [float(argument[8]),float(argument[17]),float(argument[26])]
         Head = [float(argument[10]),float(argument[19]),float(argument[28])]
-        
+        timeIn = [float(argument[9]),float(argument[18]),float(argument[27])]
+
         Qact=list(map(Q, time))
         Qactround=np.round(Qact, decimals=5)
         
         Output=list(map(OP, Qactround,Head))
         Outputround=np.round(Output, decimals=3)
 
-        Input=list(map(IP, time))
+        Input=list(map(IP, timeIn))
         Inputround=np.round(Input, decimals=3)
         
         Effi=list(map(Eff, Outputround,Inputround))
@@ -194,7 +195,7 @@ class FML_svcet:
             return((A*h)/t)
         
         def OP(Q,H):
-            return(c*9.81*Q*H)
+            return((1000*9.81*Q*H)/1000)
         
         def IP(t):
             return((X*3600*0.8)/(c*t))
@@ -209,18 +210,19 @@ class FML_svcet:
         
         time = [float(argument[6]),float(argument[14]),float(argument[22]),float(argument[30])]
         Head = [float(argument[11]),float(argument[19]),float(argument[27]),float(argument[35])]
-        
+        timeIn = [float(argument[7]),float(argument[15]),float(argument[23]),float(argument[31])]
+       
         Qact=list(map(Q, time))
         Qactround=np.round(Qact, decimals=5)
         
-        Output=list(map(OP, Qactround,Head))
+        Output=list(map(OP, Qactround, Head))
         Outputround=np.round(Output, decimals=4)
 
-        Input=list(map(IP, time))
-        Inputround=np.round(Input, decimals=4)
+        Input=list(map(IP, timeIn))
+        Inputround=np.round(Input, decimals=3)
         
         Effi=list(map(Eff, Outputround,Inputround))
-        Efficiency=np.round(Effi, decimals=5)
+        Efficiency=np.round(Effi, decimals=2)
         
         print(json.dumps({"jet":[{ "The Actual discharge Qact " : str(Qactround[0]) +", "+ str(Qactround[1]) +", "+ str(Qactround[2])+", "+ str(Qactround[3]),"The Output power " : str(Outputround[0]) +", "+ str(Outputround[1]) +", "+ str(Outputround[2])+", "+ str(Outputround[3]),"The Input power " : str(Inputround[0]) +", "+ str(Inputround[1]) +", "+ str(Inputround[2])+", "+ str(Inputround[3]), "The Efficiency % " : str(Efficiency[0]) +", "+ str(Efficiency[1]) +", "+ str(Efficiency[2])+", "+ str(Efficiency[3])}]}))
 
