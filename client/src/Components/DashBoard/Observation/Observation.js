@@ -396,39 +396,7 @@ const updateval = (event) => {
       
               
           </div>
-         
-          <br /><br />
-          {user.role!="student" &&
-          <Accordion  expanded={accord} >
-            <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"    
-            onClick={accordchange}         
-            >
-              <Typography className={classes.heading}>Result</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                <p>Result will be shown here</p>
-                {errorvalue? <p style={{color:"red"}}>*{errorvalue}*</p>:
-                Object.keys(result).map((item) => {
-                  return Object.keys(result[item][0]).map((i) => {
-                    return (
-                      
-                       <p>{i} : {result[item][0][i]}</p> 
-                         
-                        
-                      
-                    );
-                  });
-                })
-                // <p>{output}</p>
-              }
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-}
+        
           </div>
           <br /><br />
           <Stack spacing={2} direction="row" style={{ position: "relative", left: "25%" }}>

@@ -392,7 +392,7 @@ individuals.map((userr, ident) => {
       <div style={{ maxWidth: '100%' }}>
         {loadingscreen ?<Loading />:
         <div>
-          {users.length != 0 && <div style={{position:"relative",left:"20px"}}><NotificationRunz users={users} /></div>}
+          {users.length != 0 && <div style={{position:"relative",left:"calc(100% - 200px)"}}><NotificationRunz users={users} /></div>}
        
         <MaterialTable
           columns={columns1}

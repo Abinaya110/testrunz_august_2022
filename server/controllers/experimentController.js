@@ -251,7 +251,7 @@ const datatoPlot = async (req, res) => {
   let id = req.body.id;
   let plotdatas = req.body.data;
   console.log("hello",typeof plotdatas);
-  console.log("PATCH",plotdatas)
+  console.table(plotdatas)
    try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: id },

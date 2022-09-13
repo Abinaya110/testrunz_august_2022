@@ -41,18 +41,24 @@ const getlabdetail =  async function (req, res, next) {
     let university =req.body.university
     let institute =req.body.instituteName
     let department =req.body.department
+    console.log(institute,department)
     try{
-        const admin    = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"admin"} ] })
-        const teachers = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"teacher"} ] })
-        const students = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"student"} ] })
+        const admin    = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"admin"} ] })
+        const teachers = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"teacher"} ] })
+        const students = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"student"} ] })
         const metas = await MetaInfo.aggregate( [
-            {$match:{ department:department}}, 
+            {$match:{  $and: [ 
+                {department:department}, 
+                // { university:university},
+                { institute:institute}
+               
+            ]}}, 
             {$group: { _id: "$labtype" }}
-          
+           
         ] );
         const ids = metas.map((obj) => obj._id);
         console.log(students)
-        const totalrunz = await ExperimentInfo.find({  $and: [{ instituteName:institute},{department:department},{labType: { $in: ids }}]})
+        const totalrunz = await ExperimentInfo.find({  $and: [{ institute:institute},{department:department},{labType: { $in: ids }}]})
             // field: { $in: ids } })
 
         console.log(totalrunz.length)
@@ -78,14 +84,15 @@ const getlabdetailadmin= async function(req,res){
     let university =req.body.university
     let institute =req.body.instituteName
     let lab =req.body.lab
+    console.log("this part",req.body)
     try{
-        const teachers = await User.find({ $and: [{ university:university},{ instituteName:institute},{ labtype: { $in: [lab ] } },{role:"teacher"} ] })
-        const students = await User.find({ $and: [{ university:university},{ instituteName:institute},{labtype: { $in: [lab ] }},{role:"student"} ] })
+        const teachers = await User.find({ $and: [{ university:university},{ institute:institute},{ labtype: { $in: [lab ] } },{role:"teacher"} ] })
+        const students = await User.find({ $and: [{ university:university},{ institute:institute},{labtype: { $in: [lab ] }},{role:"student"} ] })
 
         const metas = await MetaInfo.find({ $and: [ { labtype:lab }, {institute:institute}] } )
     const ids = metas.map((obj) => obj.ProcedureName);
       
-        const totalrunz = await ExperimentInfo.find({  $and: [{ instituteName:institute},{labType: lab}]})
+        const totalrunz = await ExperimentInfo.find({  $and: [{ institute:institute},{labType: lab}]})
             // field: { $in: ids } })
 
         console.log(totalrunz.length)

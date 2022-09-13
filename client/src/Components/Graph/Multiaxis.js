@@ -142,6 +142,15 @@ function Multiaxis({count,data,setData}) {
 
   const check=()=>{
     console.log("value saved",column)
+    let x = inputFields.filter((a)=>{if(a.x1 ){return a}});
+
+    if (x.length == 0) {
+      x=[  { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" }]
+    }
+    setInputFields(x)
+
+
+
     setData(current =>
       current.map(obj => {
         if (obj.id === count+1) {
@@ -265,7 +274,7 @@ function Multiaxis({count,data,setData}) {
   </div>
 
 
-  <div className="column">
+  <div className="column" style={{margin:"100px"}}>
 
         {temp && (
           <ResponsiveContainer width="50%" aspect={2}>
