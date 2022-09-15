@@ -87,6 +87,15 @@ function Multiaxis({count,data,setData}) {
   },[])
 
   const generate = () => {
+    let x = inputFields.filter((a)=>{if(a.x1 ){return a}});
+
+    if (x.length == 0) {
+      x=[  { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" }]
+    }
+    setInputFields(x)
+
+
+
     setTemp();
     let yval1 = inputFields.map((obj) => obj.y1);
     let yval2 = inputFields.map((obj) => obj.y2);
@@ -141,19 +150,12 @@ function Multiaxis({count,data,setData}) {
 
 
   const check=()=>{
-    console.log("value saved",column)
-    let x = inputFields.filter((a)=>{if(a.x1 ){return a}});
-
-    if (x.length == 0) {
-      x=[  { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" }]
-    }
-    setInputFields(x)
-
-
+   
 
     setData(current =>
       current.map(obj => {
         if (obj.id === count+1) {
+        
           return {...obj, plotdata:inputFields, axiscount: column};
         }
 
@@ -357,7 +359,7 @@ variant='contained'
             <Button 
             variant='outlined'
             style={{marginLeft:"50px",color:"black",borderColor:"#F1C232"}}
-             onClick={() => check()}>
+             onClick={check}>
               Update
               
             </Button>

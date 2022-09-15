@@ -26,43 +26,33 @@ const Graph = () => {
  useEffect(()=>{
 
 console.log("this is token",token)
- 
-var start = new Date().getTime();
+
 
 fetch(`${ApiUrl}/experiments/${token}`)
 .then((res)=>res.json())
-.then(data =>{
+.then(data=>{
   console.log("modify here",data)
   if(data.plotdata){
     setData(JSON.parse(data.plotdata))
+    let newArray = JSON.parse(data.plotdata).filter(function (el)
+{
+  return el.plotdata.length > 1
+       
+}
+);
+setAxisCount(newArray.length)
+
+
   }
   else{
     setData(dummydata)
   }
 })
-  let value = localStorage.getItem("inputFields")
-  console.log(value)
+
  
  },[])
 
 
-
-
- const getdata=()=>{
-  let value = localStorage.getItem("inputFields")
-  console.log(value)
-  if(value){
-
-    setData(JSON.parse(value))
-    console.log("getif",data)
-  }
-  else{
-    
-    setData(dummydata)
-    console.log("getelse",data)
-    console.log("getelse",dummydata)
-  }
- }
   
   return (
     <div>
@@ -70,7 +60,7 @@ fetch(`${ApiUrl}/experiments/${token}`)
 <br/>
 <label style={{paddingTop:"15px"}}>No of Graph: </label>
 
-{console.log(data)}
+
 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
 
         <Select
