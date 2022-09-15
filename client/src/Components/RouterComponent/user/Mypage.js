@@ -206,7 +206,7 @@ const Mypage = () => {
       <div >
         {loadingscreen ?<Loading/>:
         <div>
-          {users.length != 0 && <div style={{position:"relative",left:"calc(100% - 200px)"}}><Notificationmypage users={users} /></div>}
+          {users.length != 0 && <div style={{position:"relative",left: "50px" ,width:"500px"}}><Notificationmypage users={users} /></div>}
       
         <MaterialTable
           columns={columns1}

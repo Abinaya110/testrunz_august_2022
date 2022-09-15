@@ -8,7 +8,8 @@ RUN apk -U upgrade
 RUN apk update && apk add py3-pip
 RUN apk add g++ 
 RUN npm install
-RUN pip install numpy
+ADD repositories /etc/apk/repositories
+RUN apk add --update python python-dev gfortran py-pip build-base py-numpy@community
 
 COPY . .
 
