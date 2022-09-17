@@ -43,14 +43,14 @@ const getlabdetail =  async function (req, res, next) {
     let department =req.body.department
     console.log(institute,department)
     try{
-        const admin    = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"admin"} ] })
-        const teachers = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"teacher"} ] })
-        const students = await User.find({ $and: [{ university:university},{ institute:institute},{department:department},{role:"student"} ] })
+        const admin    = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"admin"} ] })
+        const teachers = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"teacher"} ] })
+        const students = await User.find({ $and: [{ university:university},{ instituteName:institute},{department:department},{role:"student"} ] })
         const metas = await MetaInfo.aggregate( [
             {$match:{  $and: [ 
                 {department:department}, 
                 // { university:university},
-                { institute:institute}
+                { instituteName:institute}
                
             ]}}, 
             {$group: { _id: "$labtype" }}

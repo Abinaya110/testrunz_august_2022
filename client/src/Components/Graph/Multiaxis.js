@@ -150,18 +150,27 @@ function Multiaxis({count,data,setData}) {
 
 
   const check=()=>{
-   
+   let array = data
+   let  objIndex = array.findIndex((obj => obj.id == count+1));
 
-    setData(current =>
-      current.map(obj => {
-        if (obj.id === count+1) {
+    //Log object to Console.
+    // console.log("Before update: ", myArray[objIndex])
+    
+    //Update object's name property.
+    array[objIndex].plotdata = inputFields
+    array[objIndex].axiscount = column
+
+setData(array)
+    // setData(current =>
+    //   current.map(obj => {
+    //     if (obj.id === count+1) {
         
-          return {...obj, plotdata:inputFields, axiscount: column};
-        }
+    //       return {...obj, plotdata:inputFields, axiscount: column};
+    //     }
 
-        return obj;
-      }),
-    );
+    //     return obj;
+    //   }),
+    // );
     console.log("data saved",data)
     let patchdata={ 
       data:JSON.stringify(data),
