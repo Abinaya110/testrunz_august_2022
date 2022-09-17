@@ -182,7 +182,7 @@ setData(array)
     ApiService.patchplotdata(patchdata).then((res) => {
       Swal.fire(
         'Data Saved',
-        'Graph vaue as been saved',
+        'Graph value has been saved',
         'success'
       )
       
