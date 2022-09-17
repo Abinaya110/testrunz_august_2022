@@ -16,6 +16,7 @@ import "./Graph.css"
 
 import { useParams} from "react-router-dom";
 import ApiService from '../../Sevices/ApiService';
+import Swal from 'sweetalert2'
 
 
 
@@ -179,7 +180,11 @@ setData(array)
   }
   
     ApiService.patchplotdata(patchdata).then((res) => {
-     console.log(res)
+      Swal.fire(
+        'Data Saved',
+        'Graph vaue as been saved',
+        'success'
+      )
       
     });
   
