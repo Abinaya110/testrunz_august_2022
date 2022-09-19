@@ -281,7 +281,7 @@ const goBack = () => {
             // })
             Swal.fire(
               'success',
-              'Procedure has been updated',
+              'Procedure has been Duplicated',
               'success',
             )
             setModalopen(false);

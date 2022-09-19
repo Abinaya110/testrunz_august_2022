@@ -3,7 +3,7 @@ var ObjectId = require('mongodb').ObjectId;
 const MetaInfo = require("../models/MetaInfo");
 
 const postInfo = function (req, res, next) {
-  console.log(req.body)
+  // console.log(req.body)
   const newMetaInfo = new MetaInfo({
     id: req.body.experimentno,
     ProcedureName: req.body.experiment,
@@ -25,10 +25,10 @@ const postInfo = function (req, res, next) {
 const getSelectedExplist = async function (req, res, next) {
   let lab= req.body.lab
   let institute= req.body.institute
-  console.log(lab)
+  // console.log(lab)
   try {
     const metas = await MetaInfo.find({ $and: [ { labtype:lab }, {institute:institute}] } );
-console.log(metas)
+// console.log(metas)
     res.json({ data: metas, totalCount: metas.length });
   } catch (err) {
     console.error(err);
@@ -40,7 +40,7 @@ console.log(metas)
 
 const patchById = async (req, res) => {
   try {
-    console.log("moreifo",req.body)
+    // console.log("moreifo",req.body)
 
     const modifiedMetaInfo = await MetaInfo.findByIdAndUpdate(
       // req.body.editid
@@ -83,7 +83,7 @@ const getInfo = async function (req, res, next) {
 };
 
 const getInstitute = async function (req, res, next) {
-  console.log("hello")
+  // console.log("hello")
   try {
     const metas = await MetaInfo.aggregate( [
    
@@ -92,7 +92,7 @@ const getInstitute = async function (req, res, next) {
     ] );
     const ids = metas.map((obj) => obj._id);
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -100,7 +100,7 @@ const getInstitute = async function (req, res, next) {
 
 const getDepartment = async function (req, res, next) {
   instituteval = req.body.institute
-  console.log("hello")
+  // console.log("hello")
   try {
     const metas = await MetaInfo.aggregate( [
         {$match:{ institute:instituteval}}, 
@@ -109,7 +109,7 @@ const getDepartment = async function (req, res, next) {
     ] );
     const ids = metas.map((obj) => obj._id);
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -118,7 +118,7 @@ const getDepartment = async function (req, res, next) {
 const getLabs = async function (req, res, next) {
   let departmentval = req.body.department
   let instituteName=req.body.instituteName
-  console.log("hai",departmentval)
+  // console.log("hai",departmentval)
   try {
     const metas = await MetaInfo.aggregate( [
         {
@@ -141,7 +141,7 @@ const getLabs = async function (req, res, next) {
     ] );
     const ids = metas.map((obj) => obj._id);
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -150,12 +150,12 @@ const getLabs = async function (req, res, next) {
 const getExplist = async function (req, res, next) {
   labval = req.body.lab
   institute= req.body.institute
-  console.log("hai",labval,institute)
+  // console.log("hai",labval,institute)
   try {
     const metas = await MetaInfo.find({ $and: [ { labtype:labval }, {institute:institute}] } )
     const ids = metas.map((obj) => obj.ProcedureName);
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -164,7 +164,7 @@ const getExplist = async function (req, res, next) {
 const getLabsfromdepartment = async function (req, res, next) {
   department = req.body.department
   institute = req.body.institute
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const metas = await MetaInfo.aggregate( [
         {$match: { $and: [  {department : department }  , { institute:institute  } ] } },
@@ -174,7 +174,7 @@ const getLabsfromdepartment = async function (req, res, next) {
     ] );
     const ids = metas.map((obj) => obj._id);
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -196,7 +196,7 @@ const getUniversity= async(req,res)=>{
 
   
     res.json({ ids});
-    console.log( ids)
+    // console.log( ids)
   } catch (err) {
     console.error(err);
   }
@@ -206,7 +206,7 @@ const getUniversity= async(req,res)=>{
 
 const getRespectiveInstitute= async(req,res)=>{
 let university = req.body.university
-console.log(university)
+// console.log(university)
 
 try {
   const metas = await MetaInfo.aggregate( [
@@ -219,7 +219,7 @@ try {
   const ids = metas.map((obj) => obj._id);
 
   res.json({ ids});
-  console.log( ids)
+  // console.log( ids)
 } catch (err) {
   console.error(err);
 }

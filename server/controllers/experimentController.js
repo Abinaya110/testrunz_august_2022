@@ -9,7 +9,7 @@ const Usernames = require("../models/Users");
 const validateRegisterInput = require("../validation/register");
 
 const getExpAllUser = async function (req, res, next) {
-  console.log("user id cj=jandjad", req.params._id);
+  // console.log("user id cj=jandjad", req.params._id);
   try {
     const users = await User.find({ userid: req.params._id });
     /* 
@@ -22,7 +22,7 @@ const getExpAllUser = async function (req, res, next) {
           experimentName,
         })
       ); */
-    console.log("output", users.length);
+    // console.log("output", users.length);
     res.json({ data: users.reverse(), totalCount: users.length });
   } catch (err) {
     console.error(err);
@@ -30,7 +30,7 @@ const getExpAllUser = async function (req, res, next) {
 };
 
 const getExpAllUsermail = async function (req, res, next) {
-  console.log("usersgjgsid", JSON.stringify(req.body._id));
+  // console.log("usersgjgsid", JSON.stringify(req.body._id));
   try {
     const users = await User.find({ shareWith: req.body._id });
     /* 
@@ -43,7 +43,7 @@ const getExpAllUsermail = async function (req, res, next) {
           experimentName,
         })
       ); */
-    console.log("output", users.length);
+    // console.log("output", users.length);
     res.json({ data: users, totalCount: users.length });
   } catch (err) {
     console.error(err);
@@ -54,7 +54,7 @@ const getSingleUser = async function (req, res, next) {
   try {
     const user = await User.findOne({ _id: req.params._id });
     // console.log("hellooo", user.expresult);
-    console.log("hello", req.params._id);
+    // console.log("hello", req.params._id);
     res.json(user);
   } catch (err) {
     console.error(err);
@@ -63,7 +63,7 @@ const getSingleUser = async function (req, res, next) {
 };
 
 const postUser = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // check validation
@@ -109,7 +109,7 @@ const patchGradeandremark = async (req, res, next) => {
   let value = Object.values(req.body)[0];
   id = req.body.id;
   let status=req.body.status
-  console.log("grade and mark", key, value, id);
+  // console.log("grade and mark", key, value, id);
 
   try {
     const updatedContent = await User.findByIdAndUpdate(
@@ -138,7 +138,7 @@ const editstatus = async (req, res, next) => {
   let id=req.params._id
   let status=req.body.status
   const user = await User.findById(id);
-  console.log("status", user);
+  // console.log("status", user);
   
     const updatedContent = await User.findByIdAndUpdate(
           { _id: id },
@@ -178,7 +178,7 @@ const editstatus = async (req, res, next) => {
 
 //post bulk user
 const postBulkuser = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   let email = req.body.email;
   let procedureDescription = req.body.procedureDescription;
   let labType = req.body.labType;
@@ -189,7 +189,7 @@ const postBulkuser = async (req, res, next) => {
   let validname = [];
   try {
     for (let i = 0; i < count; i++) {
-      console.log("individual", email[i]);
+      // console.log("individual", email[i]);
       const user = await Usernames.findOne({ email: email[i] });
       if (user) {
         const newUser = new User({
@@ -212,8 +212,8 @@ const postBulkuser = async (req, res, next) => {
       }
     }
     res.json({ sent: validname });
-    console.log("sent", validname);
-    console.log("unsent", noname);
+    // console.log("sent", validname);
+    // console.log("unsent", noname);
   } catch (err) {
     // const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -250,7 +250,7 @@ const postBulkuser = async (req, res, next) => {
 const datatoPlot = async (req, res) => {
   let id = req.body.id;
   let plotdatas = req.body.data;
-  console.log("hello",typeof plotdatas);
+  // console.log("hello",typeof plotdatas);
   console.table(plotdatas)
    try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -269,7 +269,7 @@ const datatoPlot = async (req, res) => {
 
 // group mypage with department
 const patchUser = async (req, res) => {
-  console.log("PATCH", req.body);
+  // console.log("PATCH", req.body);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params._id },
@@ -294,7 +294,7 @@ const patchUser = async (req, res) => {
 
 // $pull: { fruits: { $in: [ "apples", "oranges" ] }, vegetables: "carrots"
 const getExpBymail = async (req, res) => {
-  console.log("PATCH", req.body);
+  // console.log("PATCH", req.body);
   try {
     const metas = await User.find({
       $and: [
@@ -332,7 +332,7 @@ const getExpBymail = async (req, res) => {
 
 // Remove Shared user
 const removesharedUser = async (req, res) => {
-  console.log("remove shared", req.body);
+  // console.log("remove shared", req.body);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params._id },
@@ -349,7 +349,7 @@ const removesharedUser = async (req, res) => {
 // add data to experiments
 const patchUser1 = async (req, res) => {
   const { id, expresult, ...other } = req.body;
-  console.log("PATCH", other, id);
+  // console.log("PATCH", other, id);
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: id },
@@ -396,7 +396,7 @@ const postspecificexp = async (req, res) => {
 };
 
 const mailUser = async (req, res) => {
-  console.log("mail content", req.body);
+  // console.log("mail content", req.body);
 
   let message = `${req.body.name} submitted the prodedure of ${
     req.body.experimentName
@@ -421,11 +421,11 @@ const mailUser = async (req, res) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log("here comes the error", error);
+      // console.log("here comes the error", error);
       res.json("error");
     } else {
       res.json("sent!!!");
-      console.log("Email sent!!!");
+      // console.log("Email sent!!!");
     }
   });
 };

@@ -55,6 +55,7 @@ const Observation = ({ data ,datavalues }) => {
   const [data1, setData1] = React.useState({});
   const [{ user }, dispatch] = useStateValue();
   const [graphview,setGraphview] = React.useState(false);
+  const [savebtn,setSavebtn] =React.useState(true);
 
   const [remark,setRemark]=React.useState();
   const [mark,setMark]=React.useState();
@@ -130,14 +131,15 @@ if(obj){
       objects = {...objects,temp};
      
       ////////////////////////
-      setData1((prev) => ({ ...prev, [id]: value ?? "1" }));
+      setData1((prev) => ({ ...prev, [id]: value }));
       ele.onChange = (e) => {
         const { id, value } = e.target;
         setData1((prev) => ({ ...prev, [id]: value }));
       };
     });
-    console.log("data1",data1)
-    console.log("objects",objects)
+    // console.log("data1",data1)
+    // console.log("objects",objects)
+    setSavebtn(false)
 
   }
 
@@ -245,7 +247,7 @@ const updateval = (event) => {
   // console.log("check ele length ",inputEl.length )
   // console.log("check data ",Object.values(data))
   // console.log("check data ",Object.keys(data))
-  // console.log("check ele ",inputEl )
+  console.log("check the data here",data1 )
  
 
   fetch(`${ApiUrl}/experiments/`, {
@@ -404,7 +406,7 @@ const updateval = (event) => {
 
                 <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={()=>setGraphview(true)}>Graph &nbsp;&nbsp;&nbsp;<VscGraphLine/></Button>
           
-      <Button variant="contained"    style={{ backgroundColor:"#F1C232",color:"black" }} onClick={updateval}>Save &nbsp;&nbsp;&nbsp;<ImCloudUpload/></Button>
+      <Button variant="contained"    style={{ backgroundColor:"#F1C232",color:"black" }} disabled={savebtn} onClick={updateval}>Save &nbsp;&nbsp;&nbsp;<ImCloudUpload/></Button>
           <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={retrive}>Retrive &nbsp;&nbsp;&nbsp;<FaDownload/></Button>
       {/* <Button variant="contained" onClick={generate}>generate &nbsp;&nbsp;&nbsp;<GrDocumentPdf/></Button> */}
       {/* <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={()=>Export2Doc('generator', 'test')}>generate &nbsp;&nbsp;&nbsp;<SiMicrosoftword/></Button> */}

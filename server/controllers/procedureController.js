@@ -93,9 +93,9 @@ const patchProcedure = async (req, res) => {
 
  const deleteProcedure = async (req, res) => {
   try {
-    console.log(req.params._id )
+    // console.log(req.params._id )
     const proceduredetail = await MetaInfo.findById(req.params._id)
-    console.log(proceduredetail)
+    // console.log(proceduredetail)
 // proceduredetail
     const removedContent = await Content.remove({ _id: proceduredetail.id });
     const removedmetainfo = await MetaInfo.remove({ _id: req.params._id });

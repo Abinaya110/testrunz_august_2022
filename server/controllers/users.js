@@ -6,7 +6,7 @@ const read = async(req, res, next) => {
   try {
     const user = await User.findById(userID);
     res.json(user);
-    console.log(user)
+    // console.log(user)
   } catch (err) {
     console.error(err);
   }
@@ -21,7 +21,7 @@ const read = async(req, res, next) => {
 
 // update
 const update = (req, res, next) => {
-  console.log(req.body)
+  // console.log(req.body)
   const {
     university,
     instituteName,
@@ -80,7 +80,7 @@ const update = (req, res, next) => {
       user
         .save()
         .then((updated) => {
-          console.log(updated)
+          // console.log(updated)
           return res.json({ updated });
         })
         .catch((err) => {
@@ -97,7 +97,7 @@ const patchlab = async function (req, res, next) {
   lab=req.body.lab
 
   id=req.body.id
-  console.log(role)
+  // console.log(role)
   try {
     const updatedContent = await User.findByIdAndUpdate(
       { _id: id },
@@ -149,7 +149,7 @@ const patchlabadmin = async function (req, res, next) {
  let key=Object.keys(req.body)[0]
   let value=Object.values(req.body)[0]
   id=req.body.id
-console.log(key,value,id)
+// console.log(key,value,id)
  
 
   try {
@@ -177,9 +177,9 @@ const getaccess = async function (req, res, next) {
   role=req.body.role
   department=req.body.department
   instituteName=req.body.instituteName
-  console.log(instituteName)
+  // console.log(instituteName)
  
-  console.log(role)
+  // console.log(role)
   try {
     if(role==="superadmin"){
       const updatedContent = await User.find({$or:[{role:"teacher"},{role:"student"},{role:"admin"}] });
