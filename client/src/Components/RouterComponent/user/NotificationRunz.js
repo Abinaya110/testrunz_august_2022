@@ -104,7 +104,6 @@ export default function NotificationRunz(props) {
                       color="error"
                     >
                       <CommentOutlinedIcon  sx={{ fontSize: 25 }}/>
-                      {console.log(array.length)}
                     </Badge>
                   </Button>
                 </div>

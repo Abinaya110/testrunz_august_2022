@@ -18,9 +18,7 @@ const convertArrayToObject = (array, key) => {
 };
 
 router.post("/", (req, res) => {
-  //console.log(req.body);
   values = req.body;
-  //console.log(values);
   res.redirect("/runPython");
 });
 

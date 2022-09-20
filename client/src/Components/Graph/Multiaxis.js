@@ -356,7 +356,6 @@ setData(array)
 
   </div>
 
-      <br/>
 
 
 <Button

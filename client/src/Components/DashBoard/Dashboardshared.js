@@ -42,11 +42,11 @@ const Dashboardshared = (props) => {
   let {token} = useParams();
 
   React.useEffect(() => {
-    // console.log("paramsid here",token)
+    
     ApiService.fetchUserById(token).then(
       (res) => {
         let user = res.data;
-        //console.log(data);
+        
         data._id = user._id;
         data.studentName = user.studentName;
         data.runID = user.runID;
@@ -54,13 +54,13 @@ const Dashboardshared = (props) => {
         data.experimentName = user.experimentName;
         
         setData({ ...data });
-        //console.log(data);
-        console.log("content",res)
+     
+  
       }).catch((err)=>{
       console.log("content error",err)
       console.log("content error msg",err.data)
     })
-console.log("dashboard shared")
+
     playingUser();
     changestatus();
   }, []);

@@ -267,10 +267,27 @@ const datatoPlot = async (req, res) => {
   }
 };
 
-// group mypage with department
+
 const patchUser = async (req, res) => {
   // console.log("PATCH", req.body);
   try {
+    const user = await Usernames.findById(req.body.userid)
+    let userinstiute = user.instituteName
+    let userrole =user.role
+    const shareperson = await Usernames.findOne({ email: req.body.sharewith })
+    let sharepersoninstiute = shareperson.instituteName
+    let sharepersonrole =shareperson.role
+
+
+    if(userrole==="student" && sharepersonrole==="student"){
+      res.json({type:"error",msg:"You are not allowed to Share with this user"})
+    }
+    else if(sharepersoninstiute != userinstiute){
+      res.json({type:"error",msg:"You are not allowed to Share with this user"})
+    }
+    else{
+
+    
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params._id },
       {
@@ -286,7 +303,44 @@ const patchUser = async (req, res) => {
         },
       }
     );
-    res.json(updatedUser);
+    
+    // sending mail
+    let message = `${req.body.name} submitted the prodedure of ${
+      req.body.experimentName
+    } from ${req.body.labType} Lab open the following Link to check${
+      process.env.MAIL_URL + req.body._id
+    }`;
+  
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.EMAILPASS,
+      },
+    });
+  
+    var mailOptions = {
+      from: process.env.EMAIL,
+      to: req.body.sharewith,
+      subject: "Sharing Runz",
+      text: message,
+    };
+  
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        // console.log("here comes the error", error);
+        res.json({type:"success",msg:"Share but mail has not sent"})
+      } else {
+        res.json({type:"success",msg:"Share with this user"})
+        // console.log("Email sent!!!");
+      }
+    });
+
+
+
+
+
+  }
   } catch (err) {
     console.error(err);
   }

@@ -21,4 +21,6 @@ router.post("/query", postQuery);
 
 // router.delete("/:runID", deleteNotes);
 
+// commented routs is optional controller has to be written 
+
 module.exports = router;

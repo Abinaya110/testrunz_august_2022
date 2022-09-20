@@ -249,7 +249,7 @@ const updateval = (event) => {
   // console.log("check data ",Object.keys(data))
   console.log("check the data here",data1 )
  
-
+ 
   fetch(`${ApiUrl}/experiments/`, {
     method: "PATCH",
     body: JSON.stringify({ ...data1, id: window.location.href.split("/")[5],expresult: editorRef.current.getContent()}),
