@@ -103,11 +103,7 @@ const customStylescell = {
     backgroundColor: "black",
   },
 };
-const fetchuser = async () => {
-  let ress = await ApiService.fetchUsers();
-  console.log("rkijriotjioprjtfgjeriogj", ress);
-  return ress;
-};
+
 
 const Runz = () => {
   let rows = [];
@@ -171,16 +167,16 @@ const Runz = () => {
       _id:user._id
     }
     const usersdum = await ApiService.fetchUsers(userId).then((res) => res);
-    console.log("asdsaddsadafdwfsfas", user._id);
+  
     setLoadingscreen(false)
     setUsers(() => usersdum.data.data);
-    // console.log(usersdum.data.data)
+  
   };
 
 
   useEffect(() => {
     value();
-    console.log(user);
+   
   }, [modalOpenAdd, modalOpenEdit]);
 
   
@@ -204,20 +200,20 @@ const Runz = () => {
   //   //window.localStorage.clear();
   //   window.localStorage.setItem("userId", id);
   //   openModale();
-  //   console.log("this is id", id);
   // };
 
   const shareRunz =(data)=>{
-    // window.localStorage.setItem("userId", id);
+    
     openModale();
     setDatatoshare(data)
-    console.log("this is iddetail", data);
-    console.log("this is id", datatoshare);
+    
   }
   
   
   const sharerunzwith =()=>{
-    // window.localStorage.setItem("userId", id);
+
+
+
     setSharewitherror("")
       let users={
          _id:datatoshare.ProcedureId,
@@ -225,16 +221,11 @@ const Runz = () => {
           labType: datatoshare.labname,
           experimentName: datatoshare.ProcedureName,
           sharewith:sharewith,
-          status:"shared"
+          status:"shared",
+          userid:user._id,
+          name:user.name
       }
-      let usermail ={
-        _id:datatoshare.ProcedureId,
-         procedureDescription: datatoshare.description,
-         labType: datatoshare.labname,
-         experimentName: datatoshare.ProcedureName,
-         sharewith:sharewith,
-         name:user.name
-     }
+    
 
 
 if(sharewith==""||null){
@@ -242,52 +233,48 @@ if(sharewith==""||null){
 }
    else{
     setBtnstatus(true)
-    axios.post(USER_API_BASE_URL + "/mail", usermail)
-    .then((res) => {
-              console.log(res.data)
-              if(res.data == "error"){
-                setBtnstatus(false)
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Check the Email or internet connection',
-               
-                })
-              }
-              else{
-              console.log("mail sent successfully.");
-              ApiService.editUser(users)
+    ApiService.editUser(users)
               .then((res) => {
+                let type = res.data.type
+                let msg = res.data.msg
                 setBtnstatus(false)
-                      Swal.fire(
-                        'Shared',
-                        'Runz has been shared and mailed',
-                        'success'
-                      )
+                if(type==="success"){
+                  Swal.fire(
+                    'Shared',
+                    msg,
+                    'success'
+                  )
+                }else{
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: msg,
+                 
+                  })
+                }
+                     
                       closeModale()
               })
               .catch(function(e) {
-                console.log("error in adding name",e); // "oh, no!"
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: "Error in adding name",
+               
+                })
+                setBtnstatus(true)
               });
 
-            }
-    })
-    .catch(function(e) {
-      console.log("error in mail",e); // "oh, no!"
-    });
   }
   }
 
 
 
   const playUser = (id) => {
-    // window.localStorage.removeItem("userId");
-    // window.localStorage.setItem("userId", id);
     history.push(`/userdash/${id}`);
-    // console.log("runid runz page", id)
   };
  let individuals = users;
- console.log(typeof users)
+
   // let individuals = users.reverse();
 individuals.map((userr, ident) => {
    
@@ -431,7 +418,6 @@ individuals.map((userr, ident) => {
           editable={{
             onRowDelete: (selectedRow) => new Promise((resolve, reject) => {
               deleteUser(selectedRow.ProcedureId)
-              console.log(selectedRow)
               setTimeout(() => resolve(), 500);
             }),
 

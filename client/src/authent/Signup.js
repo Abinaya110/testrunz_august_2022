@@ -54,7 +54,7 @@ const Signup = () => {
     setPassworderror()
     setConfirmpassworderror()
   if (!name ) {
-      console.log("no name")
+     
       setNameerror("*Name required*")
     }
     else if(nameerror){

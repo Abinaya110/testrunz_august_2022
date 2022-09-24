@@ -2,6 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import Modal from "react-modal";
 // import Graph from "../Graph/Graph";
 import ApiUrl from "../../../ServerApi";
+import Swal from 'sweetalert2'
 
 import Lodaing from "../../RouterComponent/user/Lodaing";
 import { Editor } from "@tinymce/tinymce-react";
@@ -237,8 +238,11 @@ const SharedRecord = ({ data, datavalues }) => {
   })
     .then((response) => response.json())
     .then((json) => {
-      alert("User updated successfully");
-      console.log(json);
+      Swal.fire(
+        'Assigned',
+        `${tag} has been to the updated`,
+        'success'
+      )
  
     });
 };

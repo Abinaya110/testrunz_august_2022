@@ -77,12 +77,12 @@ const Signin = () => {
               usertoken: data.jwttoken
             })
             .then((res) => {
-              console.log("here")
+            
               dispatch({
                 type: actionTypes.SET_USER,
                 user: res.data.user
              });
-             console.log("hello user")
+            
              history.push("/private");
              });
 
@@ -95,8 +95,6 @@ const Signin = () => {
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log("Failure1", errorCode)
-        console.log("Failure2", errorMessage)
         setStatusmessage(errorMessage)
         setOpen(true);
       });

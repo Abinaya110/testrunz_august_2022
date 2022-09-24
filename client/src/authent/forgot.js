@@ -54,8 +54,6 @@ const Forgot = () => {
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log("1",errorCode)
-    console.log("2",errorMessage)
     setStatusmessage(errorMessage)
     setOpen(true);
   });

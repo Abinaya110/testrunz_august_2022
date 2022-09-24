@@ -36,7 +36,7 @@ const Google1 = () => {
               usertoken: data.jwttoken
             })
             .then((res) => {
-              console.log("here")
+  
               dispatch({
                 type: actionTypes.SET_USER,
                 user: res.data.user

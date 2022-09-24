@@ -50,7 +50,7 @@ const Context = ({ value, dataV }) => {
   const classes = useStyles();
   const [data, setData] = React.useState({});
   const [data1, setData1] = React.useState({});
-  // const [isData, setIsData] = React.useState(false);
+ 
   const [result, setResult] = React.useState({});
   const [errorvalue, setErrorvalue]=React.useState();
   const [output,setOutput]=React.useState({})
@@ -62,17 +62,13 @@ const Context = ({ value, dataV }) => {
   const vertical ="button"
   const horizontal = "center"
 
-  // const [inputEl,setInputEl] = React.useState(document.querySelectorAll("input"));
-  // let inputElArr = Array.from(inputEl).slice(1);
-
-
 
 
   function init() {
-    // setInputEl(document.querySelectorAll("input"))
+  
     let inputEl = document.querySelectorAll("input");
-     console.log(inputEl)
-    //  console.log(inputElArr)
+   
+  
      inputEl.forEach((ele) => {
       const { name, value } = ele;
       setData((prev) => ({ ...prev, [name]: value ?? "1" }));
@@ -89,7 +85,7 @@ const Context = ({ value, dataV }) => {
     fetch(`${ApiUrl}/experiments/${token}`)
     .then((res)=>res.json())
     .then(data =>{
-      // console.log("check here",data)
+   
       const filtered = Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '');
       const obj = Object.fromEntries(filtered)
 
@@ -163,7 +159,7 @@ const  Export2Doc=(element, filename = '')=>{
     
    
 
-  // React.useEffect(init, [isData]);
+
 
   const accordchange=()=>{
     setAccord(!accord)
@@ -248,20 +244,14 @@ const  Export2Doc=(element, filename = '')=>{
     
     else if(empty.length === 0){
     init()
-    // console.log("check", event)
-    // console.log("check data legth ",Object.values(data).length)
-    // console.log("check ele length ",inputEl.length )
-    // console.log("check data ",Object.values(data))
-    // console.log("check data ",Object.keys(data))
-    // console.log("check ele ",inputEl )
-   
+
 
     fetch(`${ApiUrl}/experiments/`, {
       method: "PATCH",
       body: JSON.stringify({ ...data, id: window.location.href.split("/")[5] }),
       headers: { "Content-type": "application/json" },
     })
-      .then(res => {console.log("result", res)
+      .then(res => {
       setOpens(true);
       setStatusmessages('Your work has been saved')
     }

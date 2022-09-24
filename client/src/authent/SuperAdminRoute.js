@@ -17,7 +17,7 @@ const SuperAdminRoute = ({ auth, component: Component, ...rest }) => {
 
   useEffect(()=>{
     const abortcont = new AbortController();
-    console.log("coookieee",cookies.userjwt)
+   
 
 fetch(`${process.env.REACT_APP_API}/validateuser`, {
 		method: "POST",
@@ -32,13 +32,12 @@ fetch(`${process.env.REACT_APP_API}/validateuser`, {
 .then(response => response.json())
 .then(json => 
   {
-    // setB(json.user)
-    // console.log("lasdkl",b)
+ 
     dispatch({
             type: actionTypes.SET_USER,
             user: json.user,
           });
-    // console.log("lasdkl",user.role)
+  
     return ()=>abortcont.abort()
   }
   );

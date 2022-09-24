@@ -32,18 +32,12 @@ fetch(`${process.env.REACT_APP_API}/validateuser`, {
 .then(response => response.json())
 .then(json => 
   {
-    // setB(json.user)
-    // console.log("lasdkl",b)
-    // setUserrole(json.user.showOnce)
-   
-        
-
+ 
     dispatch({
             type: actionTypes.SET_USER,
             user: json.user,
           });
-    // console.log("lasdkl",user.role)
-    // return ()=>abortcont.abort()
+
   }
   );
 
@@ -53,9 +47,9 @@ fetch(`${process.env.REACT_APP_API}/validateuser`, {
   },[])
      return (
    <>
-   {console.log(user)}
+  
     <Route {...rest} render={props => ( user ? <Component {...props} /> :  
-    // <Redirect to="/app" />
+  
     null
     )} />   
     </>                      

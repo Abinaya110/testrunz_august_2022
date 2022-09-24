@@ -47,15 +47,14 @@ const DashBoard = (props) => {
     ApiService.fetchUserById(token).then(
       (res) => {
         let user = res.data;
-        //console.log(data);
+     
         data._id = user._id;
         data.studentName = user.studentName;
         data.runID = user.runID;
         data.labType = user.labType;
         data.experimentName = user.experimentName;
         setData({ ...data });
-        //console.log(data);
-        console.log("content",data)
+       
       }).catch((err)=>{
       console.log("content error",err)
       console.log("content error msg",err.data)
