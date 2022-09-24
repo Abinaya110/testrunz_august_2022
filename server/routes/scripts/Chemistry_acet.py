@@ -1,195 +1,115 @@
-# import json
-
-# class Chem_acet:
-#     def __init__(self, arg):
-#         self.arg = arg
-#     def Acetic_acid(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-#         wt_1= float(argument[1])
-#         N1_1=((wt_1*1000)/12600)  #WT1
-#         V2_1=int(argument[2])   #20
-#         N_2=round((V1_1*N1_1)/V2_1,4) #1
-#         wt_2=int(argument[8]) #wt2
-#         N2_2=((wt_2*100))
-#         V2 = v1(float(argument[10]),float(argument[11])) #FINAL
-#         N2= round((V2_1 * N_2 )/V2,4) #2
-#         Vinegar= (N2*60)/10
-#         Percentage = round(((10000*Vinegar)/ N2_2),2)
-#         print(json.dumps({"ans":[{"Amount of acidic acide present in the given vinegar sample =":str(Vinegar)+"N","Percentge of acidic percent in the given vinegar sample=":str(Percentage)+"%"}]}))
-#     def oxygen(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-#         wt_1= float(argument[1])
-#         N1_1=((wt_1*1000)/9806)  #WT1
-#         V2_1=int(argument[2])   #20
-#         N_2=round((V2_1*N1_1)/V1_1,4) #1
-#         wt_2=int(argument[8]) #wt2
-#         V2_2=int(argument[10]) # 50ML
-#         V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-#         N2= round((V2 * N_2 )/V2_2,4) #2
-#         Water_sample= (N2*8*1000)
-#         print(json.dumps({"ans":[{"Amount of dissolved oxygen present in given eater sample":str(Water_sample)+"ppm"}]}))
-#     def edta(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         V1_1=v1(float(argument[2]),float(argument[3])) #FINAL
-#         V2_1=int(argument[1])   #20
-#         N_2=round((V2_1)/V1_1,3) #1
-
-#         V2 = v1(float(argument[8]),float(argument[9])) #FINAL
-#         N2= round((V2/ N_2),4) #2
-#         sample_hard= round((N2*1000)/20,1)
-#         print(json.dumps({"ans":[{"1000 ml of sample hard water contain hardness":str(sample_hard)}]}))
-#     def Carbonate(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         Wt=float(argument[1]) # weigth
-#         N_wt= (Wt*1000/12400)
-#         V1=float(argument[2]) # 20ml
-#         V2=v1(float(argument[3]),float(argument[4]))
-#         N2 = round(V1*N_wt/V2,2)
-#         Na2co3=round(N2*2*float(argument[12])/V1,4)
-#         NN=round(Na2co3*6200/1000,2)
-#         V1_1=float(argument[12])
-#         V2_1=float(argument[13])
-#         V= round(V2_1- (2*V1_1))
-#         N_Na2co3=((NN*V)/V1)
-#         NaHCO3=round(N_Na2co3*84/100,2)
-#         print(json.dumps({"ans":[{"Amount of Na2co3 present in given solution":str(NN)+"g","Normality of NaHco3=":str(N_Na2co3)+"N","Amount of NaHCO3 present in given solution":str(NaHCO3)+"g"}]}))  
-       
-#     def mohr(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         A= float(argument[15])
-#         B= float(argument[16])
-#         N2=float(argument[1])
-#         V1= float(argument[2])
-#         V2=  (A-B)
-#         N1= N2*V2 / V1
-#         Chloride = round(N1*35.45*1000,2)
-#         print(json.dumps({"Answer":[{"Amount of chloride ion present in the given water sample =":str(Chloride)+"ppm"}]}))
-        
-#     def copper(self):
-#         argument = self.arg[0:]
-#         def v1(x,y):return x+y
-#         V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-#         wt_1= float(argument[1])
-#         N1_1=((wt_1*1000)/9806)  #WT1
-#         V2_1=int(argument[2])   #20
-#         N_2=round((V2_1*N1_1)/V1_1,4) #1
-#         wt_2=int(argument[8]) #wt2
-#         V2_2=int(argument[10]) # 50ML
-#         V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-#         N2= round((V2 * N_2 )/V2_2,4) #2
-#         Water_sample= round((N2*63.5*100)/1000,3)
-#         print(json.dumps({"ans":[{"Amount of chlorine present":str(V2_1)}]}))
-
-
 import json
+from pickletools import float8
 
 class Chem_acet:
     def __init__(self, arg):
         self.arg = arg
+        
     def Acetic_acid(self):
         argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/12600)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V1_1*N1_1)/V2_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        N2_2=((wt_2*100))
-        V2 = v1(float(argument[10]),float(argument[11])) #FINAL
-        N2= round((V2_1 * N_2 )/V2,4) #2
-        Vinegar= (N2*60)/10
-        Percentage = round(((100*Vinegar)/ N2_2),2)
-        print(json.dumps({"ans":[{"Amount of acidic acide present in the given vinegar sample =":str(N2)+"N","Percentge of acidic percent in the given vinegar sample=":str(Percentage)+"%"}]}))
-    def oxygen(self):
-        argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/9806)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        Water_sample= (N2*8*1000)
-        print(json.dumps({"ans":[{"Amount of dissolved oxygen present in given eater sample":str(Water_sample)+"ppm"}]}))
+        
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),3)
+        Norm2 = round((float(argument[26])*float(argument[27])/float(argument[28])),3)
+        Acetic= round((Norm2/10*60),2)
+        Percent =round((100*Acetic)/float(argument[16]),2)
+        
+        print(json.dumps({"ans":[{"Normality of NaOH":str(Norm1),"Normality of oxalic acid in Vinegar":str(Norm2),"Amount of acetic acid present in the given vinegar sample":str(Acetic),"Percentage of acetic acid present in the given vinegar sample":str(Percent)+"%"}]}))
+    
+    
     def edta(self):
         argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[2]),float(argument[3])) #FINAL
-        V2_1=int(argument[1])   #20
-        N_2=round((V2_1)/V1_1,3) #1
-
-        V2 = v1(float(argument[8]),float(argument[9])) #FINAL
-        N2= round((V2/ N_2),4) #2
-        sample_hard= round((N2*1000)/20,1)
-        print(json.dumps({"ans":[{"1000 ml of sample hard water contain hardness":str(sample_hard)}]}))
+        
+        EDTA = round((float(argument[1])/float(argument[5])),3)
+        Hard = round((float(argument[15])*EDTA),3)
+        Sample=round((Hard*1000/20),2)
+        
+        print(json.dumps({"ans":[{"1ml of EDTA":str(EDTA)+"mg of CaCO3","20ml of Hard water":str(Hard)+"mg of CaCO3","1000ml of Sample hard water contains":str(Sample)+"ppm"}]}))
+    
+    
     def Carbonate(self):
         argument = self.arg[0:]
-        def v1(x,y):return x+y
-        Wt=float(argument[1]) # weigth
-        N_wt= (Wt*1000/12400)
-        V1=float(argument[2]) # 20ml
-        V2=v1(float(argument[3]),float(argument[4]))
-        N2 = round(V1*N_wt/V2,2)
-        Na2co3=round(N2*2*float(argument[12])/V1,4)
-        NN=round(Na2co3*6200/1000,2)
-        V1_1=float(argument[12])
-        V2_1=float(argument[13])
-        V= round(V2_1- (2*V1_1))
-        N_Na2co3=((NN*V)/V1)
-        NaHCO3=round(N_Na2co3*84/100,2)
-        print(json.dumps({"ans":[{"Amount of Na2co3 present in given solution":str(NN)+"g","Normality of NaHco3=":str(N_Na2co3)+"N","Amount of NaHCO3 present in given solution":str(NaHCO3)+"g"}]}))  
-       
+        
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),3)
+        Norm2 = round((Norm1*2*float(argument[18])/float(argument[16])),3)
+        Amount= round((Norm2*float(argument[2])*62*100/1000),2)
+        Norm3=round((Norm1*(float(argument[19])-2*float(argument[18]))/float(argument[3])),2)
+        Amount2 =round((Norm3*84*100/1000),2)
+        
+        print(json.dumps({"ans":[{"Normality of HCl":str(Norm1),"Normality of Na2CO3":str(Norm2),"Amount of Na2CO3 present in the given solution":str(Amount),"Normality of NaHCO3":str(Norm3)+"%","Amount of NaHCO3 present in the given solution":str(Amount2)}]}))
+    
+    
+    def ferrous(self):
+        argument = self.arg[0:]
+        
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),3)
+        Norm2 = round((float(argument[25])*float(argument[26])/float(argument[27])),2)
+        Amount= round((Norm2*55.85*100/1000),2)
+        
+        print(json.dumps({"ans":[{"Normality of KMnO4":str(Norm1),"Normality of FAS":str(Norm2),"Amount of Ferrous iron present in the given solution":str(Amount)}]}))
+    
+        
     def mohr(self):
         argument = self.arg[0:]
-        def v1(x,y):return x+y
-        A= float(argument[15])
-        B= float(argument[16])
-        N2=float(argument[1])
-        V1= float(argument[2])
-        V2=  (A-B)
-        N1= N2*V2 / V1
-        Chloride = round(N1*35.45*1000,2)
-        print(json.dumps({"Answer":[{"Amount of chloride ion present in the given water sample =":str(Chloride)+"ppm"}]}))
-   
-    def Bleaching_powder(self):
-        argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/9806)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        Water_sample= round((N2*35.45*100)/1000,3)
-        print(json.dumps({"ans":[{"Amount of chlorine present":str(Water_sample)}]}))
+        
+        A= float(argument[21])
+        B= float(argument[22])
+        Norm1 = round(((A-B)*float(argument[1])/float(argument[20])),2)
+        Norm2 = round((Norm1*(A-B)/float(argument[2])),2)
+        Amount= round((Norm2*35.45*1000),2)
+        
+        print(json.dumps({"ans":[{"Normality of AgNO3":str(Norm1),"Normality of Chloride":str(Norm2),"Amount of Chloride present in the given water sample":str(Amount)}]}))
+         
+         
     def copper(self):
         argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/9806)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        Water_sample= round((N2*63.5*100)/1000,4)
-        print(json.dumps({"ans":[{"Amount of chlorine present":str(Water_sample)}]}))
+         
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),4)
+        Norm2 = round((float(argument[25])*float(argument[26])/float(argument[27])),3)
+        Amount= round((Norm2*63.5*100/1000),4)
+        
+        print(json.dumps({"ans":[{"Normality of Thio":str(Norm1),"Normality of CuSO4":str(Norm2),"Amount of Copper present in the given solution":str(Amount)}]}))
+
+
+    def Bleaching_powder(self):
+        argument = self.arg[0:]
+        
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),4)
+        Norm2 = round((float(argument[25])*float(argument[26])/float(argument[27])),3)
+        Amount= round((Norm2*35.45*100/1000),4)
+        
+        print(json.dumps({"ans":[{"Normality of Thio":str(Norm1),"Normality of Chlorine":str(Norm2),"Amount of Chlorine present in the given solution":str(Amount)}]}))
+           
+                
+    def calcium(self):
+        argument = self.arg[0:]
+        
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),4)
+        Norm2 = round((float(argument[25])*float(argument[26])/float(argument[27])),3)
+        Amount= round((Norm2*20*100/1000),4)
+        
+        print(json.dumps({"ans":[{"Normality of KMnO4":str(Norm1),"Normality of Calcium":str(Norm2),"Amount of Calcium present in the given solution":str(Amount)}]}))
+           
+ 
+    def oxygen(self):
+        argument = self.arg[0:]
+         
+        Norm1 = round((float(argument[12])*float(argument[13])/float(argument[14])),4)
+        Norm2 = round((float(argument[25])*Norm1/float(argument[27])),3)
+        Amount= round((Norm2*8*1000),4)
+        
+        print(json.dumps({"ans":[{"Normality of Thio":str(Norm1),"Normality of Dissolved oxygen":str(Norm2),"Amount of Dissolved Oxygen in the given solution":str(Amount)}]}))
+           
+    
+    def Magnesium(self):
+        argument = self.arg[0:]
+        Mola1 = round((float(argument[12])*float(argument[13])/float(argument[14])),4)
+        Mola2 = round((Mola1*float(argument[26])/float(argument[27])),4)
+        Amount= round((Mola2*24*100/1000),4)
+        
+        print(json.dumps({"ans":[{"Molarity of EDTA":str(Mola1),"Molarity of Magnesium":str(Mola2),"Amount of Magnesium present in the given solution":str(Amount)}]}))
+           
+   
+    
     def Conductometry(self):
         argument = self.arg[0:]
         V1=(float(argument[43])) #20  
@@ -197,44 +117,3 @@ class Chem_acet:
         V2= (float(argument[45]))
         N2= round((V1*N1)/V2,4)
         print(json.dumps({"ans":[{"Amount of lead present in the given":str(N2)}]}))
-    def Magnesium(self):
-        argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1)/287.5)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        Magnes= round((N2*24*100)/1000,4)
-        print(json.dumps({"ans":[{"Amount of magnesium=":str(Magnes)+"g"}]}))
-    def calcium(self):
-        argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/12600)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        wt_2=int(argument[8]) #wt2
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        Permanganometry= round((N2*24*100)/1000,4)
-        print(json.dumps({"ans":[{"Amount of CA2+ present in given solution=":str(Permanganometry)+"g"}]}))
-    def ferrous(self):
-        argument = self.arg[0:]
-        def v1(x,y):return x+y
-        V1_1=v1(float(argument[3]),float(argument[4])) #FINAL
-        wt_1= float(argument[1])
-        N1_1=((wt_1*1000)/12600)  #WT1
-        V2_1=int(argument[2])   #20
-        N_2=round((V2_1*N1_1)/V1_1,4) #1
-        V2_2=int(argument[10]) # 50ML
-        V2 = v1(float(argument[11]),float(argument[12])) #FINAL
-        N2= round((V2 * N_2 )/V2_2,4) #2
-        ferrous= round((N2*55.85*100)/1000,4)
-        print(json.dumps({"ans":[{"Amount of Fe2+ present in given solution=":str(ferrous)+"g"}]}))

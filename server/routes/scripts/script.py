@@ -34,6 +34,7 @@ from HMT_Milam import HMT_Milam
 from FluidMechanics_svcet import FML_svcet
 from BEE_acet import BEE
 from Electronic1_svcet import Elec1
+from Electronic_acet import Electronics1
 
 def main(argv,title):
     argument = ''
@@ -660,6 +661,44 @@ def main(argv,title):
                     Elec1(argument).Full_SVCET()
                 elif((argument[len(argument) -2] == "Biasing")and (argument[len(argument) -1] == "circuit_SVCET" )):
                     Elec1(argument).Biasing_SVCET() 
+                # elif((argument[len(argument) -2] == "DC") and (argument[len(argument) -1] == "Shunt_SVCET")):
+                #     ElecMac1(argument).DCshunt()
+                # elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Series") and (argument[len(argument) -1] == "Motor_SVCET")):
+                #     ElecMac1(argument).DC_SERIES_MOTOR()
+                # elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Compound") and (argument[len(argument) -1] == "Motor_SVCET")):
+                #     ElecMac1(argument).DC_COMPOUND_MOTOR()
+                # elif((argument[len(argument) -3] == "OC") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "SC_SVCET")):
+                #     ElecMac1(argument).SELF()       
+                # elif((argument[len(argument) -2] == "Swinburne's") and (argument[len(argument) -1] == "Test_SVCET")):
+                #     ElecMac1(argument).SWINBURNE()
+                # elif((argument[len(argument) -2] == "Speed") and (argument[len(argument) -1] == "control_SVCET")):
+                #     ElecMac1(argument).Speed()
+                # elif((argument[len(argument) -1] == "Single_Phase_Transformer_SVCET")):
+                #     ElecMac1(argument).Singlephasetrf()
+                # elif((argument[len(argument) -2] == "Parallel")and (argument[len(argument) -1] == "Operation_SVCET")):
+                #     ElecMac1(argument).trf()
+                elif((argument[len(argument) -1] == "LED_acet")):
+                    Electronics1(argument).LED_acet()
+                elif((argument[len(argument) -1] == "CE_acet")):
+                    Electronics1(argument).CE_acet()
+                elif((argument[len(argument) -1] == "FET_acet")):
+                    Electronics1(argument).FET_acet()
+                elif((argument[len(argument) -1] == "UJT_acet")):
+                    Electronics1(argument).UJT_acet()
+                elif((argument[len(argument) -1] == "SCR_acet")):
+                    Electronics1(argument).SCR_acet()
+                elif((argument[len(argument) -1] == "Gate_acet")):
+                    Electronics1(argument).Gate_acet()
+                elif((argument[len(argument) -2] == "Clipper") and (argument[len(argument) -1] == "Circuit_acet")):
+                    Electronics1(argument).Clipper_acet()
+                elif((argument[len(argument) -2] == "Clamper") and (argument[len(argument) -1] == "Circuit_acet")):
+                    Electronics1(argument).Clamper_acet()
+                elif((argument[len(argument) -1] == "Hartley_acet") ):
+                    Electronics1(argument).Hartley_acet()
+                elif((argument[len(argument) -1] == "Colpitts_acet") ):
+                    Electronics1(argument).Colpitts_acet()
+                elif((argument[len(argument) -2] == "Zener")and(argument)[len(argument)-1] =="Diode_acet"):
+                    Electronics1(argument).Zener_acet()   
  
                  
                 else:

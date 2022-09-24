@@ -234,7 +234,7 @@ useEffect(()=>{
         }, 1000);
         }
         else{
-          setMessage("User Added successfully.");
+          setMessage("Runz created successfully");
           setTimeout(() => {
             props.closeModal();
           }, 1000);

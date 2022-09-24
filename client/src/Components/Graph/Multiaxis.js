@@ -48,7 +48,7 @@ function Multiaxis({count,data,setData}) {
   setInputFields(value[count].plotdata)
   setColumn(value[count].axiscount)
 
-  console.log("if",inputFields)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      console.log("if",inputFields)
 // if(value[count].axiscount){
 //   let key =Object.values(value[count].plotdata[0])
 //   let keys =key.filter(e => e != "");
