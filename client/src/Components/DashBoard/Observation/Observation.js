@@ -1,0 +1,452 @@
+import Grid from "@material-ui/core/Grid";
+
+// import Graph from "../Graph/Graph";
+import ApiUrl from "../../../ServerApi";
+
+import Lodaing from "../../RouterComponent/user/Lodaing";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import { Editor } from '@tinymce/tinymce-react';
+import {VscGraphLine}from "react-icons/vsc"
+import React, { useEffect ,useRef} from "react";
+import * as html2json from "html2json";
+import parse from "html-react-parser";
+import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import { FaDownload } from 'react-icons/fa';
+import { ImCloudUpload } from 'react-icons/im';
+import "../layout.css"
+import Alert from '@mui/material/Alert';
+import { useParams} from "react-router-dom";
+import { useStateValue } from "../../../data/StateProvider"
+// import { stableValueHash } from "react-query/types/core/utils";
+import Snackbar from '@mui/material/Snackbar';
+import jsPDF from "jspdf"
+import { SiMicrosoftword } from 'react-icons/si';
+import ApiService from "../../../Sevices/ApiService";
+import Graph from "../../Graph/Graph";
+const useStyles = makeStyles({
+  root: {
+    width: "1000px",
+  },
+  paper: {},
+});
+
+const Observation = ({ data ,datavalues }) => {
+
+  const classes = useStyles();
+  const [htmlContext, setHtmlContext] = React.useState();
+  const [statusmessagee, setStatusmessagee] = React.useState("")
+  const [statusmessages, setStatusmessages] = React.useState("")
+  const [opene, setOpene] = React.useState(false);
+  const [opens, setOpens] = React.useState(false);
+  const [result, setResult] = React.useState({});
+  const [errorvalue, setErrorvalue]=React.useState();
+  const [accord, setAccord] = React.useState(false);
+  const [output,setOutput]=React.useState({})
+  const [data1, setData1] = React.useState({});
+  const [{ user }, dispatch] = useStateValue();
+  const [graphview,setGraphview] = React.useState(false);
+  const [savebtn,setSavebtn] =React.useState(true);
+
+  const [remark,setRemark]=React.useState();
+  const [mark,setMark]=React.useState();
+
+
+
+  
+  const vertical ="button"
+  const horizontal = "center"
+  const editorRef = useRef(null);
+
+  const [expresult,setExpresult]=React.useState("<p></p>");
+  let {token} = useParams();
+
+  //console.log({ ...data });
+  React.useEffect(() => {
+    axios
+      .get(`${ApiUrl}/procedures/search/${data.experimentName}`)
+      .then((res) => {
+        setHtmlContext(res.data);
+        fetch(`${ApiUrl}/experiments/${token}`)
+        .then((res)=>res.json())
+        .then(data =>{
+       
+          const expresultval=data.expresult
+          if(expresultval){
+            setExpresult(expresultval)
+          }
+          setMark(data.grade)
+          setRemark(data.remark)
+          console.log("check remark here",data)
+          const filtered =data.datas && Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '') ;
+          const obj = filtered && Object.fromEntries(filtered)
+if(obj){
+          for (const [key, values] of Object.entries(obj)) {
+            document.getElementById(key).value=values
+             }
+         }         
+
+             setOpens(true);
+            setStatusmessages('Data has been Retrived') 
+        } )
+        .catch((error) => {
+          setOpene(true);
+          setStatusmessagee('Error In data Retrive')
+          console.log("error is",error)
+        });
+      });
+  }, [data.experimentName]);
+
+
+
+
+
+
+
+
+
+
+
+
+// initial the input 
+  function init() {
+    let objects={}
+    // setInputEl(document.querySelectorAll("input"))
+    let inputEl = document.getElementById('content').querySelectorAll("input");
+     console.log(inputEl)
+    //  console.log(inputElArr)
+     inputEl.forEach((ele) => {
+      const { id, value } = ele;
+      let temp ={[id]:value}
+      //////////////////////
+      objects = {...objects,temp};
+     
+      ////////////////////////
+      setData1((prev) => ({ ...prev, [id]: value }));
+      ele.onChange = (e) => {
+        const { id, value } = e.target;
+        setData1((prev) => ({ ...prev, [id]: value }));
+      };
+    });
+    // console.log("data1",data1)
+    // console.log("objects",objects)
+    setSavebtn(false)
+
+  }
+
+// retrive
+  const retrive = async(event) => {
+    event.preventDefault();
+    fetch(`${ApiUrl}/experiments/${token}`)
+    .then((res)=>res.json())
+    .then(data =>{
+      // console.log("check here",data)
+      const filtered = Object.entries(JSON.parse(data.datas)).filter(([key, value]) => key != '');
+      const obj = Object.fromEntries(filtered)
+      
+      for (const [key, values] of Object.entries(obj)) {
+
+        document.getElementById(key).value=values
+         }
+         setOpens(true);
+        setStatusmessages('Data has been Retrived')
+    
+    } )
+    .catch((error) => {
+      setOpene(true);
+      setStatusmessagee('Error In data Retrive')
+    });
+ 
+
+  }
+
+
+// generate word
+const  Export2Doc=(element, filename = '')=>{
+  var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+  var postHtml = "</body></html>";
+  var html = preHtml+document.getElementById(element).innerHTML+postHtml;
+  var blob = new Blob(['\ufeff', html],{
+      type: 'application/msword'
+  });
+  var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html)
+  filename = filename?filename+'.doc': 'document.doc';
+  var downloadLink = document.createElement("a");
+  document.body.appendChild(downloadLink);
+  if(navigator.msSaveOrOpenBlob){
+      navigator.msSaveOrOpenBlob(blob, filename);
+  }else{
+      downloadLink.href = url;
+      downloadLink.download = filename;
+      downloadLink.click();
+  }
+  document.body.removeChild(downloadLink);
+}
+    
+useEffect(() => {
+  // init()
+  // var table = document.getElementsByTagName("table")[0];
+ 
+  // console.log(table)
+        // for (var i = 0 ; i < table.rows.length; i++) {
+ 
+        //     var row = "";
+ 
+        //     for (var j = 0; j < table.rows[i].cells.length; j++) {
+ 
+        //         row += table.rows[i].cells[j].innerHTML;
+        //         row += " | ";
+        //     }
+ 
+        //     alert(row);
+        // }
+  
+}, []);
+
+
+
+
+
+
+
+
+
+//function to update the data 
+const updateval = (event) => {
+   
+      
+   
+  // event.preventDefault();
+  init()
+  
+  console.log("data to send",data1);
+  let vals = Object.values(data1)
+ 
+  const empty = vals.filter(item => item  === "");
+  const tosent  = delete data1[""]
+  if (empty.length > 0){
+    setErrorvalue("Must fill all Required Readings")
+    setOpene(true);
+  setStatusmessagee('No data is uploaded refresh and try again')
+  }
+
+  
+  else if(empty.length === 0){
+  init()
+  // console.log("check", event)
+  // console.log("check data legth ",Object.values(data).length)
+  // console.log("check ele length ",inputEl.length )
+  // console.log("check data ",Object.values(data))
+  // console.log("check data ",Object.keys(data))
+  console.log("check the data here",data1 )
+ 
+ 
+  fetch(`${ApiUrl}/experiments/`, {
+    method: "PATCH",
+    body: JSON.stringify({ ...data1, id: window.location.href.split("/")[5],expresult: editorRef.current.getContent()}),
+    headers: { "Content-type": "application/json" },
+  })
+    .then(res => {console.log("result", res)
+    setOpens(true);
+    setStatusmessages('Your work has been saved')
+  }
+    )
+    .catch((error) => {
+      // console.error('Error:', error);
+      setOpene(true);
+      setStatusmessagee('something went wrong Try again')
+    });
+
+}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleClosee = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpene(false);
+  
+  };
+  const handleCloses = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpens(false);
+    
+  };
+  const accordchange=()=>{
+    setAccord(!accord)
+  }
+  const uses = htmlContext?.html.child.map((ele) => ele);
+  return (
+    <>
+      {/* <Grid container className={classes.root} spacing={2}>
+        <Grid item > */}
+          <div className={classes.paper}>
+          
+             {/* <Contextshared value={htmlContext} dataV={data} datavalues={datavalues}/>  */}
+             {htmlContext? 
+         <div >
+           {/* <div id="generator" style={{width:"600px", padding:"50px"}}> */}
+           <div id="generator" >
+          <div className="containeer">
+            <div id="content">
+            <form onChange={init}>
+                {
+                uses.map((el) =>
+                  parse(htmlContext?.html && html2json.json2html(el))
+                )} 
+               
+            </form>
+            </div>
+            <div>
+            {graphview && <Graph/>
+            }
+          </div>
+
+            <div>
+              <h6><strong>RESULT:</strong></h6>
+              <Editor
+              initialValue={expresult}
+        apiKey="au50u78j9vjabzcr4icg4v3oknubu08ifv9rfstawlzmdobp"
+        init={{
+          selector: "textarea",
+          plugins: 'link image code lists directionality',
+          directionality: "ltr",
+          toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
+          menubar: 'format ',
+          toolbar: 'undo redo | blocks | ' +
+            'bold italic forecolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+      
+        }}
+        onInit={(evt,editor)=>editorRef.current=editor}
+        onChange={init}
+      />
+           
+            </div>
+        
+      
+              
+          </div>
+        
+          </div>
+          <br /><br />
+          <Stack spacing={2} direction="row" style={{ position: "relative", left: "25%" }}>
+         
+
+                <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={()=>setGraphview(true)}>Graph &nbsp;&nbsp;&nbsp;<VscGraphLine/></Button>
+          
+      <Button variant="contained"    style={{ backgroundColor:"#F1C232",color:"black" }} disabled={savebtn} onClick={updateval}>Save &nbsp;&nbsp;&nbsp;<ImCloudUpload/></Button>
+          <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={retrive}>Retrive &nbsp;&nbsp;&nbsp;<FaDownload/></Button>
+      {/* <Button variant="contained" onClick={generate}>generate &nbsp;&nbsp;&nbsp;<GrDocumentPdf/></Button> */}
+      {/* <Button variant="contained"   style={{ backgroundColor:"#F1C232",color:"black" }} onClick={()=>Export2Doc('generator', 'test')}>generate &nbsp;&nbsp;&nbsp;<SiMicrosoftword/></Button> */}
+
+     
+    </Stack>
+     <Snackbar open={opene} autoHideDuration={3000} onClose={handleClosee} anchorOrigin={{ vertical, horizontal }}>
+        <Alert onClose={handleClosee} severity="error" sx={{ width: '100%' }}>
+          {statusmessagee}
+        </Alert>
+      </Snackbar> 
+      <Snackbar open={opens} autoHideDuration={3000} onClose={handleCloses} anchorOrigin={{ vertical, horizontal }}>
+        <Alert onClose={handleCloses} severity="success" sx={{ width: '100%' }}>
+          {statusmessages}
+        </Alert>
+      </Snackbar>
+        </div> 
+        :
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={true}
+        // onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+        }
+         {/* :<Lodaing style={{width:"100%",height:"100%"}}/>} */}
+          </div>
+        {/* </Grid>
+
+      </Grid> */}
+
+      <div className="sticky" style={{background:"rgba(0, 0, 0, 0.262)",backdropFilter: "blur(10px)",borderRadius:"6px",position:"absolute",top:'200px',right:"0%", width: "calc(100vw - 100rem)",height:"200px",padding:"20px  20px 20px"}}>
+     
+       <h5> Remark: {remark && remark}</h5>
+        <br/>
+       <h5>Mark: {mark && mark} </h5> 
+      </div>
+    </>
+  );
+};
+
+export default Observation;

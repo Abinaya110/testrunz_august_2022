@@ -1,0 +1,15 @@
+.area{
+    width: 100vw;
+  height:100%;
+padding: 0;
+margin: 0;
+  background-color: rgb(102, 100, 100);
+  overflow: hidden;
+  
+   
+}
+body {
+  -moz-transform: scale(0.8, 0.8);
+  zoom: 1;
+  zoom: 100%;
+} 
