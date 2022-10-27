@@ -6,12 +6,12 @@ const USER_API_BASE = `${ApiUrl}`;
 
 class ApiService {
   fetchUsers(userId) {
-    console.log("dadasdas",userId)
-    return axios.get(USER_API_BASE_URL+ "/runz/"+userId._id);
+    // console.log("dadasdas", userId);
+    return axios.get(USER_API_BASE_URL + "/runz/" + userId._id);
   }
   fetchUsersmail(usermail) {
-   console.log("dadasdas",usermail)
-    return axios.post(USER_API_BASE_URL+ "/mypage",usermail);
+    // console.log("dadasdas", usermail);
+    return axios.post(USER_API_BASE_URL + "/mypage", usermail);
   }
 
   fetchUserById(userId) {
@@ -27,7 +27,7 @@ class ApiService {
   }
 
   addBulkuser(user) {
-    return axios.post("" + USER_API_BASE_URL+"/bulk", user);
+    return axios.post("" + USER_API_BASE_URL + "/bulk", user);
   }
 
   editUser(user) {
@@ -48,4 +48,3 @@ class ApiService {
 }
 
 export default new ApiService();
-  

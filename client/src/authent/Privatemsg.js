@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const Privatemsg = () => {
-  return (
-    <div>
-        This page is Private You must be admin to View the content
-    </div>
-  )
-}
+  return <div>This page is Private. You must be an admin to view the content</div>;
+};
 
-export default Privatemsg
+export default Privatemsg;

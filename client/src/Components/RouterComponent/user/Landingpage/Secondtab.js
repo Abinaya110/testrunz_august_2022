@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +36,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -57,17 +57,36 @@ export default function Secondtab() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{background: '#F1C232'}}
-      TabIndicatorProps={{  
-        style: {
+      <AppBar
+        position="static"
+        style={{ background: "#F1C232" }}
+        TabIndicatorProps={{
+          style: {
             // display: "none",
-            backgroundColor:"white"
-        },
-      }} >
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} style={{width:"200px",color:"black"}}/>
-          <Tab label="Item Two" {...a11yProps(1)} style={{width:"200px",color:"black"}}/>
-          <Tab label="Item Three" {...a11yProps(2)} style={{width:"200px",color:"black"}} />
+            backgroundColor: "white",
+          },
+        }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          <Tab
+            label="Item One"
+            {...a11yProps(0)}
+            style={{ width: "200px", color: "black" }}
+          />
+          <Tab
+            label="Item Two"
+            {...a11yProps(1)}
+            style={{ width: "200px", color: "black" }}
+          />
+          <Tab
+            label="Item Three"
+            {...a11yProps(2)}
+            style={{ width: "200px", color: "black" }}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

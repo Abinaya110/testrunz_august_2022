@@ -5,18 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
-import AppBar from '@material-ui/core/AppBar';
-
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import AppBar from "@material-ui/core/AppBar";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import { useStateValue } from '../../data/StateProvider';
+import { useStateValue } from "../../data/StateProvider";
 /* import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Radio from "@material-ui/core/Radio"; */
@@ -62,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    width:"100%"
+    width: "100%",
   },
-  card:{
+  card: {
     // paddingTop:"100px"
-  }
+  },
 }));
 /* const GreenRadio = withStyles({
   root: {
@@ -81,8 +74,8 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs({ data }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  const [selectedValue, setSelectedValue] = React.useState("");
-  const [{user}, dispatch] = useStateValue();
+  // const [selectedValue, setSelectedValue] = React.useState("");
+  const [{ user }] = useStateValue();
 
   React.useEffect(() => {
     async function fetchData() {
@@ -92,15 +85,15 @@ export default function VerticalTabs({ data }) {
           runID: data.runID,
           notes: defaultString,
         })
-        .then((res) => { });
+        .then((res) => {});
     }
 
     if (data.runID) fetchData();
   }, [data.runID]);
 
-  const handleChangeRadio = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  // const handleChangeRadio = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -148,22 +141,29 @@ export default function VerticalTabs({ data }) {
           </Typography>
         </CardContent>
       </Card>
-    
+
       <div className={classes.root}>
-      {/* <Record data={data} /> */}
-      <AppBar position="static" style={{width:"100%"}}>
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example" style={{background: '#F1C232'}} 
-        TabIndicatorProps={{  
-      style: {
-          // display: "none",
-          backgroundColor:"white"
-      },
-    }}  >
-          <Tab label="Observation" {...a11yProps(0)} />
-          <Tab label="Notes" {...a11yProps(1)} />
-         {user.role!="student" &&<Tab label="Record" {...a11yProps(2)} />}
+        {/* <Record data={data} /> */}
+        <AppBar position="static" style={{ width: "100%" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+            style={{ background: "#F1C232" }}
+            TabIndicatorProps={{
+              style: {
+                // display: "none",
+                backgroundColor: "white",
+              },
+            }}
+          >
+            <Tab label="Observation" {...a11yProps(0)} />
+            <Tab label="Notes" {...a11yProps(1)} />
+            {user.role !== "student" && (
+              <Tab label="Record" {...a11yProps(2)} />
+            )}
           </Tabs>
-      </AppBar>
+        </AppBar>
         <TabPanel value={value} index={0}>
           <Observation data={data} />
           {/* <>hai0</> */}
@@ -172,13 +172,11 @@ export default function VerticalTabs({ data }) {
           <Notes data={data} />
           {/* <>hai1</> */}
         </TabPanel>
-      
+
         <TabPanel value={value} index={2}>
           <Record data={data} />
           {/* <>hai2</> */}
         </TabPanel>
-
-       
       </div>
     </>
   );

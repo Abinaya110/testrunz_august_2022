@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Badge from "@mui/material/Badge";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,14 +36,13 @@ export default function NotificationRunz(props) {
   let datas = props.users;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [array, setArray] = useState();
-  const history = useHistory()
+  const history = useHistory();
   const handleMenuItemClick = (event, index) => {
     // setSelectedIndex(index);
     history.push(`/userdash/${index._id}`);
     setOpen(false);
-    console.log("noti",index)
+    // console.log("noti", index);
     // playUser(data.ProcedureId)
   };
 
@@ -62,24 +60,22 @@ export default function NotificationRunz(props) {
   useEffect(() => {
     setArray(
       datas.filter(function (data) {
-        return data.status == "reviewed";
+        return data.status === "reviewed";
       })
     );
 
-    console.log("from n r p", array);
-    console.log("from n r p", datas);
+    // console.log("from n r p", array);
+    // console.log("from n r p", datas);
   }, []);
   return (
     <div className={classes.root}>
       <form style={formContainer}>
         {array ? (
           <React.Fragment>
-
-         
-                <ButtonGroup ref={anchorRef} >
-            <div >
-                  <Button
-                    style={{
+            <ButtonGroup ref={anchorRef}>
+              <div>
+                <Button
+                  style={{
                     //   backgroundColor: "#F1C232",
                     //   padding: "5px",
                     //   borderRadius: "5px",
@@ -88,26 +84,26 @@ export default function NotificationRunz(props) {
                     //   color: "black",
                     //   overflow: "hidden",
                     //   zIndex: "500%",
-                    textAlign:"right",
+                    textAlign: "right",
                     color: "#F1C232",
-                    border:"none",
-                    margin:"10px"
-                    }}
-                    aria-controls={open ? "split-button-menu" : undefined}
-                    aria-expanded={open ? "true" : undefined}
-                    aria-haspopup="menu"
-                    onClick={handleToggle}
+                    border: "none",
+                    margin: "10px",
+                  }}
+                  aria-controls={open ? "split-button-menu" : undefined}
+                  aria-expanded={open ? "true" : undefined}
+                  aria-haspopup="menu"
+                  onClick={handleToggle}
+                >
+                  <Badge
+                    style={{ zIndex: 0 }}
+                    badgeContent={array.length}
+                    color="error"
                   >
-                    <Badge
-                      style={{ zIndex: 0 }}
-                      badgeContent={array.length}
-                      color="error"
-                    >
-                      <CommentOutlinedIcon  sx={{ fontSize: 25 }}/>
-                    </Badge>
-                  </Button>
-                </div>
-                </ButtonGroup>
+                    <CommentOutlinedIcon sx={{ fontSize: 25 }} />
+                  </Badge>
+                </Button>
+              </div>
+            </ButtonGroup>
             <Popper
               sx={{
                 zIndex: "1",
@@ -116,7 +112,7 @@ export default function NotificationRunz(props) {
               anchorEl={anchorRef.current}
               role={undefined}
               transition
-            //   disablePortal
+              //   disablePortal
             >
               {({ TransitionProps, placement }) => (
                 <Grow
@@ -137,7 +133,9 @@ export default function NotificationRunz(props) {
                           <MenuItem
                             sx={{ overflow: "hidden" }}
                             key={option._id}
-                            onClick={(event,index) => handleMenuItemClick(event,option)}
+                            onClick={(event, index) =>
+                              handleMenuItemClick(event, option)
+                            }
                           >
                             {option.experimentName}
                           </MenuItem>

@@ -1,56 +1,50 @@
-import { Route, Redirect } from 'react-router-dom';
-
-import React, { useState, useEffect ,useLayoutEffect} from "react";
-
+import { Route } from "react-router-dom";
+import React, {  useEffect } from "react";
 import { useCookies } from "react-cookie";
-import axios from "axios";
-import { useStateValue } from '../data/StateProvider';
-
-import { actionTypes } from "../data/reducer"
+import { useStateValue } from "../data/StateProvider";
+import { actionTypes } from "../data/reducer";
 
 const TeacherRoute = ({ auth, component: Component, ...rest }) => {
   const [{ user }, dispatch] = useStateValue();
   const [cookies, setCookie, removeCookie] = useCookies(["userjwt"]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const abortcont = new AbortController();
-    console.log("coookieee",cookies.userjwt)
+    // console.log("coookieee", cookies.userjwt);
 
-fetch(`${process.env.REACT_APP_API}/validateuser`, {
-		method: "POST",
-    signal:abortcont.signal,
-	  body: JSON.stringify({
-      usertoken: cookies.userjwt
-	}),
-	headers: {
-		"Content-type": "application/json; charset=UTF-8"
-	}
-})
-.then(response => response.json())
-.then(json => 
-  {
- 
-    dispatch({
-            type: actionTypes.SET_USER,
-            user: json.user,
-          });
+    fetch(`${process.env.REACT_APP_API}/validateuser`, {
+      method: "POST",
+      signal: abortcont.signal,
+      body: JSON.stringify({
+        usertoken: cookies.userjwt,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: json.user,
+        });
 
-    return ()=>abortcont.abort()
-  }
+        return () => abortcont.abort();
+      });
+  }, []);
+  return (
+    <>
+      <Route
+        {...rest}
+        render={(props) =>
+          user.role === "teacher" ? (
+            <Component {...props} />
+          ) : // <Redirect to="/signin" />
+          null
+        }
+      />
+    </>
   );
-
-   
-  
-
-  },[])
-     return (
-   <>
-    <Route {...rest} render={props => ( user.role=="teacher" ? <Component {...props} /> :  
-    // <Redirect to="/signin" />
-    null
-    )} />   
-    </>                      
-)}
-
+};
 
 export default TeacherRoute;

@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
-
 import axios from "axios";
-
-
-import { useStateValue } from '../../../../data/StateProvider';
-import { actionTypes } from "../../../../data/reducer"
-
-import MuiAlert from "@material-ui/lab/Alert";
+import { useStateValue } from "../../../../data/StateProvider";
+import { actionTypes } from "../../../../data/reducer";
+// import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import MaterialTable from 'material-table';
-import Loading from "../Lodaing"
+import MaterialTable from "material-table";
+import Loading from "../Lodaing";
 import { useHistory } from "react-router-dom";
-
-import ApiUrl from "../../../../ServerApi"
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+import ApiUrl from "../../../../ServerApi";
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 const Procedurelist = () => {
   const [dat, setDat] = useState(null);
   const classes = useStyles();
-  const [loadingscreen, setLoadingscreen] = useState(true)
-  const history = useHistory()
+  const [loadingscreen, setLoadingscreen] = useState(true);
+  const history = useHistory();
 
   const [{ user }, dispatch] = useStateValue();
   const columns1 = [
@@ -41,41 +36,35 @@ const Procedurelist = () => {
     { title: "Department", field: "department" },
     { title: "Year", field: "year" },
     { title: "Institute", field: "institute" },
-
   ];
 
   useEffect(() => {
-    if (user.role == "superadmin") {
+    if (user.role ==="superadmin") {
       fetch(`${ApiUrl}/moreInfo`)
-        .then(data => data.json())
-        .then(data => {
-          setDat(data.data)
-          setLoadingscreen(false)
-        })
-    }
-
-    else {
-      let lab = user.labtype
-      let institute = user.instituteName
+        .then((data) => data.json())
+        .then((data) => {
+          setDat(data.data);
+          setLoadingscreen(false);
+        });
+    } else {
+      let lab = user.labtype;
+      let institute = user.instituteName;
       fetch(`${ApiUrl}/moreInfo/selected`, {
         method: "POST",
         body: JSON.stringify({
-          lab:lab,
-          institute:institute
+          lab: lab,
+          institute: institute,
         }),
         headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-        .then(data => data.json())
-        .then(data => {
-          setDat(data.data)
-          setLoadingscreen(false)
-        })
+        .then((data) => data.json())
+        .then((data) => {
+          setDat(data.data);
+          setLoadingscreen(false);
+        });
     }
-
-
-
   }, []);
 
   const addProc = () => {
@@ -85,105 +74,52 @@ const Procedurelist = () => {
 
   const editProc = (id) => {
     // window.localStorage.clear();
-    let  list=["admin","superadmin"]
-    if(list.includes(user.role))
-    {
+    let list = ["admin", "superadmin"];
+    if (list.includes(user.role)) {
       axios.get(`${ApiUrl}/moreInfo/${id}`).then((res) => {
         window.localStorage.setItem("proceId", res.data.id);
-  
       });
       dispatch({
         type: actionTypes.SET_PROSID,
         prosid: id,
       });
-  
+
       history.push(`/editProce/${id}`);
     }
-
   };
 
   return (
     <div className={classes.root}>
-
-
-
-
-      <div style={{ maxWidth: '100%' }}>
-        {loadingscreen ? <Loading /> :
+      <div style={{ maxWidth: "100%" }}>
+        {loadingscreen ? (
+          <Loading />
+        ) : (
           <MaterialTable
-
-
             columns={columns1}
             data={dat}
             title="Procedures"
             onRowClick={(e, data) => editProc(data.id)}
             options={{
-              // actionsColumnIndex: -1, grouping:true, 
-              pageSizeOptions: [5, 10,15], pageSize: 10
+              // actionsColumnIndex: -1, grouping:true,
+              pageSizeOptions: [5, 10, 15],
+              pageSize: 10,
             }}
-
             actions={[
               {
-                icon: 'add',
-                tooltip: 'Add Procedure',
+                icon: "add",
+                tooltip: "Add Procedure",
                 isFreeAction: true,
-                onClick: () => addProc()
-              }
+                onClick: () => addProc(),
+              },
             ]}
-
           />
-        }
+        )}
       </div>
-
     </div>
   );
 };
 
 export default Procedurelist;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // {dat && dat.data.data ? (
 //   <DataGrid

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React from 'react'
 import ss from "./ss1.png"
 
 const Image = () => {

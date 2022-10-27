@@ -1,60 +1,57 @@
 import React, { useState, useEffect } from "react";
-
 import axios from "axios";
 import serverApi from "../../../ServerApi";
+// import { makeStyles } from "@material-ui/core/styles";
+// import MuiAlert from "@material-ui/lab/Alert";
 
-import { makeStyles } from "@material-ui/core/styles";
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: "100%",
+//     "& > * + *": {
+//       marginTop: theme.spacing(2),
+//     },
+//   },
+// }));
 
-import MuiAlert from "@material-ui/lab/Alert";
+// const style = {
+//   marginTop: "25px",
+//   display: "flex",
+//   justifyContent: "center",
+//   textDecoration: "underline",
+// };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    "& > * + *": {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
+// const formContainer = {
+//   display: "flex",
+//   flexFlow: "column wrap",
+//   alignContent: "space-between",
+// };
 
-const style = {
-  marginTop: "25px",
-  display: "flex",
-  justifyContent: "center",
-  textDecoration: "underline",
-};
+// const intialValue = {
+//   labType: "",
+//   experimentName: "",
+// };
 
-const formContainer = {
-  display: "flex",
-  flexFlow: "column wrap",
-  alignContent: "space-between",
-};
-
-const intialValue = {
-  labType: "",
-  experimentName: "",
-};
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 const Runz = (props) => {
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(null);
-  const [data, setData] = useState(intialValue);
+  // const classes = useStyles();
+  // const [open, setOpen] = useState(false);
+  // const [message, setMessage] = useState(null);
+  // const [data, setData] = useState(intialValue);
   const [options, setOptions] = useState([]);
   const [options1, setOptions1] = useState([]);
 
-  function renderOptions(options) {
-    return (
-      options &&
-      options.length > 0 &&
-      options.map((option, index) => {
-        return <option>{option}</option>;
-      })
-    );
-  }
+  // function renderOptions(options) {
+  //   return (
+  //     options &&
+  //     options.length > 0 &&
+  //     options.map((option, index) => {
+  //       return <option>{option}</option>;
+  //     })
+  //   );
+  // }
 
   useEffect(() => {
     let newSet = new Set();
@@ -69,31 +66,30 @@ const Runz = (props) => {
     });
   }, []);
 
-  const onChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
+  // const onChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
-  const saveUser = (e) => {
-    e.preventDefault();
-    axios
-      .post(`${serverApi}/labrotories`, {
-        name: data.labType,
-        experiment: data.experimentName,
-      })
-      .then(() => {
-        setMessage("Assigned successfully.");
-        setOpen(true);
-      });
-  };
+  // const saveUser = (e) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(`${serverApi}/labrotories`, {
+  //       name: data.labType,
+  //       experiment: data.experimentName,
+  //     })
+  //     .then(() => {
+  //       setMessage("Assigned successfully.");
+  //       setOpen(true);
+  //     });
+  // };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpen(false);
+  // };
 
   return (
-    <>
-    </>
+    <></>
     // <div className={classes.root}>
     //   <>
     //     <form style={formContainer}>

@@ -6,7 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Helpguide1 from "./Supporttab/Helpguide1";
+import Helpguide from "./Supporttab/Helpguide";
 import Feedback from "./Supporttab/Feedback";
 
 function TabPanel(props) {
@@ -94,7 +94,7 @@ export default function Settings() {
         <Feedback />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Helpguide1 />
+        <Helpguide />
       </TabPanel>
     </div>
   );

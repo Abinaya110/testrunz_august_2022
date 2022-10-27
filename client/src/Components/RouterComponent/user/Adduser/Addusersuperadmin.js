@@ -56,7 +56,7 @@ function Addusersuperadmin() {
     fetch(`${ApiUrl}/moreInfo/all/university`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setUniversitylist(data.ids);
       });
 
@@ -91,7 +91,7 @@ function Addusersuperadmin() {
       .then((response) => response.json())
       .then((json) => {
         setInstitutelist(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -113,12 +113,12 @@ function Addusersuperadmin() {
       .then((response) => response.json())
       .then((json) => {
         setDepartmentlist(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
 
   const fetchlab = (department) => {
-    console.log("heheheeh", department);
+    // console.log("heheheeh", department);
     setDepartment(department);
     setRight([]);
     setLeft();
@@ -136,7 +136,7 @@ function Addusersuperadmin() {
       .then((response) => response.json())
       .then((json) => {
         setLeft(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -149,13 +149,13 @@ function Addusersuperadmin() {
     setInstituteerror();
     setDepartmenterror();
     setLaberror();
-    console.log(name);
-    console.log(email);
-    console.log(role);
-    console.log("right", right);
-    console.log(institute);
-    console.log(department);
-    console.log("This is password", password);
+    // console.log(name);
+    // console.log(email);
+    // console.log(role);
+    // console.log("right", right);
+    // console.log(institute);
+    // console.log(department);
+    // console.log("This is password", password);
 
     if (!name) {
       setNameerror("*Name required*");
@@ -180,7 +180,7 @@ function Addusersuperadmin() {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          console.log("successfully Registered", userCredential);
+          // console.log("successfully Registered", userCredential);
 
           fetch(`${process.env.REACT_APP_API}/register`, {
             method: "POST",
@@ -208,15 +208,15 @@ function Addusersuperadmin() {
               axios
                 .post(process.env.REACT_APP_API + "/usermail", usermail)
                 .then((res) => {
-                  console.log(res.data);
-                  if (res.data == "error") {
+                  // console.log(res.data);
+                  if (res.data === "error") {
                     Swal.fire({
                       icon: "error",
                       title: "Oops...",
                       text: "Invalid mail id",
                     });
                   } else {
-                    console.log("mail sent successfully.");
+                    // console.log("mail sent successfully.");
 
                     Swal.fire(
                       "User created!",
@@ -236,7 +236,7 @@ function Addusersuperadmin() {
               // setLab()
             })
             .catch((error) => {
-              console.error("Error:", error);
+              // console.error("Error:", error);
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -245,10 +245,10 @@ function Addusersuperadmin() {
             });
         })
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log("Failure1", errorMessage);
-          console.log("Failure2", errorCode);
+          // var errorCode = error.code;
+          // var errorMessage = error.message;
+          // console.log("Failure1", errorMessage);
+          // console.log("Failure2", errorCode);
           Swal.fire({
             icon: "error",
             title: "Oops...",
@@ -269,7 +269,7 @@ function Addusersuperadmin() {
           onChange={(e) => {
             setName(e.target.value);
             if (
-              /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/.test(
+              /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~1234567890]/.test(
                 e.target.value
               )
             ) {
@@ -289,7 +289,7 @@ function Addusersuperadmin() {
           onChange={(e) => {
             setEmail(e.target.value);
             if (
-              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
                 e.target.value
               )
             ) {

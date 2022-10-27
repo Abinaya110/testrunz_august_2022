@@ -14,8 +14,8 @@ const Slider = ({ imageSrc, title, subtitle, flipped }) => {
         <>
           {/* <img src={imageSrc} alt="Travel" className="slider__image" /> */}
           <video className="slider__image" autoPlay loop muted>
-    <source src={imageSrc} type='video/mp4' />
-</video>
+            <source src={imageSrc} type="video/mp4" />
+          </video>
           <div className="slider__content">
             <h1 className="slider__title">{title}</h1>
             <p>{subtitle}</p>

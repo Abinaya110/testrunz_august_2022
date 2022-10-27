@@ -1,19 +1,13 @@
-import React,{useEffect} from "react";
+import React from "react";
 import AppRouter from "./Components/RouterComponent/RouterComponent";
-import { useStateValue } from './data/StateProvider';
-import { useCookies } from "react-cookie";
-
+import { useStateValue } from "./data/StateProvider";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
-
-  const [cookies, setCookie, removeCookie] = useCookies(["userjwt"]);
-
+  const [{ user }] = useStateValue();
 
   return (
     <div>
-    
-      <AppRouter user={ user }/>
+      <AppRouter user={user} />
     </div>
   );
 }

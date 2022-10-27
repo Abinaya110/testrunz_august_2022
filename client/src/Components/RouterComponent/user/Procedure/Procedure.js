@@ -8,11 +8,12 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import { nanoid } from "nanoid";
 import { Button } from "@material-ui/core";
 import "./procedure.css";
 import ApiUrl from "../../../../ServerApi";
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -45,20 +46,38 @@ const App = (props) => {
     return setShowResults((prev) => !prev);
   };
   const Search = () => {
-   
     return (
       <div>
-        <Button variant="contained"  type="submit" style={{ backgroundColor:"#F1C232",color:"black",position:"absolute",top: 65, right: 100,}} onClick={onClickshow}>
-        {showResults ? "HIDE" : "SHOW"}
+        <Button
+          variant="contained"
+          type="submit"
+          style={{
+            backgroundColor: "#F1C232",
+            color: "black",
+            position: "absolute",
+            top: 65,
+            right: 100,
+          }}
+          onClick={onClickshow}
+        >
+          {showResults ? "HIDE" : "SHOW"}
         </Button>
-       
+
         {showResults ? <Results /> : null}
       </div>
     );
   };
 
   const Results = () => (
-    <Card className="blocks" style={{ backgroundColor: "#E7E9EB",position:"absolute",top:"120px",zIndex:10}}>
+    <Card
+      className="blocks"
+      style={{
+        backgroundColor: "#E7E9EB",
+        position: "absolute",
+        top: "120px",
+        zIndex: 10,
+      }}
+    >
       <CardContent>
         <input
           className="title"
@@ -99,7 +118,7 @@ const App = (props) => {
           button
           type="submit"
           value="save"
-          style={{ position: "center", backgroundColor:"#F1C232" }}
+          style={{ position: "center", backgroundColor: "#F1C232" }}
         />
       </CardContent>
     </Card>
@@ -114,7 +133,7 @@ const App = (props) => {
   };
 
   const handleEditorChange = (e) => {
-    console.log("Content was updated:", e.target.getContent());
+    // console.log("Content was updated:", e.target.getContent());
   };
   const handleSave = (e) => {
     e.preventDefault();
@@ -136,32 +155,25 @@ const App = (props) => {
             institute: instituteRef.current.value,
           })
           .then(() => {
-            console.log("sent meta info");    
+            // console.log("sent meta info");
             // axios.post(`${ApiUrl}/labrotories`, {
             //   name: labRef.current.value,
             //   experiment: titleRef.current.value,
             // })
-            Swal.fire(
-              'success',
-              'Procedure has been updated',
-              'success',
-            )
-            setShowResults((prev) => !prev)
+            Swal.fire("success", "Procedure has been updated", "success");
+            setShowResults((prev) => !prev);
           })
           .catch((err) => {
-            console.error(err)
+            // console.error(err)
             Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong Check your internet connection',
-           
-            })
-        
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong Check your internet connection",
+            });
           });
 
         // setMessage("Template saved successfully.");
         setOpen(true);
-     
       });
   };
   const handleChange = (content, editor) => {

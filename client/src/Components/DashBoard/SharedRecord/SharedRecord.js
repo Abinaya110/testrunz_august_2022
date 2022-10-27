@@ -5,7 +5,7 @@ import ApiUrl from "../../../ServerApi";
 import Swal from "sweetalert2";
 import Lodaing from "../../RouterComponent/user/Lodaing";
 import { VscGraphLine } from "react-icons/vsc";
-import React, {  useRef, useState } from "react";
+import React, { useState } from "react";
 import * as html2json from "html2json";
 import parse from "html-react-parser";
 import axios from "axios";
@@ -73,7 +73,7 @@ const SharedRecord = ({ data, datavalues }) => {
   let { token } = useParams();
   //console.log({ ...data });
   React.useEffect(() => {
-    console.log("data", data);
+    // console.log("data", data);
     axios
       .get(`${ApiUrl}/procedures/search/${data.experimentName}`)
       .then((res) => {
@@ -84,16 +84,16 @@ const SharedRecord = ({ data, datavalues }) => {
         fetch(`${ApiUrl}/experiments/${token}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log("check here", token);
+            // console.log("check here", token);
             // const datavalues = JSON.parse(data.datas);
             setExpresultval(data.expresult);
             setMark(data.grade);
             setRemark(data.remark);
             setGraphdata(data.plotdata);
-            console.log("datas are", datavalues);
+            // console.log("datas are", datavalues);
 
             const filtered = Object.entries(JSON.parse(data.datas)).filter(
-              ([key, value]) => key != ""
+              ([key, value]) => key !== ""
             );
             const obj = Object.fromEntries(filtered);
 
@@ -107,10 +107,10 @@ const SharedRecord = ({ data, datavalues }) => {
             }
             if (graphdata) {
               setGraphview(true);
-              console.log("hai");
+              // console.log("hai");
             }
 
-            console.log(datavalues);
+            // console.log(datavalues);
             fetch(`${ApiUrl}/runPython/`, {
               method: "POST",
               body: JSON.stringify({
@@ -121,7 +121,7 @@ const SharedRecord = ({ data, datavalues }) => {
             })
               .then((responce) => responce.json())
               .then((data) => {
-                console.log("result", data);
+                // console.log("result", data);
                 setResult(data);
                 setOpens(true);
                 setStatusmessages("Calculation Completed");
@@ -136,7 +136,7 @@ const SharedRecord = ({ data, datavalues }) => {
           .catch((error) => {
             setOpene(true);
             setStatusmessagee("Error In data Retrive");
-            console.log("error is", error);
+            // console.log("error is", error);
           });
       });
   }, [data.experimentName]);

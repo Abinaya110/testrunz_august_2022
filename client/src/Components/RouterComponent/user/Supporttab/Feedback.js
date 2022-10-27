@@ -24,7 +24,7 @@ const Feedback = () => {
   const [baseImage, setBaseImage] = useState("");
   const [type, setType] = useState("");
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
 
   const uploadImage = async (e) => {
     const file = e.target.files[0];
@@ -62,15 +62,15 @@ const Feedback = () => {
           image: baseImage,
         })
         .then((res) => {
-          console.log("feedback sent");
+          // console.log("feedback sent");
           setBaseImage("");
           setFeedback("");
           setType("");
           Swal.fire("Success", "Your feedback has been Submitted", "success");
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        // .catch((err) => {
+        //   console.log(err);
+        // });
 
       // console.log(rating)
       // console.log(feedback)
@@ -85,13 +85,24 @@ const Feedback = () => {
     <Card>
       <CardContent style={{ backgroundColor: "#E5E4E2" }}>
         <p>
-          <span style={{ fontWeight: "bold" }}>Feedback </span>
+          <span style={{ fontWeight: "bold" }}>Send us some feedback!</span>
           &nbsp;&nbsp;&nbsp;
-          <span style={{ color: "#595958" }}>"Help us to improve"</span>
+          <br />
+          <span style={{ color: "#595958" }}>
+            "Let us know what we're getting right and what we can improve"
+          </span>
+          {/* <span style={{ color: "#595958" }}>
+            "Do yoy have a suggestion or found some bug? Let us know in the field below."
+          </span> */}
         </p>
-        <br /> <br />
+        {/* <br />   */}
         <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Category</FormLabel>
+          <FormLabel
+            id="demo-radio-buttons-group-label"
+            style={{ fontWeight: "bold" }}
+          >
+            Category
+          </FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-radio-buttons-group-label"
@@ -118,7 +129,8 @@ const Feedback = () => {
         <TextareaAutosize
           aria-label="minimum height"
           minRows={6}
-          placeholder="  Enter Your Feedback....."
+          placeholder="Write your feedback..."
+          // placeholder="Describe your issue or idea..."
           style={{ width: 500 }}
           value={feedback}
           onChange={(e) => setFeedback(e.target.value)}

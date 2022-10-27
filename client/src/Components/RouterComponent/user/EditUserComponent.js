@@ -3,16 +3,12 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import ReactHTMLDatalist from "react-html-datalist";
-
 import ApiService from "../../../Sevices/ApiService";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-
 // import { laboratries } from "./data";
 import ApiUrl from "../../../ServerApi";
 
@@ -57,7 +53,7 @@ const EditUserComponent = (props) => {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = useState(null);
 
-  useEffect(() => {
+  useEffect((laboratries) => {
     laboratries.then((res) => setOptions(res));
   }, [options]);
 

@@ -8,7 +8,6 @@ import { Button } from "@material-ui/core";
 const Adduser = (props) => {
   const [{ user }] = useStateValue();
 
-
   return (
     <div>
       <div style={{ display: "flex" }}>

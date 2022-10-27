@@ -160,7 +160,9 @@ const Sidelayout = ({ children }) => {
                 button
                 key="Runz"
                 onClick={() => history.push("/runz")}
-                className={location.pathname === "/runz" ? classes.active : null}
+                className={
+                  location.pathname === "/runz" ? classes.active : null
+                }
               >
                 <ListItemIcon>
                   <PlayCircleOutlineIcon />

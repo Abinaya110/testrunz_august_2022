@@ -10,23 +10,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import { v4 as uuidv4 } from "uuid";
-import "./Graph.css"
+import "./Graph.css";
+import { useParams } from "react-router-dom";
+import ApiService from "../../Sevices/ApiService";
+import Swal from "sweetalert2";
 
-import { useParams} from "react-router-dom";
-import ApiService from '../../Sevices/ApiService';
-import Swal from 'sweetalert2'
-
-
-
-
-
-
-
-function Multiaxis({count,data,setData}) {
-  
-  let {token} = useParams();
+function Multiaxis({ count, data, setData }) {
+  let { token } = useParams();
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" },
   ]);
@@ -37,65 +29,55 @@ function Multiaxis({count,data,setData}) {
 
   const [temp, setTemp] = useState();
   const [column, setColumn] = useState();
-  useEffect(()=>{
-    console.log("hello1", data)
-    let value = data
+  useEffect(() => {
+    // console.log("hello1", data);
+    let value = data;
     // console.log("hello2", value[count].plotdata)
-    if (value){
-  console.log("hello1",typeof value[0])
- 
-  
-  setInputFields(value[count].plotdata)
-  setColumn(value[count].axiscount)
+    if (value) {
+      // console.log("hello1", typeof value[0]);
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      console.log("if",inputFields)
-// if(value[count].axiscount){
-//   let key =Object.values(value[count].plotdata[0])
-//   let keys =key.filter(e => e != "");
-  
-  
-//   // let count = keys.length -2
-//   setColumn(keys.length - 2)
-//   console.log("count",column)
-//   console.log("keys",keys)
-//   // console.log("keys",keys)
+      setInputFields(value[count].plotdata);
+      setColumn(value[count].axiscount);
 
+      // console.log("if", inputFields);
+      // if(value[count].axiscount){
+      //   let key =Object.values(value[count].plotdata[0])
+      //   let keys =key.filter(e => e != "");
 
-// }
+      //   // let count = keys.length -2
+      //   setColumn(keys.length - 2)
+      //   console.log("count",column)
+      //   console.log("keys",keys)
+      //   // console.log("keys",keys)
 
- 
-}
-// else{
-//   console.log("else",data)
-//   setInputFields(data[count].plotdata)
-   
+      // }
+    }
+    // else{
+    //   console.log("else",data)
+    //   setInputFields(data[count].plotdata)
 
+    //   let key =Object.values(data[count].plotdata[0])
+    //   let keys =key.filter(e => e != "");
 
-
-//   let key =Object.values(data[count].plotdata[0])
-//   let keys =key.filter(e => e != "");
-
-
-//   // let count = keys.length -2
-//   setColumn(keys.length - 2)
-//   console.log("count",column)
-//   console.log("keys",keys)
-//   // console.log("keys",keys)
-// }
-   
-
-
-  },[])
+    //   // let count = keys.length -2
+    //   setColumn(keys.length - 2)
+    //   console.log("count",column)
+    //   console.log("keys",keys)
+    //   // console.log("keys",keys)
+    // }
+  }, []);
 
   const generate = () => {
-    let x = inputFields.filter((a)=>{if(a.x1 ){return a}});
+    let x = inputFields.filter((a) => {
+      if (a.x1) {
+        return a;
+      }
+    });
 
-    if (x.length == 0) {
-      x=[  { id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" }]
+    if (x.length === 0) {
+      x = [{ id: uuidv4(), x1: "", y1: "", y2: "", y3: "", y4: "" }];
     }
-    setInputFields(x)
-
-
+    setInputFields(x);
 
     setTemp();
     let yval1 = inputFields.map((obj) => obj.y1);
@@ -116,7 +98,7 @@ function Multiaxis({count,data,setData}) {
 
     setTemp(inputFields);
     // setData(!temp)
-    console.log("InputFields", inputFields);
+    // console.log("InputFields", inputFields);
   };
 
   const handleChangeInput = (id, event) => {
@@ -149,239 +131,260 @@ function Multiaxis({count,data,setData}) {
     setInputFields(values);
   };
 
-
-  const check=()=>{
-   let array = data
-   let  objIndex = array.findIndex((obj => obj.id == count+1));
+  const check = () => {
+    let array = data;
+    let objIndex = array.findIndex((obj) => obj.id === count + 1);
 
     //Log object to Console.
     // console.log("Before update: ", myArray[objIndex])
-    
-    //Update object's name property.
-    array[objIndex].plotdata = inputFields
-    array[objIndex].axiscount = column
 
-setData(array)
+    //Update object's name property.
+    array[objIndex].plotdata = inputFields;
+    array[objIndex].axiscount = column;
+
+    setData(array);
     // setData(current =>
     //   current.map(obj => {
     //     if (obj.id === count+1) {
-        
+
     //       return {...obj, plotdata:inputFields, axiscount: column};
     //     }
 
     //     return obj;
     //   }),
     // );
-    console.log("data saved",data)
-    let patchdata={ 
-      data:JSON.stringify(data),
-      id:token
-    // JSON.stringify(data)
-  }
-  
-    ApiService.patchplotdata(patchdata).then((res) => {
-      Swal.fire(
-        'Data Saved',
-        'Graph value has been saved',
-        'success'
-      )
-      
-    });
-  
+    // console.log("data saved", data);
+    let patchdata = {
+      data: JSON.stringify(data),
+      id: token,
+      // JSON.stringify(data)
+    };
 
-  }
+    ApiService.patchplotdata(patchdata).then((res) => {
+      Swal.fire("Data Saved", "Graph value has been saved", "success");
+    });
+  };
   return (
     <div>
-      <h5> Graph {count+1}:</h5>
-      <label style={{padding:'20px 20px 20px 0'}}>Column:</label>
+      <h5> Graph {count + 1}:</h5>
+      <label style={{ padding: "20px 20px 20px 0" }}>Column:</label>
 
-      <select onChange={(e)=>{setColumn(e.target.value)}}>
-      <option value={1}> 1</option>
-  <option value={2} > 2</option>
-  <option value={3}> 3</option>
-  <option value={4}> 4</option>
-</select>
+      <select
+        onChange={(e) => {
+          setColumn(e.target.value);
+        }}
+      >
+        <option value={1}>1</option>
+        <option value={2}>2</option>
+        <option value={3}>3</option>
+        <option value={4}>4</option>
+      </select>
 
+      <div className="row">
+        <div className="column">
+          <table>
+            <thead>
+              <tr>
+                <th>Xaxis</th>
+                <th>Yaxis1</th>
+                {column >= 2 && <th>Yaxis2</th>}
+                {column >= 3 && <th>Yaxis3</th>}
+                {column >= 4 && <th>Yaxis4</th>}
+                <th>Remove row</th>
+                {/* <th>Add Cell</th> */}
+              </tr>
+            </thead>
+            <tbody>
+              {inputFields.map((inputField) => (
+                <tr key={inputField.id}>
+                  <td>
+                    <input
+                      name="x1"
+                      style={{ width: "100px" }}
+                      value={inputField.x1}
+                      onChange={(event) =>
+                        handleChangeInput(inputField.id, event)
+                      }
+                    />
+                  </td>
 
+                  <td>
+                    <input
+                      name="y1"
+                      style={{ width: "100px" }}
+                      value={inputField.y1}
+                      onChange={(event) =>
+                        handleChangeInput(inputField.id, event)
+                      }
+                    />
+                  </td>
+                  {column >= 2 && (
+                    <td>
+                      <input
+                        name="y2"
+                        style={{ width: "100px" }}
+                        value={inputField.y2}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
+                      />
+                    </td>
+                  )}
+                  {column >= 3 && (
+                    <td>
+                      <input
+                        name="y3"
+                        style={{ width: "100px" }}
+                        value={inputField.y3}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
+                      />
+                    </td>
+                  )}
+                  {column >= 4 && (
+                    <td>
+                      <input
+                        name="y4"
+                        style={{ width: "100px" }}
+                        value={inputField.y4}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
+                      />
+                    </td>
+                  )}
+                  <td>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      style={{ width: "100%", padding: "3px 3px 3px 5px" }}
+                      disabled={inputFields.length === 1}
+                      onClick={() => handleRemoveFields(inputField.id)}
+                    >
+                      Remove &nbsp;&nbsp;&nbsp; 
+                      <DeleteIcon />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
+        <div className="column" style={{ margin: "100px" }}>
+          {temp && (
+            <ResponsiveContainer width="50%" aspect={2}>
+              <LineChart
+                width={500}
+                height={300}
+                data={temp}
+                margin={{
+                  top: 5,
+                  right: 30,
+                  left: 20,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="x1" />
 
-<div className="row">
-
-<div className="column">
-
-      <table>
-        <thead>
-          <tr>
-            <th>Xaxis</th>
-            <th>Yaxis1</th>
-            {column >= 2 && <th>Yaxis2</th>}
-            {column >= 3 && <th>Yaxis3</th>}
-              {column >= 4 && <th>Yaxis4</th>}
-            <th>Remove row</th>
-            {/* <th>Add Cell</th> */}
-          </tr>
-        </thead>
-        <tbody>
-          {inputFields.map((inputField) => (
-            <tr key={inputField.id}>
-              <td>
-                <input
-                  name="x1"
-                  style={{ width: "100px" }}
-                  value={inputField.x1}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
+                <YAxis
+                  yAxisId="right1"
+                  orientation="left"
+                  dataKey="y1"
+                  domain={[0, maxval1]}
                 />
-              </td>
+                {column >= 2 && (
+                  <YAxis
+                    yAxisId="right2"
+                    orientation="left"
+                    dataKey="y2"
+                    domain={[0, maxval2]}
+                  />
+                )}
+                {column >= 3 && (
+                  <YAxis
+                    yAxisId="right3"
+                    orientation="left"
+                    dataKey="y3"
+                    domain={[0, maxval3]}
+                  />
+                )}
+                {column >= 4 && (
+                  <YAxis
+                    yAxisId="right4"
+                    orientation="left"
+                    dataKey="y4"
+                    domain={[0, maxval4]}
+                  />
+                )}
 
-              <td>
-                <input
-                  name="y1"
-                  style={{ width: "100px" }}
-                  value={inputField.y1}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
+                <Tooltip />
+                <Legend />
+                <Line
+                  yAxisId="right1"
+                  type="monotone"
+                  dataKey="y1"
+                  stroke="#FF0000"
+                  activeDot={{ r: 8 }}
                 />
-              </td>
-{column >= 2 &&
-              <td>
-                <input
-                  name="y2"
-                  style={{ width: "100px" }}
-                  value={inputField.y2}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
-                />
-              </td>
-}
-{column >=3 &&
-              <td>
-                <input
-                  name="y3"
-                  style={{ width: "100px" }}
-                  value={inputField.y3}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
-                />
-              </td>
-}
-{column >= 4 &&
-              <td>
-                <input
-                  name="y4"
-                  style={{ width: "100px" }}
-                  value={inputField.y4}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
-                />
-              </td>
-}
-              <td >
-                <Button 
-                variant="contained"
-                color="error"
-                style={{width:"100%",padding:"3px 3px 3px 5px"}}
-                  disabled={inputFields.length === 1}
-                  onClick={() => handleRemoveFields(inputField.id)}
-                >
-                  remove &nbsp;&nbsp;&nbsp; <DeleteIcon/>
-                </Button>
-              </td>
-          
-            </tr>
-          ))}
-        </tbody>
-      </table>
-  </div>
+                {column >= 2 && (
+                  <Line
+                    yAxisId="right2"
+                    type="monotone"
+                    dataKey="y2"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                )}
+                {column >= 3 && (
+                  <Line
+                    yAxisId="right3"
+                    type="monotone"
+                    dataKey="y3"
+                    stroke="#0000ff"
+                    activeDot={{ r: 8 }}
+                  />
+                )}
+                {column >= 4 && (
+                  <Line
+                    yAxisId="right4"
+                    type="monotone"
+                    dataKey="y4"
+                    stroke="#00FF00"
+                    activeDot={{ r: 8 }}
+                  />
+                )}
+              </LineChart>
+            </ResponsiveContainer>
+          )}
+        </div>
+      </div>
 
+      <Button
+        variant="contained"
+        onClick={() => generate()}
+        style={{ background: "#F1C232", color: "black" }}
+      >
+        Generate
+      </Button>
 
-  <div className="column" style={{margin:"100px"}}>
-
-        {temp && (
-          <ResponsiveContainer width="50%" aspect={2}>
-            <LineChart
-              width={500}
-              height={300}
-              data={temp}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="x1" />
-
-              <YAxis yAxisId="right1" orientation="left"  dataKey="y1" domain={[0, maxval1]} />
-              {column >=2 &&        <YAxis yAxisId="right2" orientation="left"  dataKey="y2" domain={[0, maxval2]} />}
-          {column >=3 &&        <YAxis yAxisId="right3" orientation="left"  dataKey="y3"  domain={[0, maxval3]}/>}
-          {column >=4 &&        <YAxis yAxisId="right4" orientation="left"  dataKey="y4"  domain={[0, maxval4]}/>}
-          
-              <Tooltip />
-              <Legend />
-              <Line
-              yAxisId="right1"
-                type="monotone"
-                dataKey="y1"
-                stroke="#FF0000"
-                activeDot={{ r: 8 }}
-              />
-  {column >=2 &&            <Line
-  yAxisId="right2"
-                type="monotone"
-                dataKey="y2"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-  }
-        {column >=3 &&      <Line
-        yAxisId="right3"
-                type="monotone"
-                dataKey="y3"
-                stroke="#0000ff"
-                activeDot={{ r: 8 }}
-              />
-        }
-         {column >=4 &&     <Line
-         yAxisId="right4"
-                type="monotone"
-                dataKey="y4"
-                stroke="#00FF00"
-                activeDot={{ r: 8 }}
-              />
-         }
-      
-
-            </LineChart>
-          </ResponsiveContainer>
-        )}
-      
-  </div>
-
-  </div>
-
-
-
-<Button
-variant='contained'
-  onClick={()=>generate()}
-  style={{background:"#F1C232",color:"black"}}
->Generate</Button>
-
-
-     {/* <Button  onClick={() => addd()}>
+      {/* <Button  onClick={() => addd()}>
               Save
               
             </Button> */}
-            <Button 
-            variant='outlined'
-            style={{marginLeft:"50px",color:"black",borderColor:"#F1C232"}}
-             onClick={check}>
-              Update
-              
-            </Button>
-
-<br/>
+      <Button
+        variant="outlined"
+        style={{ marginLeft: "50px", color: "black", borderColor: "#F1C232" }}
+        onClick={check}
+      >
+        Update
+      </Button>
 
       <br />
 
-     
+      <br />
     </div>
   );
 }

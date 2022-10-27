@@ -48,18 +48,18 @@ const Adduserteacher = () => {
       return ans;
     }
     setPassword(randomStr(8));
-    console.log(user);
+    // console.log(user);
   }, []);
 
   const createuser = (e) => {
     // console.log(id)
-    console.log(name);
-    console.log(email);
-    console.log(user.instituteName);
-    console.log(user.department);
-    console.log(lab);
-    console.log(role);
-    console.log("this is password", password);
+    // console.log(name);
+    // console.log(email);
+    // console.log(user.instituteName);
+    // console.log(user.department);
+    // console.log(lab);
+    // console.log(role);
+    // console.log("this is password", password);
     e.preventDefault();
     // setNameerror()
     // setEmailerror()
@@ -71,26 +71,26 @@ const Adduserteacher = () => {
       password: password,
     };
     if (!name) {
-      console.log("no name");
+      // console.log("no name");
       setNameerror("*Name required*");
     } else if (nameerror) {
-      console.log(nameerror);
+      // console.log(nameerror);
     } else if (emailerror) {
-      console.log(emailerror);
+      // console.log(emailerror);
     } else if (!email) {
-      console.log("no email");
+      // console.log("no email");
       setEmailerror("*Email required*");
     } else if (!role) {
-      console.log("no role");
+      // console.log("no role");
       setRoleerror("*Role required*");
-    } else if (!lab && user.role == "teacher") {
-      console.log("no lab");
+    } else if (!lab && user.role === "teacher") {
+      // console.log("no lab");
       setLaberror("*Lab required*");
     } else {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          console.log("successfully Registered", userCredential);
+          // console.log("successfully Registered", userCredential);
 
           fetch(`${process.env.REACT_APP_API}/register`, {
             method: "POST",
@@ -110,16 +110,12 @@ const Adduserteacher = () => {
             .then((response) => response.json())
             .then((data) => {
               setOpen1(true);
-              Swal.fire(
-                "User Created",
-                "User has been Created successfully",
-                "success"
-              );
+              Swal.fire("Success", "User created successfully", "success");
               /// send email
               axios
                 .post(process.env.REACT_APP_API + "/usermail", usermail)
                 .then((res) => {
-                  console.log(res.data);
+                  // console.log(res.data);
                   if (res.data === "error") {
                     Swal.fire({
                       icon: "error",
@@ -127,7 +123,7 @@ const Adduserteacher = () => {
                       text: "Invalid mail id",
                     });
                   } else {
-                    console.log("mail sent successfully.");
+                    // console.log("mail sent successfully.");
 
                     Swal.fire(
                       "User created!",
@@ -143,7 +139,7 @@ const Adduserteacher = () => {
               setLab();
             })
             .catch((error) => {
-              console.error("Error:", error);
+              // console.error("Error:", error);
               setStatusmessage("Database not created");
               setOpen(true);
               Swal.fire({
@@ -154,10 +150,10 @@ const Adduserteacher = () => {
             });
         })
         .catch((error) => {
-          var errorCode = error.code;
+          // var errorCode = error.code;
           var errorMessage = error.message;
-          console.log("Failure1", errorMessage);
-          console.log("Failure2", errorCode);
+          // console.log("Failure1", errorMessage);
+          // console.log("Failure2", errorCode);
           setStatusmessage(errorMessage);
           setOpen(true);
           Swal.fire({
@@ -180,7 +176,7 @@ const Adduserteacher = () => {
           onChange={(e) => {
             setName(e.target.value);
             if (
-              /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~1234567890]/.test(
+              /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~1234567890]/.test(
                 e.target.value
               )
             ) {
@@ -200,9 +196,7 @@ const Adduserteacher = () => {
           onChange={(e) => {
             setEmail(e.target.value);
             if (
-              /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-                e.target.value
-              )
+              /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)
             ) {
               setEmailerror();
             } else {
@@ -316,7 +310,7 @@ const Adduserteacher = () => {
         anchorOrigin={{ vertical, horizontal }}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          User created Successfully!
+          User created successfully!
         </Alert>
       </Snackbar>
     </div>

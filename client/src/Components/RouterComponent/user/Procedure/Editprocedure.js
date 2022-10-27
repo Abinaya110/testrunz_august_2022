@@ -76,7 +76,7 @@ const Editprocedure = (props) => {
     });
 
     axios.get(`${ApiUrl}/moreInfo/${content}`).then((res) => {
-      console.log("check", res.data);
+      // console.log("check", res.data);
       setExperiment(res.data.ProcedureName);
       setLabtype(res.data.labtype);
       setDepartment(res.data.department);
@@ -86,7 +86,7 @@ const Editprocedure = (props) => {
       setUniversity(res.data.university);
       setMoreinfoid(res.data._id);
     });
-  }, []);
+  }, [content]);
 
   const showmodal = (e) => {
     e.preventDefault();
@@ -139,10 +139,10 @@ const Editprocedure = (props) => {
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong Check your internet connection",
+                text: "Something went wrong! Check your internet connection",
               });
             } else {
-              Swal.fire("Success", "Procedure has been updated", "success");
+              Swal.fire("Success", "Procedure updated!", "success");
             }
           });
       });
@@ -162,7 +162,7 @@ const Editprocedure = (props) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
-      console.log("button result", result);
+      // console.log("button result", result);
       if (result.isConfirmed) {
         fetch(`${ApiUrl}/procedures/delete/${moreinfoid}`, {
           method: "DELETE",
@@ -170,13 +170,15 @@ const Editprocedure = (props) => {
           .then((res) => res.json())
           .then((data) => {
             // Do some stuff...
-            console.log(moreinfoid);
-            console.log(data);
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            // console.log(moreinfoid);
+            // console.log(data);
+            Swal.fire("Deleted!", "Your file has been deleted", "success");
             props.history.push("/procedure");
           })
-          .catch((err) => console.log("hai", err));
-      } else if (result.isDismissed) {
+          .catch((err) => 
+          console.log("hai", err));
+      } 
+      else if (result.isDismissed) {
         Swal.fire("Nothing is deleted", "", "info");
       }
     });
@@ -203,7 +205,7 @@ const Editprocedure = (props) => {
           html: editorRef.current.getContent(),
         })
         .then((res) => {
-          console.log(res.data.content);
+          // console.log(res.data.content);
           if (res.data.result === "already exist") {
             Swal.fire({
               icon: "error",
@@ -223,7 +225,7 @@ const Editprocedure = (props) => {
                 university: university,
               })
               .then(() => {
-                console.log("sent meta info");
+                // console.log("sent meta info");
                 // axios.post(`${ApiUrl}/labrotories`, {
                 //   name: labRef.current.value,
                 //   experiment: titleRef.current.value,
@@ -236,11 +238,11 @@ const Editprocedure = (props) => {
                 setModalopen(false);
               })
               .catch((err) => {
-                console.error(err);
+                // console.error(err);
                 Swal.fire({
                   icon: "error",
                   title: "Oops...",
-                  text: "Something went wrong Check your internet connection",
+                  text: "Something went wrong! Check your internet connection",
                 });
               });
           }

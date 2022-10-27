@@ -1,42 +1,25 @@
-import React, { useEffect, useState, useContext } from "react";
-
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
-import Divider from "@mui/material/Divider";
-
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-
-import { DataGrid } from "@material-ui/data-grid";
 import TextField from "@material-ui/core/TextField";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-
 import Modal from "react-modal";
-
 import ApiUrl from "../../../ServerApi";
 import ApiService from "../../../Sevices/ApiService";
-
 import AddUserComponent from "./AddUserComponent";
-
-
 import { useStateValue } from "../../../data/StateProvider";
 import MaterialTable from 'material-table';
-
-
-import {FaRegEdit} from 'react-icons/fa';
 import {RiShareForwardFill} from 'react-icons/ri';
 import Box from '@mui/material/Box';
 import Loading from "./Lodaing"
 import { Button } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import AddUserComponentadmin from "./AddUserComponentadmin";
-import AddUserComponentschool from "./AddUserComponentschool";
+// import AddUserComponentschool from "./AddUserComponentschool";
 import NotificationRunz from "./NotificationRunz";
-const USER_API_BASE_URL = `${ApiUrl}/experiments`;
 
 
 function Alert(props) {
@@ -97,17 +80,17 @@ const boxstyle = {
   p: 4,
 };
 
-const customStylescell = {
-  content: {
-    color: "red",
-    backgroundColor: "black",
-  },
-};
+// const customStylescell = {
+//   content: {
+//     color: "red",
+//     backgroundColor: "black",
+//   },
+// };
 
 
 const Runz = () => {
   let rows = [];
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [users, setUsers] = useState([]);
@@ -138,17 +121,16 @@ const Runz = () => {
 
   ];
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  // const [page, setPage] = React.useState(0);
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
 
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
 
 
   // model setup
@@ -228,7 +210,7 @@ const Runz = () => {
     
 
 
-if(sharewith==""||null){
+if(sharewith===""||null){
   setSharewitherror("Enter a mail Id")
 }
    else{
@@ -242,7 +224,7 @@ if(sharewith==""||null){
                   Swal.fire(
                     'Shared',
                     msg,
-                    'success'
+                    'Success'
                   )
                 }else{
                   Swal.fire({
@@ -298,7 +280,7 @@ individuals.map((userr, ident) => {
   return (
     <div className={classes.root}>
     
-    {user.role=="superadmin"?  <Modal
+    {user.role==="superadmin"?  <Modal
         isOpen={modalOpenAdd}
         appElement={document.getElementById('root')}
         style={customStyles}
@@ -353,7 +335,7 @@ individuals.map((userr, ident) => {
               value={sharewith} 
               onChange={(e)=>{
                 setSharewith(e.target.value)
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
+                if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
                   setEmailerror()
                 }
                 else {
@@ -379,7 +361,7 @@ individuals.map((userr, ident) => {
       <div style={{ maxWidth: '100%' }}>
         {loadingscreen ?<Loading />:
         <div>
-          {users.length != 0 && <div style={{position:"relative",left: "50px" ,width:"500px"}}><NotificationRunz users={users} /></div>}
+          {users.length !== 0 && <div style={{position:"relative",left: "50px" ,width:"500px"}}><NotificationRunz users={users} /></div>}
        
         <MaterialTable
           columns={columns1}
@@ -397,7 +379,7 @@ individuals.map((userr, ident) => {
             body: {
             
               editRow: {
-                deleteText: `Are you sure you want to delete this runz`
+                deleteText: `Are you sure you want to delete this runz?`
               }
           }
           }}

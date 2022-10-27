@@ -1,24 +1,21 @@
 import React from "react";
-
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import { useParams} from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 import ApiService from "../../Sevices/ApiService";
 import ApiUrl from "../../ServerApi";
 import DispBoard from "./DispBoard";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 // function Alert(props) {
 //   return <MuiAlert elevation={6} variant="filled" {...props} />;
 // }
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "80rem",
-    
+
     "& > * + *": {
       marginTop: theme.spacing(2),
     },
@@ -38,30 +35,29 @@ const DashBoard = (props) => {
   const [data, setData] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState(null);
-  const vertical ="top"
-  const horizontal = "center"
-  let {token} = useParams();
-
+  const vertical = "top";
+  const horizontal = "center";
+  let { token } = useParams();
 
   React.useEffect(() => {
-    ApiService.fetchUserById(token).then(
-      (res) => {
+    ApiService.fetchUserById(token)
+      .then((res) => {
         let user = res.data;
-     
+
         data._id = user._id;
         data.studentName = user.studentName;
         data.runID = user.runID;
         data.labType = user.labType;
         data.experimentName = user.experimentName;
         setData({ ...data });
-       
-      }).catch((err)=>{
-      console.log("content error",err)
-      console.log("content error msg",err.data)
-    })
+      })
+      .catch((err) => {
+        // console.log("content error", err);
+        // console.log("content error msg", err.data);
+      });
 
     playingUser();
-    changestatus()
+    changestatus();
   }, []);
 
   const handleClose = (event, reason) => {
@@ -77,9 +73,7 @@ const DashBoard = (props) => {
   };
 
   const playingUser = () => {
-    setMessage(
-      `RunId ${token} experiment is encaged...`
-    );
+    setMessage(`RunId ${token} experiment is encaged...`);
     setOpen(true);
   };
 
@@ -88,22 +82,16 @@ const DashBoard = (props) => {
       method: "PATCH",
       // signal:abortcont.signal,
       body: JSON.stringify({
-        status:"viewed",
-
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-  .then(response => response.json())
-  .then(json => 
-    {
-    
-      console.log("edit status",json)
-      
-    }
-    );
-  
+        status: "viewed",
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        // console.log("edit status", json);
+      });
   };
 
   return (
@@ -123,7 +111,7 @@ const DashBoard = (props) => {
       >
        Back<ArrowBackIosIcon/>
       </button> */}
-        <ArrowBackIcon
+      <ArrowBackIcon
         onClick={goBack}
         style={{
           color: "red",
@@ -138,8 +126,13 @@ const DashBoard = (props) => {
       />
 
       <DispBoard data={data} />
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} anchorOrigin={{ vertical, horizontal }}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical, horizontal }}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           {message}
         </Alert>
       </Snackbar>

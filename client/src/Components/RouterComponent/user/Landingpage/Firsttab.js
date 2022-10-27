@@ -82,7 +82,7 @@ export default function Firsttab() {
     <Grid item>content</Grid>
     <Grid item> 
     <img
-                style={{ width: "600px", height: "400px",  display: "block", marginLeft: "auto",  marginRight: "auto", width: "50%", objectFit: "contain"}}
+                style={{ width: "600px", height: "400px",  display: "block", marginLeft: "auto",  marginRight: "auto", objectFit: "contain"}}
                 src={labimg}
                 alt=""
               />

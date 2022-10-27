@@ -9,6 +9,7 @@ import { actionTypes } from "../data/reducer";
 import CardContent from "@material-ui/core/CardContent";
 import { useStateValue } from "../data/StateProvider";
 import ApiUrl from "../ServerApi";
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -42,14 +43,14 @@ const Private = (props) => {
   const [state, setState] = useState("");
   const [year, setYear] = useState("");
   const [semester, setSemester] = useState("");
-  const [showOnce, setShowOnce] = useState(false);
+  const [showOnce] = useState(false);
   const [btnText, setBtnText] = useState("Submit");
   const [{ user }, dispatch] = useStateValue();
   const classes = useStyles();
 
   useEffect(() => {
     set_id(user._id);
-    console.log("private", user);
+    // console.log("private", user);
     if (user.university) {
       setUniversitytemp(user.university);
       fetchdepartment(user.university);
@@ -70,7 +71,7 @@ const Private = (props) => {
     fetch(`${ApiUrl}/moreInfo/all/university`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setUniversitylist(data.ids);
       });
   }, []);
@@ -94,7 +95,7 @@ const Private = (props) => {
       .then((response) => response.json())
       .then((json) => {
         setInstitutelist(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -117,7 +118,7 @@ const Private = (props) => {
       .then((json) => {
         setDepartmentlist(json.ids);
 
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -135,25 +136,25 @@ const Private = (props) => {
     setUniversity(university || universitytemp);
     setInstituteName(instituteName || instituteNametemp);
     setDepartment(department || departmenttemp);
-    console.log("check here", department);
+    // console.log("check here", department);
 
     if (!university) {
-      console.log("no university name");
+      // console.log("no university name");
       setUniversityerror("*University required*");
     } else if (!instituteName) {
-      console.log("no institute name");
+      // console.log("no institute name");
       setInstitutenameerror("*Institute Name required*");
     } else if (!department) {
-      console.log("no department name");
+      // console.log("no department name");
       setDepartmenterror("*Department required*");
     } else if (!country) {
-      console.log("no country name");
+      // console.log("no country name");
       setCountryerror("*Country required*");
     } else if (state === "" || null) {
-      console.log("no password");
+      // console.log("no password");
       setStateerror("*State required*");
     } else if (role === "student" && (year === "" || null)) {
-      console.log("no year");
+      // console.log("no year");
       setYearerror("*Year required  enter a valid number*");
     } else if (
       (role === "student" && parseInt(year) > 4) ||
@@ -161,7 +162,7 @@ const Private = (props) => {
     ) {
       setYearerror("Year must be from 1 to 4");
     } else if (role === "student" && (semester === "" || null)) {
-      console.log("no semester");
+      // console.log("no semester");
       setSemestererror("*Semester required enter a valid number*");
     } else if (
       (role === "student" && parseInt(semester) > 8) ||
@@ -201,7 +202,7 @@ const Private = (props) => {
             });
         })
         .catch((error) => {
-          console.log("Sign-up error", error);
+          // console.log("Sign-up error", error);
           setBtnText("Submit");
           toast.error("error.response.data.error");
         });
@@ -335,7 +336,7 @@ const Private = (props) => {
                   />
                 </div>
                 <p className="errormsg">{stateerror}</p>
-{console.log(role)}
+                {/* {console.log(role)} */}
                 {role === "student" && (
                   <>
                     <div className="form-group">

@@ -9,7 +9,6 @@ from Chemistry_acet import Chem_acet
 from EnvironmentEngineeringLab import EVS
 from MaterialTesting2 import MT2
 from FluidMechanics import FML
-# from BEE import BEE
 from FirstYearCivil import FirstYCivil
 from MaterialAndMetallorgy import MAM
 from Dom import Dom
@@ -32,8 +31,9 @@ from Electronic1 import EL1
 from ElectricElectronic import EE
 from HMT_Milam import HMT_Milam
 from FluidMechanics_svcet import FML_svcet
-from BEE_acet import BEE
+from BEE_acet import BEE_ac
 from Electronic1_svcet import Elec1
+from EM1_svcet import ElecMac1
 from Electronic_acet import Electronics1
 
 def main(argv,title):
@@ -91,8 +91,6 @@ def main(argv,title):
                     Chem_acet(argument).Magnesium()
                 elif((argument[len(argument) -1] == "Calcium_acet")):
                     Chem_acet(argument).calcium()
-                elif((argument[len(argument) -1] == "Permanganometry_acet")):
-                    Chem_acet(argument).ferrous()
                 elif((argument[len(argument) -2] == "Vibration") and (argument[len(argument) -1] == "Magnetometer")):
                     FirstYPhysics(argument).vibration_magnetometer()
                 elif((argument[len(argument) -3] == "Air") and (argument[len(argument) -2] == "Wedge") and (argument[len(argument) -1] == "Experiment")):
@@ -457,8 +455,8 @@ def main(argv,title):
                     TE1(argument).Pin_Fin()
                 elif((argument[len(argument) -3] == "TIME") and (argument[len(argument) -2] == "DIVISION") and (argument[len(argument) -1] == "MULTIPLEXING")):
                     Com2(argument).TIME_DIVISION_MULTIPLEXING()
-                elif((argument[len(argument) -5] == "M-ary") and (argument[len(argument) -4] == "ASK,") and (argument[len(argument) -3] == "FSK,") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "PSK")):                    
-                    Com2(argument).Mary_ASK_FSK_and_PSK()     
+                #elif((argument[len(argument) -5] == "M-ary") and (argument[len(argument) -4] == "ASK,") and (argument[len(argument) -3] == "FSK,") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "PSK")):                    
+                  #  Com2(argument).Mary_ASK_FSK_and_PSK()     
                 elif((argument[len(argument) -4] == "BASK,") and (argument[len(argument) -3] == "BFSK") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "BPSK")):
                     Com2(argument).BASK_BFSK_and_BPSK()
                 elif((argument[len(argument) -2] == "RSA") and (argument[len(argument) -1] == "ALGORITHM")):
@@ -618,15 +616,15 @@ def main(argv,title):
                 elif( (argument[len(argument) -2] == "Insulating") and (argument[len(argument) -1] =="Powder_Mailam" )):
                     HMT_Milam(argument).Insulating_Powder_Mailam()
                 elif((argument[len(argument) -3] == "Bed")and (argument[len(argument) -2]=="Room")and (argument[len(argument) -1])=="Wiring_acet"):
-                    BEE(argument).Bed_Room_Wiring()
+                    BEE_acet(argument).Bed_Room_Wiring()
                 elif((argument[len(argument) -3] == "Doctor’s")and (argument[len(argument) -2]=="Room")and (argument[len(argument) -1])=="Wiring_acet"):
-                    BEE(argument).Doctor_Room_Wiring()  
+                    BEE_acet(argument).Doctor_Room_Wiring()  
                 elif((argument[len(argument) -3] == "Stair")and (argument[len(argument) -2]=="Case")and (argument[len(argument) -1])=="Wiring_acet"):
-                    BEE(argument).Stair_Case_Wiring() 
+                    BEE_ac(argument).Stair_Case_Wiring() 
                 elif((argument[len(argument) -2] == "Godown")and (argument[len(argument) -1]=="Wiring_acet")):
-                    BEE(argument).Godown_Wiring() 
+                    BEE_ac(argument).Godown_Wiring() 
                 elif((argument[len(argument) -2] == "Kirchoff’s")and (argument[len(argument) -1]=="Law_acet")):
-                    BEE(argument).Verification_of_Kirchoff_Law()
+                    BEE_ac(argument).Verification_of_Kirchoff_Law()
                 elif( (argument[len(argument) -3] == "Flow")  and (argument[len(argument) -2] == "Through") and (argument[len(argument) -1] =="Orifice_SVCET" )):
                     FML_svcet(argument).Flow_Through_Orifice_SVCET()
                 elif( (argument[len(argument) -3] == "Flow")  and (argument[len(argument) -2] == "Through") and (argument[len(argument) -1] =="Venturimeter_SVCET" )):
@@ -661,22 +659,7 @@ def main(argv,title):
                     Elec1(argument).Full_SVCET()
                 elif((argument[len(argument) -2] == "Biasing")and (argument[len(argument) -1] == "circuit_SVCET" )):
                     Elec1(argument).Biasing_SVCET() 
-                # elif((argument[len(argument) -2] == "DC") and (argument[len(argument) -1] == "Shunt_SVCET")):
-                #     ElecMac1(argument).DCshunt()
-                # elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Series") and (argument[len(argument) -1] == "Motor_SVCET")):
-                #     ElecMac1(argument).DC_SERIES_MOTOR()
-                # elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Compound") and (argument[len(argument) -1] == "Motor_SVCET")):
-                #     ElecMac1(argument).DC_COMPOUND_MOTOR()
-                # elif((argument[len(argument) -3] == "OC") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "SC_SVCET")):
-                #     ElecMac1(argument).SELF()       
-                # elif((argument[len(argument) -2] == "Swinburne's") and (argument[len(argument) -1] == "Test_SVCET")):
-                #     ElecMac1(argument).SWINBURNE()
-                # elif((argument[len(argument) -2] == "Speed") and (argument[len(argument) -1] == "control_SVCET")):
-                #     ElecMac1(argument).Speed()
-                # elif((argument[len(argument) -1] == "Single_Phase_Transformer_SVCET")):
-                #     ElecMac1(argument).Singlephasetrf()
-                # elif((argument[len(argument) -2] == "Parallel")and (argument[len(argument) -1] == "Operation_SVCET")):
-                #     ElecMac1(argument).trf()
+                
                 elif((argument[len(argument) -1] == "LED_acet")):
                     Electronics1(argument).LED_acet()
                 elif((argument[len(argument) -1] == "CE_acet")):
@@ -699,8 +682,30 @@ def main(argv,title):
                     Electronics1(argument).Colpitts_acet()
                 elif((argument[len(argument) -2] == "Zener")and(argument)[len(argument)-1] =="Diode_acet"):
                     Electronics1(argument).Zener_acet()   
- 
-                 
+
+
+                elif((argument[len(argument) -2] == "DC") and (argument[len(argument) -1] == "Shunt_SVCET")):
+                    ElecMac1(argument).DCshunt()
+                elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Series") and (argument[len(argument) -1] == "Motor_SVCET")):
+                    ElecMac1(argument).DC_SERIES_MOTOR()
+                elif((argument[len(argument) -3] == "DC") and (argument[len(argument) -2] == "Compound") and (argument[len(argument) -1] == "Motor_SVCET")):
+                    ElecMac1(argument).DC_COMPOUND_MOTOR()
+                elif((argument[len(argument) -3] == "OC") and (argument[len(argument) -2] == "and") and (argument[len(argument) -1] == "SC_SVCET")):
+                    ElecMac1(argument).SELF()       
+                elif((argument[len(argument) -2] == "Swinburne’s") and (argument[len(argument) -1] == "Test_SVCET")):
+                    ElecMac1(argument).SWINBURNE()
+                elif((argument[len(argument) -2] == "Speed") and (argument[len(argument) -1] == "control_SVCET")):
+                    ElecMac1(argument).Speed()
+                elif((argument[len(argument) -1] == "Single_Phase_Transformer_SVCET")):
+                    ElecMac1(argument).Singlephasetrf()
+                elif((argument[len(argument) -2] == "Parallel")and (argument[len(argument) -1] == "Operation_SVCET")):
+                    ElecMac1(argument).trf()
+                elif((argument[len(argument) -3] == "OCC")and (argument[len(argument) -2] == "Load")and (argument[len(argument) -1] == "DC_SVCET")):
+                    ElecMac1(argument).occ()
+                elif((argument[len(argument) -3] == "DC")and (argument[len(argument) -2] == "Series")and (argument[len(argument) -1] == "Generator_SVCET")):
+                    ElecMac1(argument).DCSeries()
+                elif((argument[len(argument) -3] == "Three")and (argument[len(argument) -2] == "phase")and (argument[len(argument) -1] == "Transformer_SVCET")):
+                    ElecMac1(argument).Three()
                 else:
                     Dummy(title).dummy()
             except ValueError:

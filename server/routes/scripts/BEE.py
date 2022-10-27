@@ -1,24 +1,54 @@
-# import json
-# import math as m
+import json
 
-# class BEE:
-#     def __init__(self, arg):
-#         self.arg = arg
+class BEE:
+    def __init__(self, arg):
+        self.arg = arg
+        
+    def Bed_Room_Wiring(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Bed Room Wiring is completed sucessfully"}]}))
 
-#     def CRO(self):
-#         argument = self.arg[0:]
-#         p1=(float(argument[2])* float(argument[3]))
-#         p2=(float(argument[5])* float(argument[6]))
-#         p3=(float(argument[8])* float(argument[9]))
-#         p4=(float(argument[11])* float(argument[12]))
-#         p5=(float(argument[14])* float(argument[13]))
-#         p = (p1+p2+p3+p4+p5)/5
-#         TP1 =(float(argument[17])* float(argument[18]))
-#         TP2=(float(argument[20])* float(argument[21]))
-#         TP3 =(float(argument[23])* float(argument[24]))
-#         TP4 =(float(argument[26])* float(argument[27]))
-#         TP5 =(float(argument[29])* float(argument[30]))
-#         TP = (TP1+TP2+TP3+TP4+TP5)/5
-#         F =((1/TP1)+(1/TP2)+(1/TP3)+(1/TP4)+(1/TP4))/5
-#         print(json.dumps({"length":[{"Peak voltage is " : str(p),"Time period is " : str(TP)}], "breadth":[{"Frequency mesurement for different waveform " : str(F)}] }))
+        
+    def Doctor_Room_Wiring(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Doctor’s Room Wiring is completed sucessfully"}]}))
 
+        
+    def Fan_and_Tube_Light_Connections_Wiring(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Fan and Tube Light Connections Wiring is completed sucessfully"}]}))
+        
+        
+    def Godown_Wiring(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Godown Wiring is completed sucessfully"}]}))
+        
+        
+    def Stair_Case_Wiring(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Stair Case Wiring is completed sucessfully"}]}))
+        
+        
+    def Study_of_Cathode_Ray_Oscilloscope(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Study of Cathode Ray Oscilloscope is completed sucessfully"}]}))
+        
+        
+    def Study_of_Electrical_Accessories(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Study of Electrical Accessories completed sucessfully"}]}))
+        
+        
+    def Study_of_Symbols(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Study of Symbols is completed sucessfully"}]}))
+        
+        
+    def Study_of_Tools_and_Accessories(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Study of Tools and Accessories is completed sucessfully"}]}))
+        
+        
+    def Verification_of_Kirchoff_Law(self):
+        argument = self.arg[0:]
+        print(json.dumps({"Fitting":[{"Result":"The Verification of Kirchoff’s Law is completed sucessfully"}]}))

@@ -13,7 +13,6 @@ import { Grid, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useStateValue } from "../../../../data/StateProvider";
 
 const customStyles = {
   content: {
@@ -45,16 +44,16 @@ const NewProcedure = (props) => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.log(
-      experiment,
-      labtype,
-      department,
-      year,
-      semester,
-      institute,
-      university,
-      editorRef.current.getContent()
-    );
+    // console.log(
+    //   experiment,
+    //   labtype,
+    //   department,
+    //   year,
+    //   semester,
+    //   institute,
+    //   university,
+    //   editorRef.current.getContent()
+    // );
 
     axios
       .post(`${ApiUrl}/procedures`, {
@@ -62,7 +61,7 @@ const NewProcedure = (props) => {
         html: editorRef.current.getContent(),
       })
       .then((res) => {
-        console.log(res.data.content);
+        // console.log(res.data.content);
         if (res.data.result === "already exist") {
           Swal.fire({
             icon: "error",
@@ -82,20 +81,20 @@ const NewProcedure = (props) => {
               university: university,
             })
             .then(() => {
-              console.log("sent meta info");
+              // console.log("sent meta info");
               // axios.post(`${ApiUrl}/labrotories`, {
               //   name: labRef.current.value,
               //   experiment: titleRef.current.value,
               // })
-              Swal.fire("Success", "Procedure has been updated", "success");
+              Swal.fire("Success", "Procedure updated!", "success");
               setModalopen(false);
             })
             .catch((err) => {
-              console.error(err);
+              // console.error(err);
               Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong Check your internet connection",
+                text: "Something went wrong! Check your internet connection",
               });
             });
         }

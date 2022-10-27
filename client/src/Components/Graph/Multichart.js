@@ -12,10 +12,28 @@ import {
 } from "recharts";
 
 import { v4 as uuidv4 } from "uuid";
-import "./Graph.css"
+import "./Graph.css";
 function Multichart() {
   const [inputFields, setInputFields] = useState([
-    { id: uuidv4(),x1: "", x2: "", x3: "", x4: "", x5: "", x6: "", x7: "", x8: "", y1: "", y2: "", y3: "", y4: "", y5: "", y6: "", y7: "", y8: "" },
+    {
+      id: uuidv4(),
+      x1: "",
+      x2: "",
+      x3: "",
+      x4: "",
+      x5: "",
+      x6: "",
+      x7: "",
+      x8: "",
+      y1: "",
+      y2: "",
+      y3: "",
+      y4: "",
+      y5: "",
+      y6: "",
+      y7: "",
+      y8: "",
+    },
   ]);
   const [maxval1, setMaxval1] = useState();
   const [maxval2, setMaxval2] = useState();
@@ -62,8 +80,8 @@ function Multichart() {
     // let tempinputFields = inputFields.splice(-1);
     // setInputFields(tempinputFields)
     setTemp(inputFields);
-    setData(inputFields)
-    console.log("InputFields", inputFields);
+    setData(inputFields);
+    // console.log("InputFields", inputFields);
   };
 
   const handleChangeInput = (id, event) => {
@@ -78,7 +96,25 @@ function Multichart() {
     if (inputFields[inputFields.length - 1].id === id) {
       setInputFields([
         ...inputFields,
-        { id: uuidv4(), x1: "", x2: "", x3: "", x4: "", x5: "", x6: "", x7: "", x8: "", y1: "", y2: "", y3: "", y4: "", y5: "", y6: "", y7: "", y8: "" },
+        {
+          id: uuidv4(),
+          x1: "",
+          x2: "",
+          x3: "",
+          x4: "",
+          x5: "",
+          x6: "",
+          x7: "",
+          x8: "",
+          y1: "",
+          y2: "",
+          y3: "",
+          y4: "",
+          y5: "",
+          y6: "",
+          y7: "",
+          y8: "",
+        },
       ]);
     }
   };
@@ -143,7 +179,6 @@ function Multichart() {
             {column >= 8 && <th>YAxis8</th>}
 
             <th>Remove cell</th>
-        
           </tr>
         </thead>
         <tbody>
@@ -352,54 +387,24 @@ function Multichart() {
                   remove
                 </button>
               </td>
-             
             </tr>
           ))}
         </tbody>
       </table>
 
-      <br/>
+      <br />
 
+      <Button variant="contained" onClick={() => generate()}>
+        Generate
+      </Button>
 
-<Button
-variant='contained'
-  onClick={()=>generate()}
->Generate</Button>
-
-<br/>
+      <br />
       <br />
 
       <div>
-      
-        {temp && <>
-             <ResponsiveContainer width="50%" aspect={2}>
-            <LineChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="x1" />
-              <YAxis orientation="left" dataKey="y1" domain={[0, maxval1]} />
-              <Tooltip />
-              <Legend />
-              <Line
-                type="monotone"
-                dataKey="y1"
-                stroke="#8884d8"
-                activeDot={{ r: 8 }}
-              />
-            </LineChart>
-            </ResponsiveContainer>
-
-            {column >= 2 && (
-                <ResponsiveContainer width="50%" aspect={2}>
+        {temp && (
+          <>
+            <ResponsiveContainer width="50%" aspect={2}>
               <LineChart
                 width={500}
                 height={300}
@@ -412,189 +417,244 @@ variant='contained'
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x2" />
-                <YAxis orientation="left" dataKey="y2" domain={[0, maxval2]} />
+                <XAxis dataKey="x1" />
+                <YAxis orientation="left" dataKey="y1" domain={[0, maxval1]} />
                 <Tooltip />
                 <Legend />
                 <Line
                   type="monotone"
-                  dataKey="y2"
+                  dataKey="y1"
                   stroke="#8884d8"
                   activeDot={{ r: 8 }}
                 />
               </LineChart>
+            </ResponsiveContainer>
+
+            {column >= 2 && (
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x2" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y2"
+                    domain={[0, maxval2]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y2"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 3 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x3" />
-                <YAxis orientation="left" dataKey="y3" domain={[0, maxval3]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y3"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x3" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y3"
+                    domain={[0, maxval3]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y3"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 4 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x4" />
-                <YAxis orientation="left" dataKey="y4" domain={[0, maxval4]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y4"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x4" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y4"
+                    domain={[0, maxval4]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y4"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 5 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x5" />
-                <YAxis orientation="left" dataKey="y5" domain={[0, maxval5]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y5"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x5" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y5"
+                    domain={[0, maxval5]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y5"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 6 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x6" />
-                <YAxis orientation="left" dataKey="y6" domain={[0, maxval6]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y6"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x6" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y6"
+                    domain={[0, maxval6]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y6"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 7 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x7" />
-                <YAxis orientation="left" dataKey="y7" domain={[0, maxval7]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y7"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x7" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y7"
+                    domain={[0, maxval7]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y7"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
 
             {column >= 8 && (
-                <ResponsiveContainer width="50%" aspect={2}>
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="x8" />
-                <YAxis orientation="left" dataKey="y8" domain={[0, maxval8]} />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="y8"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+              <ResponsiveContainer width="50%" aspect={2}>
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="x8" />
+                  <YAxis
+                    orientation="left"
+                    dataKey="y8"
+                    domain={[0, maxval8]}
+                  />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="y8"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                </LineChart>
               </ResponsiveContainer>
             )}
           </>
-        }
+        )}
       </div>
     </div>
   );

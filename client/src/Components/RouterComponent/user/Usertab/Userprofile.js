@@ -1,28 +1,25 @@
-
 import { useStateValue } from "../../../../data/StateProvider";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.min.css";
-import { useHistory, Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { actionTypes } from "../../../../data/reducer";
 import { useCookies } from "react-cookie";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
+
 const Userprofile = () => {
   const [{ user }, dispatch] = useStateValue();
-  const history = useHistory();
   const [editbt, setEditbt] = useState(false);
   const [yearerror, setYearerror] = useState();
   const [semestererror, setSemestererror] = useState();
   const [detail, setDetail] = useState({});
   const [update, setUpdate] = useState(false);
-
-  const [cookies, setCookie, removeCookie] = useCookies(["userjwt"]);
+  const [cookies] = useCookies(["userjwt"]);
 
   useEffect(() => {
-    console.log("coookieee", cookies.userjwt);
+    // console.log("coookieee", cookies.userjwt);
 
     async function fetchuserData() {
       await axios
@@ -91,16 +88,16 @@ const Userprofile = () => {
     } else if (parseInt(semester) > 8 || parseInt(semester) < 1) {
       setSemestererror("Semester must be from 1 to 8");
     } else {
-      console.log(
-        "sumitted result",
-        instituteName,
-        department,
-        country,
-        state,
-        year,
-        semester,
-        _id
-      );
+      // console.log(
+      //   "sumitted result",
+      //   instituteName,
+      //   department,
+      //   country,
+      //   state,
+      //   year,
+      //   semester,
+      //   _id
+      // );
 
       setCredit({ ...credit, btnText: "Submitting" });
       fetch(`${process.env.REACT_APP_API}/users/update`, {
@@ -137,11 +134,11 @@ const Userprofile = () => {
             btnText: "Submit",
           });
           setEditbt(!editbt);
-          console.log("noerror");
+          // console.log("noerror");
           setUpdate(!update);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          // console.error("Error:", error);
         });
     }
   };
@@ -163,7 +160,7 @@ const Userprofile = () => {
       {editbt ? (
         <div>
           <form>
-            {user.role == "superadmin" ? (
+            {user.role === "superadmin" ? (
               <>
                 <div className="form-group">
                   <label className="text-muted">University</label>

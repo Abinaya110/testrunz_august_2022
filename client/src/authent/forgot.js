@@ -31,7 +31,7 @@ const Forgot = () => {
     if (email === "" || null) {
       setErrormsg("*Mail ID required*");
     } else {
-      console.log("change password");
+      // console.log("change password");
       auth
         .sendPasswordResetEmail(email)
         .then(() => {
@@ -97,7 +97,7 @@ const Forgot = () => {
             severity="success"
             sx={{ width: "100%" }}
           >
-            Reset link sent to your email {email}
+            Reset link sent to your mail {email}
           </Alert>
         </Snackbar>
       </section>

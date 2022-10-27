@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import MenuItem from "@mui/material/MenuItem";
 import React, { useEffect, useState } from "react";
 import ApiUrl from "../../../../../ServerApi";
-import { Link, useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useStateValue } from "../../../../../data/StateProvider";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
@@ -28,11 +28,11 @@ const style = {
 };
 
 const ManageModal = (props) => {
-  const [{ user }, dispatch] = useStateValue();
-  let row = [];
-  const USER_API_BASE_URL = `${ApiUrl}/api/alluser`;
-  const [userlist, setUserlist] = useState();
-  const [loadingscreen, setLoadingscreen] = useState(true);
+  const [{ user }] = useStateValue();
+  // let row = [];
+  // const USER_API_BASE_URL = `${ApiUrl}/api/alluser`;
+  // const [userlist, setUserlist] = useState();
+  // const [loadingscreen, setLoadingscreen] = useState(true);
   const [update, setUpdate] = useState(true);
   const [editrole, setEditrole] = useState(true);
   const [edituniversity, setEdituniversity] = useState(true);
@@ -42,7 +42,7 @@ const ManageModal = (props) => {
   const [editstate, setEditstate] = useState(true);
   const [edityear, setEdityear] = useState(true);
   const [editsemester, setEditsemester] = useState(true);
-  const [modalOpenAdd, setModalOpenAdd] = useState(false);
+  // const [modalOpenAdd, setModalOpenAdd] = useState(false);
   const [editlabtype, setEditlabtype] = useState(true);
   const [lab, setLab] = useState();
   const [role, setRole] = useState();
@@ -57,45 +57,45 @@ const ManageModal = (props) => {
   const [semester, setSemester] = useState();
   const [state, setState] = useState();
   const [newlab, setNewlab] = useState();
-  const history = useHistory();
+  // const history = useHistory();
 
-  const columns = [
-    { title: "ID", field: "_id", editable: "never" },
-    { title: "Name", field: "name", editable: "never" },
-    { title: "Email", field: "email", editable: "never" },
-    {
-      title: "Role",
-      field: "role",
-      lookup: {
-        superadmin: "Super Admin",
-        admin: "Admin",
-        teacher: "Teacher",
-        student: "Student",
-      },
-    },
-    { title: "Country", field: "country", editable: "never" },
-    { title: "Institute Name", field: "instituteName", editable: "never" },
-  ];
+  // const columns = [
+  //   { title: "ID", field: "_id", editable: "never" },
+  //   { title: "Name", field: "name", editable: "never" },
+  //   { title: "Email", field: "email", editable: "never" },
+  //   {
+  //     title: "Role",
+  //     field: "role",
+  //     lookup: {
+  //       superadmin: "Super Admin",
+  //       admin: "Admin",
+  //       teacher: "Teacher",
+  //       student: "Student",
+  //     },
+  //   },
+  //   { title: "Country", field: "country", editable: "never" },
+  //   { title: "Institute Name", field: "instituteName", editable: "never" },
+  // ];
 
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   // const handleOpen = () => setOpen(true);
-  const handleClose = () => {
-    setOpen(false);
-    setEditlabtype(true);
-    setEditrole(true);
-    setEditinstitutename(true);
-    setEditcountry(true);
-    setEditdepartment(true);
-    setEditstate(true);
-    setEdityear(true);
-    setEditsemester(true);
-    setEditlabtype(true);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  //   setEditlabtype(true);
+  //   setEditrole(true);
+  //   setEditinstitutename(true);
+  //   setEditcountry(true);
+  //   setEditdepartment(true);
+  //   setEditstate(true);
+  //   setEdityear(true);
+  //   setEditsemester(true);
+  //   setEditlabtype(true);
+  // };
 
   const [detail, setDetail] = useState();
 
   useEffect(() => {
-    console.log("new console", props.useridnum);
+    // console.log("new console", props.useridnum);
     fetch(`${ApiUrl}/api/users/${props.useridnum}`)
       .then((res) => res.json())
       .then((data) => {
@@ -127,24 +127,24 @@ const ManageModal = (props) => {
         .then((response) => response.json())
         .then((json) => {
           // setOptions2(json.ids)
-          console.log("json hekk  kkkp");
+          // console.log("json hekk  kkkp");
           setLablist(json.ids);
-          console.log(json);
-          console.log(typeof user.role);
+          // console.log(json);
+          // console.log(typeof user.role);
         });
     };
 
-    if (user.role == "superadmin") {
+    if (user.role === "superadmin") {
       fetchlbs();
     } else {
-      console.log("list user");
+      // console.log("list user");
       setLablist(user.labtype);
     }
   };
 
   /// department fetch
   const fetchdepartment = (institute) => {
-    console.log(institute);
+    // console.log(institute);
     fetch(`${ApiUrl}/moreInfo/department`, {
       method: "POST",
 
@@ -159,7 +159,7 @@ const ManageModal = (props) => {
       .then((json) => {
         setOptions2(json.ids);
 
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -182,17 +182,16 @@ const ManageModal = (props) => {
       .then((response) => response.json())
       .then((json) => {
         setOptions1(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
-
 
   /// university fetch
   const fetchuniversity = () => {
     fetch(`${ApiUrl}/moreInfo/all/university`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setOptions1(data.ids);
       });
   };
@@ -217,7 +216,7 @@ const ManageModal = (props) => {
       .then((response) => response.json())
       .then((json) => {
         alert("User updated successfully");
-        console.log(json);
+        // console.log(json);
         setUpdate(!update);
       });
   };
@@ -258,8 +257,8 @@ const ManageModal = (props) => {
   // };
 
   // content for Manage User modal
-  const openModal = () => setModalOpenAdd(() => true);
-  const closeModal = () => setModalOpenAdd(() => false);
+  // const openModal = () => setModalOpenAdd(() => true);
+  // const closeModal = () => setModalOpenAdd(() => false);
 
   return (
     <div>
@@ -288,8 +287,12 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Name</Grid>
-              <Grid item xs={6}>{detail.name}</Grid>
+              <Grid item xs={5}>
+                Name
+              </Grid>
+              <Grid item xs={6}>
+                {detail.name}
+              </Grid>
               <Grid item xs={1}>
                 <Button disabled>
                   <BiEditAlt />
@@ -304,8 +307,12 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Email</Grid>
-              <Grid item xs={6}>{detail.email}</Grid>
+              <Grid item xs={5}>
+                Email
+              </Grid>
+              <Grid item xs={6}>
+                {detail.email}
+              </Grid>
               <Grid item xs={1}>
                 <Button disabled>
                   <BiEditAlt />
@@ -320,13 +327,15 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Role</Grid>
+              <Grid item xs={5}>
+                Role
+              </Grid>
               <Grid item xs={6}>
                 {editrole ? (
                   detail.role
                 ) : (
                   <>
-                    {user.role == "superadmin" ? (
+                    {user.role === "superadmin" ? (
                       <Select
                         labelId="demo-simple-select-disabled-label"
                         id="demo-simple-select-disabled"
@@ -341,7 +350,7 @@ const ManageModal = (props) => {
                         <MenuItem value={"student"}>Student</MenuItem>
                       </Select>
                     ) : null}
-                    {user.role == "admin" ? (
+                    {user.role === "admin" ? (
                       <Select
                         labelId="demo-simple-select-disabled-label"
                         id="demo-simple-select-disabled"
@@ -399,7 +408,9 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>University</Grid>
+              <Grid item xs={5}>
+                University
+              </Grid>
               <Grid item xs={6}>
                 {edituniversity ? (
                   detail.university
@@ -433,7 +444,7 @@ const ManageModal = (props) => {
                 )}
               </Grid>
               <Grid item xs={1}>
-                {user.role == "superadmin" ? (
+                {user.role === "superadmin" ? (
                   <Button
                     onClick={() => {
                       setEdituniversity(!edituniversity);
@@ -463,7 +474,9 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Institute Name</Grid>
+              <Grid item xs={5}>
+                Institute Name
+              </Grid>
               <Grid item xs={6}>
                 {editinstitutename ? (
                   detail.instituteName
@@ -497,7 +510,7 @@ const ManageModal = (props) => {
                 )}
               </Grid>
               <Grid item xs={1}>
-                {user.role == "superadmin" ? (
+                {user.role === "superadmin" ? (
                   <Button
                     onClick={() => {
                       setEditinstitutename(!editinstitutename);
@@ -527,7 +540,9 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Department</Grid>
+              <Grid item xs={5}>
+                Department
+              </Grid>
               <Grid item xs={6}>
                 {editdepartment ? (
                   detail.department
@@ -561,7 +576,7 @@ const ManageModal = (props) => {
                 )}{" "}
               </Grid>
               <Grid item xs={1}>
-                {user.role == "superadmin" ? (
+                {user.role === "superadmin" ? (
                   <Button
                     onClick={() => {
                       setEditdepartment(!editdepartment);
@@ -591,7 +606,9 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>Country</Grid>
+              <Grid item xs={5}>
+                Country
+              </Grid>
               <Grid item xs={6}>
                 {editcountry ? (
                   detail.country
@@ -626,14 +643,16 @@ const ManageModal = (props) => {
             </Grid>
             <br />
 
-            {detail.role == "student" ? (
+            {detail.role === "student" ? (
               <Grid
                 container
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Grid item xs={5}>Year</Grid>
+                <Grid item xs={5}>
+                  Year
+                </Grid>
                 <Grid item xs={6}>
                   {edityear ? (
                     detail.year
@@ -683,7 +702,9 @@ const ManageModal = (props) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={5}>State</Grid>
+              <Grid item xs={5}>
+                State
+              </Grid>
               <Grid item xs={6}>
                 {editstate ? (
                   detail.state
@@ -718,14 +739,16 @@ const ManageModal = (props) => {
             </Grid>
             <br />
 
-            {detail.role == "student" ? (
+            {detail.role === "student" ? (
               <Grid
                 container
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Grid item xs={5}>Semester</Grid>
+                <Grid item xs={5}>
+                  Semester
+                </Grid>
                 <Grid item xs={6}>
                   {editsemester ? (
                     detail.semester
@@ -781,7 +804,9 @@ const ManageModal = (props) => {
                   justifyContent="space-between"
                   alignItems="center"
                 >
-                  <Grid item xs={5}>List of labs available</Grid>
+                  <Grid item xs={5}>
+                    List of labs available
+                  </Grid>
                   <Grid item xs={6}>
                     {editlabtype ? null : lablist ? (
                       <Grid

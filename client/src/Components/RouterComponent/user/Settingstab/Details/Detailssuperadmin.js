@@ -33,7 +33,7 @@ const Detailssuperadmin = () => {
     fetch(`${ApiUrl}/moreInfo/all/university`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setUniversitylist(data.ids);
       });
   }, []);
@@ -66,7 +66,7 @@ const Detailssuperadmin = () => {
       .then((response) => response.json())
       .then((json) => {
         setInstitutelist(json.ids);
-        console.log(json);
+        // console.log(json);
       });
   };
 
@@ -85,19 +85,19 @@ const Detailssuperadmin = () => {
     })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json.list);
+        // console.log(json.list);
         if (json.list.length > 0) {
           setDepartmentlist(json.list);
         }
       })
-      .catch((err) => {
-        console.log(err, "hhh");
-      });
+      // .catch((err) => {
+      //   // console.log(err, "hhh");
+      // });
   };
 
   //getmoreinfo
   const getmoreinfo = (department, institute, university) => {
-    console.log(department, institute, university);
+    // console.log(department, institute, university);
 
     fetch(`${ApiUrl}/moreInfo/getdetail/university/institute/department`, {
       method: "POST",
@@ -117,9 +117,9 @@ const Detailssuperadmin = () => {
 
         setModalOpen(true);
       })
-      .catch((err) => {
-        console.log(err, "hhh");
-      });
+      // .catch((err) => {
+      //   console.log(err, "hhh");
+      // });
   };
 
   return (

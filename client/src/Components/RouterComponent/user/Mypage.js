@@ -71,14 +71,14 @@ const useStyles = makeStyles((theme) => ({
 
 const Mypage = () => {
   let rows = [];
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [users, setUsers] = useState([]);
   const [loadingscreen, setLoadingscreen] = useState(true);
   const [message, setMessage] = useState(null);
   const columns1 = [
-    { title: "ID", field: "id" },
+    { title: "S.NO", field: "id" },
     { title: "Procedure Name", field: "ProcedureName" },
     // { title: "Template Id", field: "TemplateId" },
     // { title: "Experiment Name", field: "ExperimentName" },
@@ -96,7 +96,7 @@ const Mypage = () => {
 
     if (user.showOnce === false) {
       history.push("/private");
-      console.log("truee", user.showOnce);
+      // console.log("truee", user.showOnce);
     }
   }, [message]);
 
@@ -106,7 +106,7 @@ const Mypage = () => {
       // _id:"mugilan.learny@gmail.com"
     };
     const usersdum = await ApiService.fetchUsersmail(userId).then((res) => res);
-    console.log("asdsaddsadafdwfsfas", usersdum);
+    // console.log("asdsaddsadafdwfsfas", usersdum);
     setLoadingscreen(false);
     setUsers(() => usersdum.data.data);
   };

@@ -1,11 +1,8 @@
 import Grid from "@material-ui/core/Grid";
-
 // import Graph from "../Graph/Graph";
 import ApiUrl from "../../../ServerApi";
-
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-
 import { Editor } from "@tinymce/tinymce-react";
 import { VscGraphLine } from "react-icons/vsc";
 import React, { useEffect, useRef } from "react";
@@ -73,9 +70,9 @@ const Record = ({ data, datavalues }) => {
             if (expresultval) {
               setExpresult(expresultval);
             }
-            console.log("datas are", datavalues);
+            // console.log("datas are", datavalues);
             const filtered = Object.entries(JSON.parse(data.datas)).filter(
-              ([key, value]) => key != ""
+              ([key, value]) => key !== ""
             );
             const obj = Object.fromEntries(filtered);
             for (const [key, values] of Object.entries(obj)) {
@@ -83,7 +80,7 @@ const Record = ({ data, datavalues }) => {
             }
             setOpens(true);
             setStatusmessages("Data has been Retrived");
-            console.log(datavalues);
+            // console.log(datavalues);
             fetch(`${ApiUrl}/runPython/`, {
               method: "POST",
               body: JSON.stringify({
@@ -94,7 +91,7 @@ const Record = ({ data, datavalues }) => {
             })
               .then((responce) => responce.json())
               .then((data) => {
-                console.log("result", data);
+                // console.log("result", data);
                 setResult(data);
                 setOpens(true);
                 setStatusmessages("Calculation Completed");
@@ -113,7 +110,7 @@ const Record = ({ data, datavalues }) => {
           .catch((error) => {
             setOpene(true);
             setStatusmessagee("Error In data Retrive");
-            console.log("error is", error);
+            // console.log("error is", error);
           });
       });
   }, [data.experimentName]);
@@ -138,8 +135,8 @@ const Record = ({ data, datavalues }) => {
         setData1((prev) => ({ ...prev, [id]: value }));
       };
     });
-    console.log("data1", data1);
-    console.log("objects", objects);
+    // console.log("data1", data1);
+    // console.log("objects", objects);
   }
 
   // retrive
@@ -150,7 +147,7 @@ const Record = ({ data, datavalues }) => {
       .then((data) => {
         // console.log("check here",data)
         const filtered = Object.entries(JSON.parse(data.datas)).filter(
-          ([key, value]) => key != ""
+          ([key, value]) => key !== ""
         );
         const obj = Object.fromEntries(filtered);
 
@@ -209,11 +206,11 @@ const Record = ({ data, datavalues }) => {
     event.preventDefault();
     init();
 
-    console.log("data to calc", data1);
+    // console.log("data to calc", data1);
     let vals = Object.values(data1);
 
     const empty = vals.filter((item) => item === "");
-    const tosent = delete data1[""];
+    // const tosent = delete data1[""];
 
     if (empty.length > 0) {
       setErrorvalue("Must fill all Required Readings");
@@ -222,7 +219,7 @@ const Record = ({ data, datavalues }) => {
     } else if (empty.length === 0) {
       setErrorvalue();
       setResult({});
-      let resultval = {};
+      // let resultval = {};
 
       fetch(`${ApiUrl}/runPython/`, {
         method: "POST",
@@ -234,7 +231,7 @@ const Record = ({ data, datavalues }) => {
       })
         .then((responce) => responce.json())
         .then((data) => {
-          console.log("result", data);
+          // console.log("result", data);
           setResult(data);
           setOpens(true);
           setStatusmessages("Calculation Completed");
@@ -258,11 +255,11 @@ const Record = ({ data, datavalues }) => {
     // event.preventDefault();
     init();
 
-    console.log("data to send", data1);
+    // console.log("data to send", data1);
     let vals = Object.values(data1);
 
     const empty = vals.filter((item) => item === "");
-    const tosent = delete data1[""];
+    // const tosent = delete data1[""];
     if (empty.length > 0) {
       setErrorvalue("Must fill all Required Readings");
       setOpene(true);
@@ -363,7 +360,7 @@ const Record = ({ data, datavalues }) => {
 
                   <br />
                   <br />
-                  {user.role != "student" && (
+                  {user.role !== "student" && (
                     <Accordion expanded={accord}>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}

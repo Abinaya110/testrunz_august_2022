@@ -8,8 +8,6 @@ const Details = () => {
   const [{ user }] = useStateValue();
   const role= user.role
   
-  
-  
   return (
     <div>
       {role==="admin" && <Detailsadmin/>}

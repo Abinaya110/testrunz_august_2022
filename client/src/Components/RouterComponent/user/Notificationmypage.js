@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import Badge from "@mui/material/Badge";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,14 +36,11 @@ export default function Notificationmypage(props) {
   let datas = props.users;
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [array, setArray] = useState();
-  const history = useHistory()
+  const history = useHistory();
   const handleMenuItemClick = (event, index) => {
-
     history.push(`/shareddash/${index._id}`);
     setOpen(false);
-   
   };
 
   const handleToggle = () => {
@@ -61,50 +57,49 @@ export default function Notificationmypage(props) {
   useEffect(() => {
     setArray(
       datas.filter(function (data) {
-        return data.status == "shared";
+        return data.status === "shared";
       })
     );
 
-    console.log("from n r p", array);
-    console.log("from n r p", datas);
+    // console.log("from n r p", array);
+    // console.log("from n r p", datas);
   }, []);
   return (
     <div className={classes.root}>
       <form style={formContainer}>
         {array ? (
           <React.Fragment>
-           
-                <ButtonGroup ref={anchorRef}>
-                  <Button
-                    style={{
-                    //   backgroundColor: "#F1C232",
-                    //   padding: "5px",
-                    //   borderRadius: "5px",
-                    //   borderWidth: "0.5px",
-                    //   borderColor: "gray",
-                    //   color: "black",
-                    //   overflow: "hidden",
-                    //   zIndex: "500%",
-                    color: "#F1C232",
-                    border:"none",
-                    margin:"10px"
-                    }}
-                    aria-controls={open ? "split-button-menu" : undefined}
-                    aria-expanded={open ? "true" : undefined}
-                    aria-haspopup="menu"
-                    onClick={handleToggle}
-                  >
-                    <Badge
-                      style={{ zIndex: 0 }}
-                      badgeContent={array.length}
-                      color="error"
-                    >
-                      <CommentOutlinedIcon  sx={{ fontSize: 25 }}/>
-                      {console.log(array.length)}
-                    </Badge>
-                  </Button>
-                </ButtonGroup>
-            
+            <ButtonGroup ref={anchorRef}>
+              <Button
+                style={{
+                  //   backgroundColor: "#F1C232",
+                  //   padding: "5px",
+                  //   borderRadius: "5px",
+                  //   borderWidth: "0.5px",
+                  //   borderColor: "gray",
+                  //   color: "black",
+                  //   overflow: "hidden",
+                  //   zIndex: "500%",
+                  color: "#F1C232",
+                  border: "none",
+                  margin: "10px",
+                }}
+                aria-controls={open ? "split-button-menu" : undefined}
+                aria-expanded={open ? "true" : undefined}
+                aria-haspopup="menu"
+                onClick={handleToggle}
+              >
+                <Badge
+                  style={{ zIndex: 0 }}
+                  badgeContent={array.length}
+                  color="error"
+                >
+                  <CommentOutlinedIcon sx={{ fontSize: 25 }} />
+                  {/* {console.log(array.length)} */}
+                </Badge>
+              </Button>
+            </ButtonGroup>
+
             <Popper
               sx={{
                 zIndex: "1",
@@ -113,7 +108,7 @@ export default function Notificationmypage(props) {
               anchorEl={anchorRef.current}
               role={undefined}
               transition
-            //   disablePortal
+              //   disablePortal
             >
               {({ TransitionProps, placement }) => (
                 <Grow
@@ -134,7 +129,9 @@ export default function Notificationmypage(props) {
                           <MenuItem
                             sx={{ overflow: "hidden" }}
                             key={option._id}
-                            onClick={(event,index) => handleMenuItemClick(event,option)}
+                            onClick={(event, index) =>
+                              handleMenuItemClick(event, option)
+                            }
                           >
                             {option.experimentName}
                           </MenuItem>
